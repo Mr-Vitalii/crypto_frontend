@@ -1,0 +1,19 @@
+@import "../../assets/utils/variables.scss";
+
+
+.auth-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .auth-form {
+        width: 80%;
+
+        .incitingText {
+            color: $blue;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    }
+}
