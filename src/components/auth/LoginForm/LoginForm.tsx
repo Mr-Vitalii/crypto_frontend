@@ -1,9 +1,10 @@
 import "./LoginForm.scss";
 
+import {IPropsLogin} from "common/types/auth/index" 
+
 import { Button, TextField, Typography } from "@mui/material";
 
-
-export const LoginForm = (props: any) => {
+export const LoginForm: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
   const { register, errors } = props;
 
   return (
@@ -20,20 +21,24 @@ export const LoginForm = (props: any) => {
         Enter your username and password
       </Typography>
       <TextField
+        error={!!errors.email}
         fullWidth
         margin="normal"
         label="Email"
         variant="outlined"
         placeholder="Enter your email"
+        helperText={errors.email ? `${errors.email.message}` : ""}
         {...register("email")}
       />
       <TextField
+        error={!!errors.password}
         type="password"
         fullWidth
         margin="normal"
         label="Password"
         variant="outlined"
         placeholder="Enter your password"
+        helperText={errors.password ? `${errors.password.message}` : ""}
         {...register("password")}
       />
       <Button
@@ -44,8 +49,8 @@ export const LoginForm = (props: any) => {
         LogIn
       </Button>
       <Typography variant="body1">
-        Don't have an account?
-        <span className="incitingText">Registration</span>
+        No account yet?
+        <span className="incitingText">Sign up</span>
       </Typography>
     </>
   );
