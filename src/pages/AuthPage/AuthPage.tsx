@@ -3,14 +3,18 @@ import { instance } from "utils/axios";
 
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Box } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginSchema, RegisterSchema } from "../../utils/yup";
 
+import { Box } from "@mui/material";
 
 import { LoginForm } from "components/auth/LoginForm/LoginForm";
 import { RegisterForm } from "components/auth/RegisterForm/RegisterForm";
 
+import { CommonFormData } from "common/types/auth/index";
+import { AppErrors } from "common/errors";
 
-export default function AuthPage() {
+const AuthPage: React.FC = () => {
   const location = useLocation();
 
   const {
@@ -18,10 +22,44 @@ export default function AuthPage() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<CommonFormData>({
+    resolver: yupResolver(
+      location.pathname === "/login" ? LoginSchema : RegisterSchema
+    ),
+  });
 
   const handleSubmitForm = async (data: any) => {
-    const user = await instance.post("auth/login", data);
+    if (location.pathname === "/login") {
+      try {
+        console.log(data);
+        const user = await instance.post("auth/login", data);
+      } catch (error) {
+        return error;
+      }
+    } else {
+      try {
+        if (data.password === data.confirmPassword) {
+          try {
+            const userData = {
+              firstName: data.name,
+              userName: data.username,
+              email: data.email,
+              password: data.password,
+            };
+            console.log("register");
+            const newUser = await instance.post("auth/register", userData);
+            console.log(newUser.data);
+          } catch (error) {
+            console.log(error);
+            return error;
+          }
+        } else {
+          throw new Error(AppErrors.PasswordDoNotMatch);
+        }
+      } catch (error) {
+        console.error(error); //* Тут нужно сообщить об этом пользователю
+      }
+    }
   };
 
   return (
@@ -47,4 +85,6 @@ export default function AuthPage() {
       </form>
     </div>
   );
-}
+};
+
+export default AuthPage;

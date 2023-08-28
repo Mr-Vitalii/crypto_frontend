@@ -1,14 +1,17 @@
 import "./RegisterForm.scss";
 
 import { Button, TextField, Typography } from "@mui/material";
+import { IPropsRegister } from "common/types/auth";
 
-export const RegisterForm = (props:any) => {
-  const {register, errors } = props;
+export const RegisterForm: React.FC<IPropsRegister> = (
+  props: IPropsRegister
+): JSX.Element => {
+  const { register, errors } = props;
 
   return (
     <>
       <Typography variant="h2" fontFamily="Poppins" textAlign="center">
-        Registration
+        Регистрация
       </Typography>
       <Typography
         variant="body1"
@@ -16,48 +19,60 @@ export const RegisterForm = (props:any) => {
         fontFamily="Poppins"
         textAlign="center"
       >
-        Enter data for registration
+        Введите данные для регистрации
       </Typography>
       <TextField
-        fullWidth
+        error={!!errors.name}
+        fullWidth={true}
         margin="normal"
-        label="Name"
+        label="Имя"
         variant="outlined"
-        placeholder="Enter your name"
+        placeholder="Введите ваше имя"
+        helperText={errors.name ? `${errors.name.message}` : ""}
         {...register("name")}
       />
       <TextField
-        fullWidth
+        error={!!errors.username}
+        fullWidth={true}
         margin="normal"
         label="Username"
         variant="outlined"
-        placeholder="Enter your username"
+        placeholder="Введите ваш username"
+        helperText={errors.username ? `${errors.username.message}` : ""}
         {...register("username")}
       />
       <TextField
-        fullWidth
+        error={!!errors.email}
+        fullWidth={true}
         margin="normal"
         label="Email"
         variant="outlined"
-        placeholder="Enter your email"
+        placeholder="Введите ваш email"
+        helperText={errors.email ? `${errors.email.message}` : ""}
         {...register("email")}
       />
       <TextField
+        error={!!errors.password}
         type="password"
-        fullWidth
+        fullWidth={true}
         margin="normal"
         label="Password"
         variant="outlined"
-        placeholder="Enter your password"
+        placeholder="Введите ваш пароль"
+        helperText={errors.password ? `${errors.password.message}` : ""}
         {...register("password")}
       />
       <TextField
+        error={!!errors.confirmPassword}
         type="password"
-        fullWidth
+        fullWidth={true}
         margin="normal"
         label="Password"
         variant="outlined"
-        placeholder="Enter your password again"
+        placeholder="Повторите ваш пароль"
+        helperText={
+          errors.confirmPassword ? `${errors.confirmPassword.message}` : ""
+        }
         {...register("confirmPassword")}
       />
       <Button
