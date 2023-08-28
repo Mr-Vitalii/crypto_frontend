@@ -1,10 +1,13 @@
-
 import "./AuthPage.scss";
+import { instance } from "utils/axios";
 
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Box } from '@mui/material';
+import { Box } from "@mui/material";
 
+
+import { LoginForm } from "components/auth/LoginForm/LoginForm";
+import { RegisterForm } from "components/auth/RegisterForm/RegisterForm";
 
 
 export default function AuthPage() {
@@ -18,8 +21,7 @@ export default function AuthPage() {
   } = useForm();
 
   const handleSubmitForm = async (data: any) => {
-    console.log(data);
-    
+    const user = await instance.post("auth/login", data);
   };
 
   return (
@@ -37,9 +39,9 @@ export default function AuthPage() {
           boxShadow={"-3px -2px 20px 1px #202020"}
         >
           {location.pathname === "/login" ? (
-            <div>Login Form</div>
+            <LoginForm register={register} errors={errors} />
           ) : location.pathname === "/register" ? (
-            <div>Register Form</div>
+            <RegisterForm register={register} errors={errors} />
           ) : null}
         </Box>
       </form>
