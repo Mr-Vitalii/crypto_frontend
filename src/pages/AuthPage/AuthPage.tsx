@@ -1,7 +1,8 @@
 import "./AuthPage.scss";
 import { instance } from "utils/axios";
+import { useAppDispatch } from "utils/hooks";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema, RegisterSchema } from "../../utils/yup";
@@ -13,9 +14,12 @@ import { RegisterForm } from "components/auth/RegisterForm/RegisterForm";
 
 import { CommonFormData } from "common/types/auth/index";
 import { AppErrors } from "common/errors";
+import { login } from "redux/auth/authSlice";
 
 const AuthPage: React.FC = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -33,6 +37,8 @@ const AuthPage: React.FC = () => {
       try {
         console.log(data);
         const user = await instance.post("auth/login", data);
+        dispatch(login(user.data));
+        navigate("/");
       } catch (error) {
         return error;
       }
@@ -48,7 +54,8 @@ const AuthPage: React.FC = () => {
             };
             console.log("register");
             const newUser = await instance.post("auth/register", userData);
-            console.log(newUser.data);
+             dispatch(login(newUser.data));
+              navigate("/");
           } catch (error) {
             console.log(error);
             return error;
@@ -77,9 +84,17 @@ const AuthPage: React.FC = () => {
           boxShadow={"-3px -2px 20px 1px #202020"}
         >
           {location.pathname === "/login" ? (
-            <LoginForm register={register} errors={errors} />
+            <LoginForm
+              register={register}
+              errors={errors}
+              navigate={navigate}
+            />
           ) : location.pathname === "/register" ? (
-            <RegisterForm register={register} errors={errors} />
+            <RegisterForm
+              register={register}
+              errors={errors}
+              navigate={navigate}
+            />
           ) : null}
         </Box>
       </form>
