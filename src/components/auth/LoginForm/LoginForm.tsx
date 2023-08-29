@@ -5,7 +5,7 @@ import {IPropsLogin} from "common/types/auth/index"
 import { Button, TextField, Typography } from "@mui/material";
 
 export const LoginForm: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-  const { register, errors } = props;
+  const { register, errors, navigate } = props;
 
   return (
     <>
@@ -50,7 +50,9 @@ export const LoginForm: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Elemen
       </Button>
       <Typography variant="body1">
         No account yet?
-        <span className="incitingText">Sign up</span>
+        <span className="incitingText" onClick={() => navigate("/register")}>
+          Sign up
+        </span>
       </Typography>
     </>
   );

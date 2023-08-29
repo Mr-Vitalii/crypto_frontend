@@ -6,7 +6,7 @@ import { IPropsRegister } from "common/types/auth";
 export const RegisterForm: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
-  const { register, errors } = props;
+  const { register, errors, navigate } = props;
 
   return (
     <>
@@ -84,7 +84,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
       </Button>
       <Typography variant="body1">
         Do you already have an account?
-        <span className="incitingText">Authorization</span>
+        <span className="incitingText" onClick={() => navigate("/login")}>Authorization</span>
       </Typography>
     </>
   );
