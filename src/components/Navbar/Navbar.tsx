@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { Box, AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
 import { useStyles } from "./styles";
-import FlexBetween from "./FlexBetween/FlexBetween";
-import ThemeSwitcher from "./ThemeSwitcher/ThemeSwitcher";
-import SearchBar from "./SearchBar/SearchBar";
+import FlexBetween from "../FlexBetween/FlexBetween";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import SearchBar from "../SearchBar/SearchBar";
 
 import { useAppSelector } from "../../utils/hooks";
 import { ITopBarProps } from "common/types/topbar";

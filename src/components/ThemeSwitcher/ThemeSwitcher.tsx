@@ -2,7 +2,7 @@ import React, { FC, useContext } from "react";
 import { Grid, IconButton, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import { ColorModeContext } from "../../../theme";
+import { ColorModeContext } from "../../theme";
 import { useStyles } from "./style";
 
 const ThemeSwitcher: FC = (): JSX.Element => {
