@@ -2,7 +2,8 @@ import { useStyles } from "./styles";
 
 import { IPropsLogin } from "common/types/auth/index";
 
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
+import AppButton from "components/AppButton/AppButton";
 
 export const LoginForm: React.FC<IPropsLogin> = (
   props: IPropsLogin
@@ -44,13 +45,13 @@ export const LoginForm: React.FC<IPropsLogin> = (
         helperText={errors.password ? `${errors.password.message}` : ""}
         {...register("password")}
       />
-      <Button
+      <AppButton
         type="submit"
         sx={{ marginTop: 2, marginBottom: 2, width: "60%" }}
         variant="contained"
       >
         LogIn
-      </Button>
+      </AppButton>
       <Typography variant="body1">
         No account yet?
         <span

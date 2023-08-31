@@ -1,9 +1,10 @@
 import React from "react";
-import "./Home.scss";
+import { useStyles } from "./styles";
 
 export const Home = () => {
+   const classes = useStyles();
   return (
-    <div className="home">
+    <div className={classes.home}>
       <h1>
         Welcome page
         <span role="img" aria-label="Greeting icon">

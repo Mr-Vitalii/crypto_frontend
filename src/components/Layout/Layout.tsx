@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { FC, Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Navbar } from "components/Navbar/Navbar";
 import { Box, useMediaQuery } from "@mui/material";
@@ -6,9 +6,9 @@ import { useStyles } from "./styles";
 import { Sidebar } from "components/Sidebar/Sidebar";
 import { useAuth } from "utils/hooks";
 
-export const Layout = () => {
+export const Layout: FC = (): JSX.Element => {
   const isNonMobile = useMediaQuery("(min-width:760px)");
-  
+
   const [isOpen, setIsOpen] = useState(isNonMobile ? true : false);
   const classes = useStyles();
   const isLoading = useAuth();

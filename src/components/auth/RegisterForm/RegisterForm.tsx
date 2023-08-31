@@ -1,7 +1,8 @@
 import { useStyles } from "./styles";
 
-import { Button, TextField, Typography } from "@mui/material";
+import {TextField, Typography } from "@mui/material";
 import { IPropsRegister } from "common/types/auth";
+import AppButton from "components/AppButton/AppButton";
 
 export const RegisterForm: React.FC<IPropsRegister> = (
   props: IPropsRegister
@@ -76,13 +77,13 @@ export const RegisterForm: React.FC<IPropsRegister> = (
         }
         {...register("confirmPassword")}
       />
-      <Button
+      <AppButton
         type="submit"
         sx={{ marginTop: 2, marginBottom: 2, width: "60%" }}
         variant="contained"
       >
         Registration
-      </Button>
+      </AppButton>
       <Typography variant="body1">
         Do you already have an account?
         <span

@@ -9,9 +9,9 @@ import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import SearchBar from "../SearchBar/SearchBar";
 
 import { useAppSelector } from "../../utils/hooks";
-import { ITopBarProps } from "common/types/topbar";
+import { INavBarProps } from "common/types/navbar";
 
-export const Navbar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
+export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
   const classes = useStyles();
   const { setIsOpen, isOpen, isNonMobile } = props;
   const { user } = useAppSelector((state) => state.auth.user);
@@ -34,7 +34,7 @@ export const Navbar: FC<ITopBarProps> = (props: ITopBarProps): JSX.Element => {
             {isNonMobile && (
               <Grid display="flex" justifyContent="flex-end" item sm={9} lg={9}>
                 <ThemeSwitcher />
-                <SearchBar/>
+                <SearchBar />
               </Grid>
             )}
           </Grid>
