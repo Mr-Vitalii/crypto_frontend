@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useStyles } from "./styles";
 import {
   Box,
@@ -20,8 +20,11 @@ import { NavMenu } from "./NavMenu";
 import Logo from "../../assets/images/sidebar/logo.svg";
 import ThemeSwitcher from "components/ThemeSwitcher/ThemeSwitcher";
 import SearchBar from "components/SearchBar/SearchBar";
+import { ISidebarProps } from "common/types/sidebar";
 
-export const Sidebar = (props: any) => {
+export const Sidebar: FC<ISidebarProps> = (
+  props: ISidebarProps
+): JSX.Element => {
   const [active, setActive] = useState("");
   const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
   const classes = useStyles();
@@ -29,9 +32,9 @@ export const Sidebar = (props: any) => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-    useEffect(() => {
-      setActive(pathname);
-    }, [pathname]);
+  useEffect(() => {
+    setActive(pathname);
+  }, [pathname]);
 
   return (
     <Box component="nav">
@@ -93,10 +96,7 @@ export const Sidebar = (props: any) => {
                 </ListItem>
               )}
               <ListItem>
-                <ListItemButton
-                  className={classes.navItem}
-                 
-                >
+                <ListItemButton className={classes.navItem}>
                   <ListItemIcon>
                     <LogoutOutlined />
                   </ListItemIcon>
