@@ -7,6 +7,9 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { Layout } from "./components/Layout/Layout";
 import { PrivateRoute } from "utils/router/PrivateRoute";
+import { WatchList } from "components/WatchList/WatchList";
+import { News } from "components/News/News";
+import { Settings } from "components/Settings/Settings";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
@@ -25,6 +28,9 @@ export const App = () => {
 
               <Route element={<PrivateRoute />}>
                 <Route index element={<HomePage />} />
+                <Route path="/watchlist" element={<WatchList />} />
+                <Route path="/news" element={<News />} />
+                <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>
           </Routes>

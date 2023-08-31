@@ -52,7 +52,6 @@ const AuthPage: React.FC = () => {
               email: data.email,
               password: data.password,
             };
-            console.log("register");
             const newUser = await instance.post("auth/register", userData);
              dispatch(login(newUser.data));
               navigate("/");
