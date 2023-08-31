@@ -1,11 +1,14 @@
-import "./LoginForm.scss";
+import { useStyles } from "./styles";
 
-import {IPropsLogin} from "common/types/auth/index" 
+import { IPropsLogin } from "common/types/auth/index";
 
 import { Button, TextField, Typography } from "@mui/material";
 
-export const LoginForm: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
+export const LoginForm: React.FC<IPropsLogin> = (
+  props: IPropsLogin
+): JSX.Element => {
   const { register, errors, navigate } = props;
+  const classes = useStyles();
 
   return (
     <>
@@ -50,7 +53,10 @@ export const LoginForm: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Elemen
       </Button>
       <Typography variant="body1">
         No account yet?
-        <span className="incitingText" onClick={() => navigate("/register")}>
+        <span
+          className={classes.incitingText}
+          onClick={() => navigate("/register")}
+        >
           Sign up
         </span>
       </Typography>
