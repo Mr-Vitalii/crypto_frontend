@@ -8,6 +8,6 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useAuth = () => {
     // const { isLoading } = useAppSelector((state) => state.auth);
-    const isLoading = true;
+    const isLoading = false;
     return isLoading;
 }

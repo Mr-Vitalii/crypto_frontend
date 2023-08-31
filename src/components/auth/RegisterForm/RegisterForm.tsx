@@ -1,4 +1,4 @@
-import "./RegisterForm.scss";
+import { useStyles } from "./styles";
 
 import { Button, TextField, Typography } from "@mui/material";
 import { IPropsRegister } from "common/types/auth";
@@ -7,11 +7,12 @@ export const RegisterForm: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
   const { register, errors, navigate } = props;
+  const classes = useStyles();
 
   return (
     <>
       <Typography variant="h2" fontFamily="Poppins" textAlign="center">
-        Регистрация
+        Registration
       </Typography>
       <Typography
         variant="body1"
@@ -19,7 +20,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
         fontFamily="Poppins"
         textAlign="center"
       >
-        Введите данные для регистрации
+        Enter data for registration
       </Typography>
       <TextField
         error={!!errors.name}
@@ -84,7 +85,12 @@ export const RegisterForm: React.FC<IPropsRegister> = (
       </Button>
       <Typography variant="body1">
         Do you already have an account?
-        <span className="incitingText" onClick={() => navigate("/login")}>Authorization</span>
+        <span
+          className={classes.incitingText}
+          onClick={() => navigate("/login")}
+        >
+          Authorization
+        </span>
       </Typography>
     </>
   );
