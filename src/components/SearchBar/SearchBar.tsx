@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { Stack, Autocomplete, TextField } from "@mui/material";
 
 // 
-const SearchBar: FC = (): JSX.Element => {
+export const SearchBar: FC = (): JSX.Element => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const assetsArray = [
     { name: "coin-name1" },
@@ -34,4 +34,3 @@ const SearchBar: FC = (): JSX.Element => {
   );
 };
 
-export default SearchBar;

@@ -11,10 +11,10 @@ export const Layout: FC = (): JSX.Element => {
 
   const [isOpen, setIsOpen] = useState(isNonMobile ? true : false);
   const classes = useStyles();
-  const isLoading = useAuth();
+  const isLogged = useAuth();
   return (
     <div>
-      {isLoading && (
+      {isLogged && (
         <Box
           display={isNonMobile ? "flex" : "block"}
           justifyContent="space-between"

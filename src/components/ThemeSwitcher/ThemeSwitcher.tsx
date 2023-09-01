@@ -5,7 +5,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { ColorModeContext } from "../../theme";
 import { useStyles } from "./style";
 
-const ThemeSwitcher: FC = (): JSX.Element => {
+export const ThemeSwitcher: FC = (): JSX.Element => {
   const theme = useTheme();
   const colorMode: any = useContext(ColorModeContext);
   const classes = useStyles();
@@ -25,4 +25,3 @@ const ThemeSwitcher: FC = (): JSX.Element => {
   );
 };
 
-export default ThemeSwitcher;
