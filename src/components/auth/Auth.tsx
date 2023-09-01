@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { instance } from "utils/axios";
-import { useAppDispatch } from "utils/hooks";
+import { useAppDispatch, useAppSelector } from "utils/hooks";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -14,7 +13,7 @@ import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
 
 import { CommonFormData } from "common/types/auth/index";
 import { AppErrors } from "common/errors";
-import { login } from "redux/auth/authSlice";
+import { loginUser, registerUser } from "redux/auth/thunks";
 import { useStyles } from "./styles";
 
 export const Auth: FC = (): JSX.Element => {
@@ -22,6 +21,8 @@ export const Auth: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+
+  const loading = useAppSelector((state) => state.auth.isLoading);
 
   const {
     register,
@@ -38,8 +39,7 @@ export const Auth: FC = (): JSX.Element => {
     if (location.pathname === "/login") {
       try {
         console.log(data);
-        const user = await instance.post("auth/login", data);
-        dispatch(login(user.data));
+        dispatch(loginUser(data));
         navigate("/");
       } catch (error) {
         return error;
@@ -54,8 +54,7 @@ export const Auth: FC = (): JSX.Element => {
               email: data.email,
               password: data.password,
             };
-            const newUser = await instance.post("auth/register", userData);
-            dispatch(login(newUser.data));
+            dispatch(registerUser(userData));
             navigate("/");
           } catch (error) {
             console.log(error);
@@ -89,12 +88,14 @@ export const Auth: FC = (): JSX.Element => {
               register={register}
               errors={errors}
               navigate={navigate}
+              loading={loading}
             />
           ) : location.pathname === "/register" ? (
             <RegisterForm
               register={register}
               errors={errors}
               navigate={navigate}
+              loading={loading}
             />
           ) : null}
         </Box>

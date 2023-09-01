@@ -27,18 +27,31 @@ export interface IPropsLogin<TFieldValues extends FieldValues = CommonFormData> 
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
   navigate: (to: string) => void;
+  loading: boolean;
 }
 
 export interface IPropsRegister<TFieldValues extends FieldValues = CommonFormData> {
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
   navigate: (to: string) => void;
+  loading: boolean;
 }
 
 export interface IAuthState {
-  user: {
-    user: User;
-    token: string;
-  };
+  token: string;
+  user: User;
+  isLogged: boolean;
   isLoading: boolean;
+}
+
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
+export interface IRegisterData {
+  firstName: string;
+  userName: string;
+  email: string;
+  password: string;
 }
