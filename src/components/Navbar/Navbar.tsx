@@ -14,6 +14,7 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
   const classes = useStyles();
   const { setIsOpen, isOpen, isNonMobile } = props;
   const { user } = useAuth();
+  
   return (
     <Box justifyContent="space-between" width="100%" height="100%">
       <AppBar className={classes.root} position="static">
