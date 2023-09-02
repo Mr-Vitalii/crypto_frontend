@@ -14,7 +14,7 @@ export const getFavoriteCoins = createAsyncThunk(
         );
          return {
              name: data,
-             data: coins.data.prices.slice(
+             price_chart_data: coins.data.prices.slice(
                  coins.data.prices.length - 60,
                  coins.data.prices.length - 1,
              ),
