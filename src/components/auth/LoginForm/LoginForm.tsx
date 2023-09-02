@@ -4,11 +4,9 @@ import { IPropsLogin } from "common/types/auth/index";
 
 import { TextField, Typography } from "@mui/material";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
+import { FC } from "react";
 
-
-export const LoginForm: React.FC<IPropsLogin> = (
-  props: IPropsLogin
-): JSX.Element => {
+export const LoginForm: FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
   const { register, errors, navigate, loading } = props;
   const classes = useStyles();
 
