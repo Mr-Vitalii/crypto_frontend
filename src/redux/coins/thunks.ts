@@ -9,12 +9,16 @@ export const getFavoriteCoins = createAsyncThunk(
       const coins = await coinGeckoApi.get(
         `coins/${data}/market_chart?vs_currency=usd&days=90`
       );
-      //   const singleAsset = await coinGeckoApi.get(
-      //     `coins/markets?vs_currency=usd&ids=${data}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-      //   );
+        const singleCoin = await coinGeckoApi.get(
+            `coins/markets?vs_currency=usd&ids=${data}&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
+        );
          return {
-           name: data,
-           data: coins.data
+             name: data,
+             data: coins.data.prices.slice(
+                 coins.data.prices.length - 60,
+                 coins.data.prices.length - 1,
+             ),
+             singleCoin: singleCoin.data,
          };
     //     return {
           

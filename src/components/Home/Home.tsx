@@ -1,18 +1,29 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useRef } from "react";
 import { selectFavoriteCoins } from "redux/coins/selectors";
+import { Box, Grid } from "@mui/material";
 import { getFavoriteCoins } from "redux/coins/thunks";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { useStyles } from "./styles";
+import { FavoriteBlock } from "./FavoriteBlock/FavoriteBlock";
+import { IChartData } from "common/types/coins";
 
-export const Home = () => {
+export const Home:FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const fetchDataRef = useRef(false);
-  const favoriteCoins = useAppSelector(selectFavoriteCoins);
+  const favoriteCoins: IChartData[] = useAppSelector(selectFavoriteCoins);
   const classes = useStyles();
 
-   const favoriteCoinName = useMemo(() => ["bitcoin", "ethereum"], []);
-
   console.log(favoriteCoins);
+  
+
+  const favoriteCoinName = useMemo(() => ["bitcoin", "ethereum"], []);
+
+  const filteredArray = useMemo(() => {
+    return favoriteCoins.filter(
+      (value:any, index:any, self:any) =>
+        index === self.findIndex((t:any) => t.name === value.name)
+    );
+  }, [favoriteCoins]);
 
   const fetchData = useCallback(
     (data: string[]) => {
@@ -29,14 +40,16 @@ export const Home = () => {
     fetchData(favoriteCoinName);
   }, [favoriteCoinName, fetchData, dispatch]);
 
+  console.log(filteredArray);
+  
+
   return (
-    <div className={classes.home}>
-      <h1>
-        Welcome page
-        <span role="img" aria-label="Greeting icon">
-          👻
-        </span>
-      </h1>
-    </div>
+      <Box className={classes.root}>
+          <Grid container spacing={2}>
+              {filteredArray.map((element: IChartData) => (
+                  <FavoriteBlock key={element.name} element={element} />
+              ))}
+          </Grid>
+      </Box>
   );
 };

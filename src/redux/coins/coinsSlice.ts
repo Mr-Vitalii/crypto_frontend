@@ -11,7 +11,7 @@ export const coinsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-      builder.addCase(getFavoriteCoins.fulfilled, (state, action) => {
+    builder.addCase(getFavoriteCoins.fulfilled, (state, action) => {
       state.favoriteCoins.push(action.payload);
     });
   },
