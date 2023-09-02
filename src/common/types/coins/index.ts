@@ -47,6 +47,10 @@ export interface IChartData {
   singleCoin: ISingleCoin[];
 }
 
+export interface IFavoriteBlockProps {
+    element: IChartData;
+}
+
 export interface ITablePriceData {
   assets: ISingleCoin[];
 }
