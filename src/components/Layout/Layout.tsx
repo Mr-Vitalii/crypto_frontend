@@ -13,31 +13,32 @@ export const Layout: FC = (): JSX.Element => {
   const classes = useStyles();
   const isLogged = useAuth();
   return (
-    <div>
-      {isLogged && (
-        <Box
-          display={isNonMobile ? "flex" : "block"}
-          justifyContent="space-between"
-          width="100%"
-          height="100%"
-        >
-          <Sidebar
-            isNonMobile={isNonMobile}
-            drawerWidth="250px"
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
-          <Navbar
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            isNonMobile={isNonMobile}
-          />
-        </Box>
-      )}
-
-      <Suspense fallback={null}>
-        <Outlet />
-      </Suspense>
-    </div>
+      <div>
+          {isLogged && (
+              <Box
+                  display={isNonMobile ? "flex" : "block"}
+                  justifyContent="space-between"
+                  width="100%"
+                  height="100%"
+              >
+                  <Sidebar
+                      isNonMobile={isNonMobile}
+                      drawerWidth="250px"
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                  />
+                  <Box className={classes.mainSection}>
+                      <Navbar
+                          isOpen={isOpen}
+                          setIsOpen={setIsOpen}
+                          isNonMobile={isNonMobile}
+                      />
+                      <Suspense fallback={null}>
+                          <Outlet />
+                      </Suspense>
+                  </Box>
+              </Box>
+          )}
+      </div>
   );
 };

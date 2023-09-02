@@ -8,9 +8,7 @@ import { AreaChart } from "components/charts/AreaChart/AreaChart";
 
 export const FavoriteBlock = (props: any) => {
     const { element } = props;
-    console.log(element);
-
-    // const { name, price_chart_data, singleAsset } = props;
+   
     const classes = useStyles();
 
     const currentPrice = element.singleCoin.map(
@@ -47,7 +45,7 @@ export const FavoriteBlock = (props: any) => {
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={6}>
-                    <AreaChart data={element.data} />
+                    <AreaChart data={element.price_chart_data} />
                 </Grid>
             </Grid>
         </Grid>
