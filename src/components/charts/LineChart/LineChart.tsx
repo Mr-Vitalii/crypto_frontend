@@ -23,14 +23,18 @@ ChartJS.register(
     Legend,
 );
 
-const LineChart = (props: ILineChartProps) => {
+export const LineChart = (props: ILineChartProps) => {
     const { data } = props;
-
-    console.log(data[0]);
-    
 
     const options = {
         responsive: true,
+        scales: {
+            x: {
+                grid: {
+                    display: false,
+                },
+            },
+        },
         plugins: {
             legend: {
                 position: "top" as const,
@@ -44,7 +48,9 @@ const LineChart = (props: ILineChartProps) => {
         ),
         datasets: [
             {
-                label: data[0].name.toUpperCase(),
+                label:
+                    data[0].name.charAt(0).toUpperCase() +
+                    data[0].name.slice(1),
                 data: data[0].price_chart_data.map(
                     (element: any) => element[1],
                 ),
@@ -56,4 +62,4 @@ const LineChart = (props: ILineChartProps) => {
     return <Line options={options} data={values} width="100%" height="20%" />;
 };
 
-export default LineChart;
+
