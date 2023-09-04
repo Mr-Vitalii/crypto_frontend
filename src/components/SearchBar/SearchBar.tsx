@@ -7,7 +7,7 @@ import { ISingleCoin } from "common/types/coins";
 
 //
 export const SearchBar: FC = (): JSX.Element => {
-    const [selectedItem, setSelectedItem] = useState<string | null>("");
+    const [selectedItem, setSelectedItem] = useState<string | null>(null);
     const navigate = useNavigate();
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
 
