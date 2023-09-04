@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Stack, Autocomplete, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "utils/hooks";
@@ -7,7 +7,7 @@ import { ISingleCoin } from "common/types/coins";
 
 //
 export const SearchBar: FC = (): JSX.Element => {
-    const [selectedItem, setSelectedItem] = useState<string | null>(null);
+    const [selectedItem, setSelectedItem] = useState<string | null>("");
     const navigate = useNavigate();
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
 
