@@ -12,29 +12,42 @@ import { Settings } from "components/Settings/Settings";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
+const SingleCoinPage = lazy(
+    () => import("./pages/SingleCoinPage/SingleCoinPage"),
+);
 
 export const App = () => {
-  const [theme, colorMode] = useMode();
-  return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/register" element={<AuthPage />} />
-              <Route path="/login" element={<AuthPage />} />
+    const [theme, colorMode] = useMode();
+    return (
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <div className="App">
+                    <Routes>
+                        <Route path="/" element={<Layout />}>
+                            <Route path="/register" element={<AuthPage />} />
+                            <Route path="/login" element={<AuthPage />} />
 
-              <Route element={<PrivateRoute />}>
-                <Route index element={<HomePage />} />
-                <Route path="/watchlist" element={<WatchList />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/settings" element={<Settings />} />
-              </Route>
-            </Route>
-          </Routes>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
-  );
+                            <Route element={<PrivateRoute />}>
+                                <Route index element={<HomePage />} />
+                                <Route
+                                    path="/watchlist"
+                                    element={<WatchList />}
+                                />
+                                <Route path="/news" element={<News />} />
+                                <Route
+                                    path="/settings"
+                                    element={<Settings />}
+                                />
+                                <Route
+                                    path="/single/:id"
+                                    element={<SingleCoinPage />}
+                                />
+                            </Route>
+                        </Route>
+                    </Routes>
+                </div>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
+    );
 };
