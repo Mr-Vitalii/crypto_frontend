@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Box, AppBar, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
 import { useStyles } from "./styles";
 import { FlexBetween } from "../FlexBetween/FlexBetween";
@@ -11,33 +11,43 @@ import { useAuth } from "../../utils/hooks";
 import { INavBarProps } from "common/types/navbar";
 
 export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
-  const classes = useStyles();
-  const { setIsOpen, isOpen, isNonMobile } = props;
-  const { user } = useAuth();
-  
-  return (
-      <AppBar className={classes.root} position="static">
-        <Toolbar className={classes.toolbar}>
-          <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item sm={3} lg={3}>
-              <FlexBetween>
-                <MenuOutlined
-                  className={classes.menuIcon}
-                  onClick={() => setIsOpen(!isOpen)}
-                />
-                <Typography variant="h3">
-                  Welcome {user ? `${user.firstName}` : ""}
-                </Typography>
-              </FlexBetween>
-            </Grid>
-            {isNonMobile && (
-              <Grid display="flex" justifyContent="flex-end" item sm={9} lg={9}>
-                <ThemeSwitcher />
-                <SearchBar />
-              </Grid>
-            )}
-          </Grid>
-        </Toolbar>
-      </AppBar>
-  );
+    const classes = useStyles();
+    const { setIsOpen, isOpen, isNonMobile } = props;
+    const { user } = useAuth();
+
+    return (
+        <AppBar className={classes.root} position="static">
+            <Toolbar className={classes.toolbar}>
+                <Grid
+                    container
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Grid item sm={3} lg={3}>
+                        <FlexBetween>
+                            <MenuOutlined
+                                className={classes.menuIcon}
+                                onClick={() => setIsOpen(!isOpen)}
+                            />
+                            <Typography variant="h3">
+                                Welcome {user ? `${user.firstName}` : ""}
+                            </Typography>
+                        </FlexBetween>
+                    </Grid>
+                    {isNonMobile && (
+                        <Grid
+                            display="flex"
+                            justifyContent="flex-end"
+                            item
+                            sm={9}
+                            lg={9}
+                        >
+                            <ThemeSwitcher />
+                            <SearchBar />
+                        </Grid>
+                    )}
+                </Grid>
+            </Toolbar>
+        </AppBar>
+    );
 };
