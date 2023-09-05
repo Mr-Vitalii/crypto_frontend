@@ -7,7 +7,7 @@ import { useStyles } from "./styles";
 import { FavoriteBlock } from "./FavoriteBlock/FavoriteBlock";
 import { IChartData, ISingleCoin } from "common/types/coins";
 import { LineChart } from "components/charts/LineChart/LineChart";
-import { TopPriceTable } from "components/TopPrice/TopPrice";
+import { TopPrice } from "components/TopPrice/TopPrice";
 
 export const Home: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -63,7 +63,7 @@ export const Home: FC = (): JSX.Element => {
             <Grid container className={classes.topPriceRoot}>
                 <Grid item xs={12} sm={12} lg={12}>
                     {filteredCoinsArray.length && (
-                        <TopPriceTable coins={filteredCoinsArray.slice(0, 6)} />
+                        <TopPrice coins={filteredCoinsArray.slice(0, 6)} />
                     )}
                 </Grid>
             </Grid>
