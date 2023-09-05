@@ -15,6 +15,7 @@ const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
 const SingleCoinPage = lazy(
     () => import("./pages/SingleCoinPage/SingleCoinPage"),
 );
+const WatchListPage = lazy(() => import("./pages/WatchListPage/WatchList"));
 
 export const App = () => {
     const [theme, colorMode] = useMode();
@@ -32,7 +33,7 @@ export const App = () => {
                                 <Route index element={<HomePage />} />
                                 <Route
                                     path="/watchlist"
-                                    element={<WatchList />}
+                                    element={<WatchListPage />}
                                 />
                                 <Route path="/news" element={<News />} />
                                 <Route
