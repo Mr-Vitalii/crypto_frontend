@@ -6,8 +6,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { Layout } from "./components/Layout/Layout";
 import { PrivateRoute } from "utils/router/PrivateRoute";
-import { WatchList } from "components/WatchList/WatchList";
-import { News } from "components/News/News";
 import { Settings } from "components/Settings/Settings";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -15,7 +13,8 @@ const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
 const SingleCoinPage = lazy(
     () => import("./pages/SingleCoinPage/SingleCoinPage"),
 );
-const WatchListPage = lazy(() => import("./pages/WatchListPage/WatchList"));
+const WatchListPage = lazy(() => import("./pages/WatchListPage/WatchListPage"));
+const NewsPage = lazy(() => import("./pages/NewsPage/NewsPage"));
 
 export const App = () => {
     const [theme, colorMode] = useMode();
@@ -35,7 +34,7 @@ export const App = () => {
                                     path="/watchlist"
                                     element={<WatchListPage />}
                                 />
-                                <Route path="/news" element={<News />} />
+                                <Route path="/news" element={<NewsPage />} />
                                 <Route
                                     path="/settings"
                                     element={<Settings />}
