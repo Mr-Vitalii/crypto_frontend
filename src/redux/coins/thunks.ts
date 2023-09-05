@@ -49,9 +49,10 @@ export const getTopPriceData = createAsyncThunk(
 
 export const createWatchListRecord = createAsyncThunk(
     "watchlist/create",
-    (data: { name: string; coinId: string }, { rejectWithValue }) => {
+    async (data: { name: string; coinId: string }, { rejectWithValue }) => {
         try {
-            return instanceAuth.post("watchlist", data);
+            const response = await instanceAuth.post("watchlist", data);
+            return response.data;
         } catch (error: any) {
             if (error.response && error.response.data.message) {
                 return rejectWithValue(error.response.data.message);

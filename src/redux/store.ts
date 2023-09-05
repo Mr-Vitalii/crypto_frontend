@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./auth/authSlice";
 import coinsSlice from "./coins/coinsSlice";
+import newsSlice from "./news/newsSlice";
 import watchlistSlice from "./watchlist/watchlistSlice";
 
 const store = configureStore({
@@ -8,6 +9,7 @@ const store = configureStore({
         auth: authSlice,
         coins: coinsSlice,
         watchlist: watchlistSlice,
+        news: newsSlice,
     },
 });
 

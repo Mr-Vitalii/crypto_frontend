@@ -1,10 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useStyles } from "./styles";
 
 import { ISingleCoin } from "common/types/coins";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { useNavigate, useParams } from "react-router-dom";
-import { Avatar, Button, Grid, Typography } from "@mui/material";
+import {
+    Alert,
+    AlertColor,
+    Avatar,
+    Button,
+    Grid,
+    Snackbar,
+    Typography,
+} from "@mui/material";
 
 import { selectAllCoins } from "redux/coins/selectors";
 import { createWatchListRecord } from "redux/coins/thunks";
@@ -12,6 +20,10 @@ import { createWatchListRecord } from "redux/coins/thunks";
 import { FlexBetween } from "components/FlexBetween/FlexBetween";
 
 export const SingleCoin: FC = (): JSX.Element => {
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState(false);
+    const [severity, setSeverity] = useState<AlertColor>("success");
+
     const navigate = useNavigate();
     const { id } = useParams();
     const dispatch = useAppDispatch();
@@ -22,15 +34,35 @@ export const SingleCoin: FC = (): JSX.Element => {
     const coin = allCoins.find((element) => element.name === (id as string));
 
     const handleCreateRecord = () => {
-        const data = {
-            name: "",
-            coinId: "",
-        };
-        if (coin) {
-            data.name = coin.name;
-            data.coinId = coin.id;
+        try {
+            const data = {
+                name: "",
+                coinId: "",
+            };
+            if (coin) {
+                data.name = coin.name;
+                data.coinId = coin.id;
+            }
+            dispatch(createWatchListRecord(data));
+            setError(false);
+            setSeverity("success");
+            setOpen(true);
+        } catch (e) {
+            setError(true);
+            setSeverity("error");
+            setOpen(true);
         }
-        dispatch(createWatchListRecord(data));
+    };
+
+    const handleClose = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string,
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setOpen(false);
     };
 
     return (
@@ -136,6 +168,19 @@ export const SingleCoin: FC = (): JSX.Element => {
                             Add to favorites
                         </Button>
                     </Grid>
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={2000}
+                        anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "center",
+                        }}
+                        onClose={handleClose}
+                    >
+                        <Alert severity={severity} sx={{ width: "100%" }}>
+                            {!error ? "Coin added" : "Ooops, something wrong"}
+                        </Alert>
+                    </Snackbar>
                 </Grid>
             )}
         </>
