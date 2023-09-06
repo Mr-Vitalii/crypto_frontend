@@ -6,7 +6,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { Layout } from "./components/Layout/Layout";
 import { PrivateRoute } from "utils/router/PrivateRoute";
-import { Settings } from "components/Settings/Settings";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
@@ -15,6 +14,9 @@ const SingleCoinPage = lazy(
 );
 const WatchListPage = lazy(() => import("./pages/WatchListPage/WatchListPage"));
 const NewsPage = lazy(() => import("./pages/NewsPage/NewsPage"));
+const UserSettingsPage = lazy(
+    () => import("./pages/UserSettingsPage/UserSettingsPage"),
+);
 
 export const App = () => {
     const [theme, colorMode] = useMode();
@@ -37,7 +39,7 @@ export const App = () => {
                                 <Route path="/news" element={<NewsPage />} />
                                 <Route
                                     path="/settings"
-                                    element={<Settings />}
+                                    element={<UserSettingsPage />}
                                 />
                                 <Route
                                     path="/single/:id"

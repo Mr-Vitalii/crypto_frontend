@@ -15,6 +15,8 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
     const { setIsOpen, isOpen, isNonMobile } = props;
     const { user } = useAuth();
 
+    console.log(user);
+
     return (
         <AppBar className={classes.root} position="static">
             <Toolbar className={classes.toolbar}>
