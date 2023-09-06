@@ -1,4 +1,4 @@
-import { UserSettings } from "components/Settings/Settings";
+import { UserSettings } from "components/UserSettingss/UserSettingss";
 import React, { FC } from "react";
 
 const UserSettingsPage: FC = (): JSX.Element => {

@@ -3,8 +3,8 @@ import { useStyles } from "./styles";
 import { Box, Grid, TextField } from "@mui/material";
 import { useAppDispatch } from "utils/hooks";
 
-// import { updateUserPassword } from "../../store/thunks/auth";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
+import { updateUserPassword } from "redux/auth/thunks";
 
 export const ChangePassword: FC = (): JSX.Element => {
     const [newPassword, setNewPassword] = useState("");
@@ -19,7 +19,7 @@ export const ChangePassword: FC = (): JSX.Element => {
             newPassword,
         };
 
-        // dispatch(updateUserPassword(data));
+        dispatch(updateUserPassword(data));
     };
 
     return (
@@ -36,7 +36,7 @@ export const ChangePassword: FC = (): JSX.Element => {
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
                     type="text"
-                    label="Старый пароль"
+                    label="Old password"
                     variant="outlined"
                 />
                 <TextField
@@ -44,7 +44,7 @@ export const ChangePassword: FC = (): JSX.Element => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     type="text"
-                    label="Новый пароль"
+                    label="New password"
                     variant="outlined"
                 />
                 <Box className={classes.buttonSubmitBlock}>
