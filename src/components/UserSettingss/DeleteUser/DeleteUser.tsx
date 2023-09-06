@@ -12,8 +12,7 @@ import { useStyles } from "./styles";
 import { tokens } from "theme";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "utils/hooks";
-
-// import { deleteUser } from "../../store/thunks/auth";
+import { deleteUser } from "redux/auth/thunks";
 
 export const DeleteUser: FC = (): JSX.Element => {
     const [checked, setChecked] = useState(false);
@@ -24,7 +23,7 @@ export const DeleteUser: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     const handleDelete = () => {
-        // dispatch(deleteUser());
+        dispatch(deleteUser());
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("name");
         navigate("/login");

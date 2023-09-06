@@ -64,3 +64,37 @@ export const updateUserInfo = createAsyncThunk(
         }
     },
 );
+
+export const updateUserPassword = createAsyncThunk(
+    "users/change-password",
+    async (
+        data: { oldPassword: string; newPassword: string },
+        { rejectWithValue },
+    ) => {
+        try {
+            return instanceAuth.patch("auth/update_password", data);
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    },
+);
+
+export const deleteUser = createAsyncThunk(
+    "users/delete-user",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await instanceAuth.delete("auth/user");
+            return response.data;
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    },
+);

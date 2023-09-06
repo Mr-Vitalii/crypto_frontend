@@ -4,8 +4,8 @@ import { selectUser } from "redux/auth/selectors";
 import { tokens } from "theme";
 import { tabProps } from "utils/helpers";
 import { useAppDispatch, useAppSelector, useAuth } from "utils/hooks";
-// import { ChangePassword } from "./ChangePassword/ChangePassword";
-// import { DeleteUser } from "./DeleteUser/DeleteUser";
+import { ChangePassword } from "./ChangePassword/ChangePassword";
+import { DeleteUser } from "./DeleteUser/DeleteUser";
 import { SettingsPersonalInfo } from "./SettingsPersonalInfo/SettingsPersonalInfo";
 
 import { useStyles } from "./styles";
@@ -53,12 +53,10 @@ export const UserSettings: FC = (): JSX.Element => {
                 <SettingsPersonalInfo />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <p>Item2</p>
-                {/* <ChangePassword /> */}
+                <ChangePassword />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <p>Item3</p>
-                {/* <DeleteUser /> */}
+                <DeleteUser />
             </TabPanel>
         </Grid>
     );
