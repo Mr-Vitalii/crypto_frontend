@@ -6,6 +6,8 @@ export const useStyles = makeStyles((theme: Theme) => {
     const colors = tokens(theme.palette.mode);
     return {
         root: {
+            display: "flex",
+            justifyContent: "center",
             padding: 32,
         },
         tabsWrapper: {

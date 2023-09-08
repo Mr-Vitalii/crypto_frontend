@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import moment from "moment";
-import { ILineChartProps } from "common/types/coins";
+import { ICoinsArray } from "common/types/coins";
 
 ChartJS.register(
     CategoryScale,
@@ -23,9 +23,7 @@ ChartJS.register(
     Legend,
 );
 
-export const LineChart = (props: ILineChartProps) => {
-    const { data } = props;
-
+export const LineChart: FC<ICoinsArray> = ({ data }) => {
     const options = {
         responsive: true,
         scales: {
@@ -61,5 +59,3 @@ export const LineChart = (props: ILineChartProps) => {
     };
     return <Line options={options} data={values} width="100%" height="20%" />;
 };
-
-

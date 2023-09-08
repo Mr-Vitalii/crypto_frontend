@@ -6,10 +6,11 @@ import TrendDown from "assets/images/chart/trend-down.svg";
 import { IFavoriteBlockProps, ISingleCoin } from "common/types/coins";
 import { AreaChart } from "components/charts/AreaChart/AreaChart";
 
-export const FavoriteBlock: FC<IFavoriteBlockProps> = ({ element }): JSX.Element => {
-   
+export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
+    element,
+}): JSX.Element => {
     const classes = useStyles();
-    
+
     let currentPrice = 0;
     let changePrice = 0;
     element.singleCoin.forEach((element: ISingleCoin) => {

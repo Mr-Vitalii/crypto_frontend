@@ -1,11 +1,3 @@
-export interface IAreaChartProps {
-    data: number[][];
-}
-
-export interface ILineChartProps {
-    data: any;
-}
-
 interface Roi {
     times: number;
     currency: string;
@@ -41,6 +33,23 @@ export interface ISingleCoin {
     last_updated: Date;
 }
 
+export interface ISingleNews {
+    body: string;
+    categories: string;
+    downvotes: string;
+    guid: string;
+    id: string;
+    imageurl: string;
+    lang: string;
+    published_on: number;
+    source: any;
+    source_info: { name: string; img: string; lang: string };
+    tags: string;
+    title: string;
+    upvotes: string;
+    url: string;
+}
+
 export interface IWatchlistCoin {
     coinId: string;
     name: string;
@@ -50,14 +59,26 @@ export interface IWatchlistCoin {
     _id: string;
 }
 
-export interface IChartData {
+export interface ICoinsData {
     name: string;
     price_chart_data: number[][];
     singleCoin: ISingleCoin[];
 }
 
+export interface IAreaChartProps {
+    data: number[][];
+}
+
+export interface ICoinsArray {
+    data: ICoinsData[];
+}
+
 export interface IFavoriteBlockProps {
-    element: IChartData;
+    element: ICoinsData;
+}
+
+export interface ISingleNewsProps {
+    element: ISingleNews;
 }
 
 export interface ITablePriceData {

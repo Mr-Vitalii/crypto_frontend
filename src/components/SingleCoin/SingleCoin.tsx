@@ -14,10 +14,10 @@ import {
     Typography,
 } from "@mui/material";
 
-import { selectAllCoins } from "redux/coins/selectors";
-import { createWatchListRecord } from "redux/coins/thunks";
+import { selectAllCoins, selectCoinsError } from "redux/coins/selectors";
 
 import { FlexBetween } from "components/FlexBetween/FlexBetween";
+import { addWatchListElement } from "redux/watchlist/thunks";
 
 export const SingleCoin: FC = (): JSX.Element => {
     const [open, setOpen] = useState(false);
@@ -27,13 +27,14 @@ export const SingleCoin: FC = (): JSX.Element => {
     const navigate = useNavigate();
     const { id } = useParams();
     const dispatch = useAppDispatch();
+    const serverError = useAppSelector(selectCoinsError);
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
-
     const classes = useStyles();
 
     const coin = allCoins.find((element) => element.name === (id as string));
+    const errorMessage = serverError ? serverError : "Ooops, something wrong";
 
-    const handleCreateRecord = () => {
+    const handleAddCoin = async () => {
         try {
             const data = {
                 name: "",
@@ -43,7 +44,7 @@ export const SingleCoin: FC = (): JSX.Element => {
                 data.name = coin.name;
                 data.coinId = coin.id;
             }
-            dispatch(createWatchListRecord(data));
+            await dispatch(addWatchListElement(data));
             setError(false);
             setSeverity("success");
             setOpen(true);
@@ -163,7 +164,7 @@ export const SingleCoin: FC = (): JSX.Element => {
                             color="success"
                             variant="outlined"
                             className={classes.cardButton}
-                            onClick={handleCreateRecord}
+                            onClick={handleAddCoin}
                         >
                             Add to favorites
                         </Button>
@@ -178,7 +179,7 @@ export const SingleCoin: FC = (): JSX.Element => {
                         onClose={handleClose}
                     >
                         <Alert severity={severity} sx={{ width: "100%" }}>
-                            {!error ? "Coin added" : "Ooops, something wrong"}
+                            {!error ? "Coin added" : errorMessage}
                         </Alert>
                     </Snackbar>
                 </Grid>

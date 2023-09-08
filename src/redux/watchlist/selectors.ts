@@ -1,1 +1,1 @@
-export const selectWatchlist = (state: any) => state.watchlist.coins;
+export const selectWatchlist = (state: any) => state.watchlist.watchlistCoins;

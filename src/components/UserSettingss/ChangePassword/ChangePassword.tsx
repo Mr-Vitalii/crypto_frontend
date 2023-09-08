@@ -12,7 +12,7 @@ export const ChangePassword: FC = (): JSX.Element => {
     const classes = useStyles();
     const dispatch = useAppDispatch();
 
-    const handleChangePassword = (e: React.SyntheticEvent) => {
+    const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data = {
             oldPassword,
@@ -38,6 +38,7 @@ export const ChangePassword: FC = (): JSX.Element => {
                     type="text"
                     label="Old password"
                     variant="outlined"
+                    fullWidth
                 />
                 <TextField
                     className={classes.inputField}
@@ -46,6 +47,7 @@ export const ChangePassword: FC = (): JSX.Element => {
                     type="text"
                     label="New password"
                     variant="outlined"
+                    fullWidth
                 />
                 <Box className={classes.buttonSubmitBlock}>
                     <AppLoadingButton type="submit">

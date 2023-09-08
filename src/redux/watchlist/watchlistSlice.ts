@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getWatchlistElements } from "./thunks";
 
 const initialState: any = {
-    coins: [],
+    watchlistCoins: [],
 };
 
 export const watchlistSlice = createSlice({
@@ -11,9 +11,9 @@ export const watchlistSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getWatchlistElements.fulfilled, (state, action) => {
-            state.coins = action.payload;
+            state.watchlistCoins = action.payload;
         });
     },
 });
 
-export default watchlistSlice.reducer;
+export const watchlistReducer = watchlistSlice.reducer;

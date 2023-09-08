@@ -32,7 +32,7 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                                 onClick={() => setIsOpen(!isOpen)}
                             />
                             <Typography variant="h3">
-                                Welcome {user ? `${user.firstName}` : ""}
+                                Welcome {user ? `${user.userName}` : ""}
                             </Typography>
                         </FlexBetween>
                     </Grid>

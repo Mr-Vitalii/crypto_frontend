@@ -22,7 +22,7 @@ export const DeleteUser: FC = (): JSX.Element => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const handleDelete = () => {
+    const handleDelete = (): void => {
         dispatch(deleteUser());
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("name");
@@ -66,7 +66,7 @@ export const DeleteUser: FC = (): JSX.Element => {
             <Grid item className={classes.buttonBlock}>
                 <Button
                     onClick={handleDelete}
-                    color="success"
+                    color="error"
                     variant="outlined"
                     disabled={!checked}
                 >

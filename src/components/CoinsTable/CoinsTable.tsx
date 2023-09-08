@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
     Paper,
     Table,
@@ -9,8 +9,11 @@ import {
     TableRow,
 } from "@mui/material";
 import { useStyles } from "./styles";
+import { ISingleCoin, ITablePriceData } from "common/types/coins";
 
-export const CoinsTable = (props: any) => {
+export const CoinsTable: FC<ITablePriceData> = (
+    props: ITablePriceData,
+): JSX.Element => {
     const { coins } = props;
 
     const classes = useStyles();
@@ -22,13 +25,13 @@ export const CoinsTable = (props: any) => {
                     <TableHead>
                         <TableRow>
                             <TableCell>Название</TableCell>
-                            <TableCell align="right">Цена</TableCell>
-                            <TableCell align="right">Изменения (%)</TableCell>
-                            <TableCell align="right">Изменения($)</TableCell>
+                            <TableCell align="right">Price</TableCell>
+                            <TableCell align="right">Changes (%)</TableCell>
+                            <TableCell align="right">Changes ($)</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {coins.map((element: any) => (
+                        {coins.map((element: ISingleCoin) => (
                             <TableRow
                                 key={element.name}
                                 sx={{

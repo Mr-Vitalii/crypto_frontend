@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Box, Grid, TextField } from "@mui/material";
 import { useStyles } from "./styles";
-import { useAppDispatch, useAppSelector, useAuth } from "utils/hooks";
+import { useAppDispatch, useAuth } from "utils/hooks";
 // import { getPublicUser, updateUserInfo } from "../../store/thunks/auth";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 import { updateUserInfo } from "redux/auth/thunks";
@@ -23,7 +23,7 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
         }
     }, [user]);
 
-    const handleSubmit = (e: React.SyntheticEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         const data = {
             firstName: name,
@@ -49,6 +49,7 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                     type="text"
                     label="Имя"
                     variant="outlined"
+                    fullWidth
                 />
                 <TextField
                     className={classes.inputField}
@@ -57,6 +58,7 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                     type="text"
                     label="Username"
                     variant="outlined"
+                    fullWidth
                 />
                 <TextField
                     className={classes.inputField}
@@ -65,6 +67,7 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                     type="text"
                     label="Email"
                     variant="outlined"
+                    fullWidth
                 />
                 <Box className={classes.buttonBlock}>
                     <AppLoadingButton type="submit">Save</AppLoadingButton>

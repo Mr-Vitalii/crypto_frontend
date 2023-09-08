@@ -2,12 +2,17 @@ import { styled } from "@mui/styles";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 export const AppLoadingButton = styled(LoadingButton)({
-  borderRadius: 4,
-  backgroundColor: "#1900D5 !important",
-  boxShadow: "0px 1px 7px #332a76 !important",
-  padding: "10px 20px !important",
-  maxWidth: 300,
-  color: "#fff !important",
+    borderRadius: 4,
+    backgroundColor: "#1900D5 !important",
+    boxShadow: "0px 1px 7px #332a76 !important",
+    padding: "10px 20px !important",
+    minWidth: "185px !important",
+    maxWidth: 300,
+    color: "#fff !important",
+    transition: "box-shadow 0.3s",
+
+    "&:hover": {
+        backgroundColor: "#351de6 !important",
+        boxShadow: `0px 1px 20px #3f29e7 !important`,
+    },
 });
-
-
