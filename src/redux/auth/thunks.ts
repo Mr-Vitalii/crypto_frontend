@@ -6,7 +6,12 @@ import {
     IRegisterData,
     UserAttributes,
 } from "common/types/auth";
-import { instance, instanceAuth, setAuthHeader } from "utils/axios";
+import {
+    clearAuthHeader,
+    instance,
+    instanceAuth,
+    setAuthHeader,
+} from "utils/axios";
 
 export const loginUser = createAsyncThunk<
     AuthData,
@@ -54,9 +59,9 @@ export const updateUserInfo = createAsyncThunk<
         return user.data;
     } catch (error: any) {
         if (error.response && error.response.data.message) {
-            return rejectWithValue(error.response.data.message);
+            return rejectWithValue(error.response.data);
         } else {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error);
         }
     }
 });
@@ -88,6 +93,7 @@ export const deleteUser = createAsyncThunk<
 >("users/delete-user", async (_, { rejectWithValue }) => {
     try {
         const response = await instanceAuth.delete("auth/user");
+        clearAuthHeader();
         return response.data;
     } catch (error: any) {
         if (error.response && error.response.data.message) {

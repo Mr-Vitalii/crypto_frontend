@@ -33,32 +33,6 @@ export interface ISingleCoin {
     last_updated: Date;
 }
 
-export interface ISingleNews {
-    body: string;
-    categories: string;
-    downvotes: string;
-    guid: string;
-    id: string;
-    imageurl: string;
-    lang: string;
-    published_on: number;
-    source: any;
-    source_info: { name: string; img: string; lang: string };
-    tags: string;
-    title: string;
-    upvotes: string;
-    url: string;
-}
-
-export interface IWatchlistCoin {
-    coinId: string;
-    name: string;
-    owner: {
-        _id: string;
-    };
-    _id: string;
-}
-
 export interface ICoinsData {
     name: string;
     price_chart_data: number[][];
@@ -77,10 +51,15 @@ export interface IFavoriteBlockProps {
     element: ICoinsData;
 }
 
-export interface ISingleNewsProps {
-    element: ISingleNews;
-}
-
 export interface ITablePriceData {
     coins: ISingleCoin[];
+}
+
+//* REDUX
+
+export interface ICoinsState {
+    coins: ISingleCoin[];
+    favoriteCoins: ICoinsData[];
+    favoriteCoinsIsLoading: boolean;
+    coinsIsLoading: boolean;
 }

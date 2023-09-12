@@ -65,7 +65,6 @@ export const authSlice = createSlice({
         builder.addCase(
             updateUserInfo.fulfilled,
             (state, action: PayloadAction<UserAttributes>) => {
-                console.log(action.payload);
                 state.user.firstName = action.payload.firstName;
                 state.user.userName = action.payload.userName;
                 state.user.email = action.payload.email;

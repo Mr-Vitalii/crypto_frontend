@@ -8,7 +8,7 @@ import { PrivateRoute } from "utils/routes/PrivateRoute";
 import { Layout } from "./components/Layout/Layout";
 import { RestrictedRoute } from "utils/routes/RestrictedRoute";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
 const SingleCoinPage = lazy(() => import("./pages/SingleCoinPage"));
 const WatchListPage = lazy(() => import("./pages/WatchListPage"));
@@ -20,13 +20,10 @@ export const App = () => {
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
-                <CssBaseline />
+                <CssBaseline enableColorScheme />
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<Layout />}>
-                            {/* <Route path="/register" element={<AuthPage />} />
-                            <Route path="/login" element={<AuthPage />} /> */}
-
                             <Route
                                 path="/register"
                                 element={
@@ -47,7 +44,7 @@ export const App = () => {
                             />
 
                             <Route element={<PrivateRoute />}>
-                                <Route index element={<HomePage />} />
+                                <Route index element={<DashboardPage />} />
                                 <Route
                                     path="/watchlist"
                                     element={<WatchListPage />}

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Box, Grid, Link, Typography } from "@mui/material";
 import { useStyles } from "./styles";
-import { ISingleNewsProps } from "common/types/coins";
+import { ISingleNewsProps } from "common/types/news";
 
 export const SingleNews: FC<ISingleNewsProps> = ({ element }): JSX.Element => {
     const classes = useStyles();

@@ -2,7 +2,7 @@ import { Box, Grid, Tab, Tabs, useTheme } from "@mui/material";
 import React, { FC, useState } from "react";
 
 import { tokens } from "theme";
-import { tabProps } from "utils/helpers";
+import { tabProps } from "utils/helpers/tabProps";
 
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";

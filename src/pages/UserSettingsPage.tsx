@@ -1,8 +1,14 @@
+import { FC } from "react";
 import { UserSettings } from "components/UserSettingss/UserSettingss";
-import React, { FC } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundaryComponent } from "components/ErrorBoudaryComponent/ErrorBoundaryComponent";
 
 const UserSettingsPage: FC = (): JSX.Element => {
-    return <UserSettings />;
+    return (
+        <ErrorBoundary FallbackComponent={ErrorBoundaryComponent}>
+            <UserSettings />
+        </ErrorBoundary>
+    );
 };
 
 export default UserSettingsPage;

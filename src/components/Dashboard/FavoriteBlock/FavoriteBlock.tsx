@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useStyles } from "./styles";
 import TrendUp from "assets/images/chart/trend-up.svg";
 import TrendDown from "assets/images/chart/trend-down.svg";
@@ -25,7 +25,7 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
                     <h3 className={classes.assetName}>{element.name}</h3>
                     <div className={classes.itemDetails}>
                         <h3 className={classes.cardPrice}>${currentPrice}</h3>
-                        <Box
+                        <div
                             className={
                                 changePrice > 0
                                     ? `${classes.priceTrend} ${classes.trendUp}`
@@ -38,7 +38,7 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
                                 <img src={TrendDown} alt="TrendDown" />
                             )}
                             <span>{Number(changePrice).toFixed(2)}%</span>
-                        </Box>
+                        </div>
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={6}>

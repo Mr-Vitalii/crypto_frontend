@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema, RegisterSchema } from "../../utils/yup";
 
-import { Box } from "@mui/material";
+import { AlertColor, Box, Container } from "@mui/material";
 
 import { LoginForm } from "components/Auth/LoginForm/LoginForm";
 import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
@@ -15,14 +15,20 @@ import { CommonFormData } from "common/types/auth/index";
 import { AppErrors } from "common/errors";
 import { loginUser, registerUser } from "redux/auth/thunks";
 import { useStyles } from "./styles";
+import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+import { getErrorMessage } from "utils/helpers/getErrorMessage";
 
 export const Auth: FC = (): JSX.Element => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const classes = useStyles();
-
     const loading = useAppSelector((state) => state.auth.isLoading);
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [severity, setSeverity] = useState<AlertColor>("success");
 
     const {
         register,
@@ -36,57 +42,58 @@ export const Auth: FC = (): JSX.Element => {
     });
 
     const handleSubmitForm = async (data: any) => {
-        if (location.pathname === "/login") {
-            try {
-                dispatch(loginUser(data));
-                reset();
-                navigate("/");
-            } catch (error) {
-                return error;
-            }
-        } else {
-            try {
-                if (data.password === data.confirmPassword) {
-                    try {
-                        const userData = {
-                            firstName: data.name,
-                            userName: data.username,
-                            email: data.email,
-                            password: data.password,
-                        };
-                        dispatch(registerUser(userData));
-                        reset();
-                        navigate("/");
-                    } catch (error) {
-                        return error;
+        try {
+            switch (location.pathname) {
+                case "/login":
+                    await dispatch(loginUser(data)).unwrap();
+                    setError(false);
+                    setSeverity("success");
+                    setOpenSnackbar(true);
+                    reset();
+                    navigate("/");
+                    break;
+
+                case "/register":
+                    if (data.password === data.confirmPassword) {
+                        try {
+                            const userData = {
+                                firstName: data.name,
+                                userName: data.username,
+                                email: data.email,
+                                password: data.password,
+                            };
+                            await dispatch(registerUser(userData)).unwrap();
+                            setError(false);
+                            setSeverity("success");
+                            setOpenSnackbar(true);
+                            reset();
+                            navigate("/");
+                        } catch (e) {
+                            return e;
+                        }
+                    } else {
+                        throw new Error(AppErrors.PasswordDoNotMatch);
                     }
-                } else {
-                    throw new Error(AppErrors.PasswordDoNotMatch);
-                }
-            } catch (error) {
-                console.error(error); //* Тут нужно сообщить об этом пользователю
+                    break;
+
+                default:
+                    break;
             }
+        } catch (e) {
+            setErrorMessage(getErrorMessage(e));
+            setError(true);
+            setSeverity("error");
+            setOpenSnackbar(true);
         }
     };
 
     return (
-        <div className={classes.root}>
+        <Container className={classes.root}>
             <form
                 className={classes.form}
                 onSubmit={handleSubmit(handleSubmitForm)}
             >
-                <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    flexDirection="column"
-                    maxWidth={640}
-                    margin="auto"
-                    paddingY={2}
-                    paddingX={4}
-                    borderRadius={5}
-                    boxShadow={"-3px -2px 20px 1px #202020"}
-                >
+                <Box className={classes.formContainer}>
                     {location.pathname === "/login" ? (
                         <LoginForm
                             register={register}
@@ -104,6 +111,13 @@ export const Auth: FC = (): JSX.Element => {
                     ) : null}
                 </Box>
             </form>
-        </div>
+            <AppSnackbar
+                open={openSnackbar}
+                setOpen={setOpenSnackbar}
+                error={error}
+                severity={severity}
+                errorMessage={errorMessage}
+            />
+        </Container>
     );
 };

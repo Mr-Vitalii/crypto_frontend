@@ -1,14 +1,14 @@
-import React, { FC } from "react";
-import { WatchList } from "components/WatchList/WatchList";
+import { FC } from "react";
+import { Dashboard } from "components/Dashboard/Dashboard";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorBoundaryComponent } from "components/ErrorBoudaryComponent/ErrorBoundaryComponent";
 
-const WatchListPage: FC = (): JSX.Element => {
+const DashboardPage: FC = (): JSX.Element => {
     return (
         <ErrorBoundary FallbackComponent={ErrorBoundaryComponent}>
-            <WatchList />
+            <Dashboard />
         </ErrorBoundary>
     );
 };
 
-export default WatchListPage;
+export default DashboardPage;

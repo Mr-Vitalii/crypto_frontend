@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ICoinsData } from "common/types/coins";
+import { ICoinsData, ISingleCoin } from "common/types/coins";
 import { coinGeckoApi } from "utils/axios";
 
 export const getFavoriteCoins = createAsyncThunk<
@@ -12,7 +12,7 @@ export const getFavoriteCoins = createAsyncThunk<
             `coins/${coinName}/market_chart?vs_currency=usd&days=90`,
         );
         const singleCoin = await coinGeckoApi.get(
-            `coins/markets?vs_currency=usd&ids=${coinName}&order=market_cap_desc&per_page=10&page=1&sparkline=false`,
+            `coins/markets?vs_currency=usd&ids=${coinName}&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
         );
         return {
             name: coinName,
@@ -23,8 +23,8 @@ export const getFavoriteCoins = createAsyncThunk<
             singleCoin: singleCoin.data,
         };
     } catch (error: any) {
-        if (error.response && error.response.data.message) {
-            return rejectWithValue(error.response.data.message);
+        if (error.response && error.response.data.error) {
+            return rejectWithValue(error.response.data.error);
         } else {
             return rejectWithValue(error.message);
         }
@@ -32,18 +32,18 @@ export const getFavoriteCoins = createAsyncThunk<
 });
 
 export const getTopPriceData = createAsyncThunk<
-    ICoinsData[],
+    ISingleCoin[],
     undefined,
     { rejectValue: string }
 >("coins/markets/topPrice", async (_, { rejectWithValue }) => {
     try {
         const coins = await coinGeckoApi.get(
-            `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false`,
+            `coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`,
         );
         return coins.data;
     } catch (error: any) {
-        if (error.response && error.response.data.message) {
-            return rejectWithValue(error.response.data.message);
+        if (error.response && error.response.data.error) {
+            return rejectWithValue(error.response.data.error);
         } else {
             return rejectWithValue(error.message);
         }
