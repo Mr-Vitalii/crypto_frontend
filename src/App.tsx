@@ -1,7 +1,8 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { ColorModeContext, useMode } from "./theme";
+import { useMode } from "./theme";
+import { ColorModeContext } from "theme/context";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { PrivateRoute } from "utils/routes/PrivateRoute";

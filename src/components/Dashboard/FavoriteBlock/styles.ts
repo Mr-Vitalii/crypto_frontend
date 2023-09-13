@@ -1,7 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { tokens } from "theme";
 import { Theme } from "@mui/material";
-import { Calculate } from "@mui/icons-material";
 
 export const useStyles = makeStyles((theme: Theme) => {
     const colors = tokens(theme.palette.mode);

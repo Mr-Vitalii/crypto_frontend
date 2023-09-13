@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { useStyles } from "./styles";
 import TrendUp from "assets/images/chart/trend-up.svg";
@@ -22,10 +22,14 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
         <Grid item xs={12} sm={6} lg={6} key={element.name}>
             <Grid container className={classes.topCardItem}>
                 <Grid item xs={12} sm={6} lg={6}>
-                    <h3 className={classes.assetName}>{element.name}</h3>
-                    <div className={classes.itemDetails}>
-                        <h3 className={classes.cardPrice}>${currentPrice}</h3>
-                        <div
+                    <Typography variant="h2" className={classes.assetName}>
+                        {element.name}
+                    </Typography>
+                    <Box className={classes.itemDetails}>
+                        <Typography variant="h2" className={classes.cardPrice}>
+                            ${currentPrice}
+                        </Typography>
+                        <Box
                             className={
                                 changePrice > 0
                                     ? `${classes.priceTrend} ${classes.trendUp}`
@@ -37,9 +41,11 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
                             ) : (
                                 <img src={TrendDown} alt="TrendDown" />
                             )}
-                            <span>{Number(changePrice).toFixed(2)}%</span>
-                        </div>
-                    </div>
+                            <Typography variant="body2">
+                                {Number(changePrice).toFixed(2)}%
+                            </Typography>
+                        </Box>
+                    </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={6}>
                     <AreaChart data={element.price_chart_data} />
