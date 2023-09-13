@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IWatchlistCoin, IWatchlistState } from "common/types/watchlist";
 import { getWatchlistElements } from "./thunks";
 
-const initialState: any = {
-    coins: [],
+const initialState: IWatchlistState = {
+    watchlistCoins: [],
+    isLoading: false,
 };
 
 export const watchlistSlice = createSlice({
@@ -10,10 +12,20 @@ export const watchlistSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getWatchlistElements.fulfilled, (state, action) => {
-            state.coins = action.payload;
+        builder.addCase(getWatchlistElements.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(
+            getWatchlistElements.fulfilled,
+            (state, action: PayloadAction<IWatchlistCoin[]>) => {
+                state.watchlistCoins = action.payload;
+                state.isLoading = false;
+            },
+        );
+        builder.addCase(getWatchlistElements.rejected, (state) => {
+            state.isLoading = false;
         });
     },
 });
 
-export default watchlistSlice.reducer;
+export const watchlistReducer = watchlistSlice.reducer;

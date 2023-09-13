@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -13,7 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import moment from "moment";
-import { IAreaChartProps } from 'common/types/coins';
+import { IAreaChartProps } from "common/types/coins";
 
 ChartJS.register(
     CategoryScale,
@@ -26,9 +26,7 @@ ChartJS.register(
     Legend,
 );
 
-export const AreaChart: FC<IAreaChartProps> = (props: IAreaChartProps) => {
-    const { data } = props;
-
+export const AreaChart: FC<IAreaChartProps> = ({ data }) => {
     const options = {
         responsive: true,
         scales: {

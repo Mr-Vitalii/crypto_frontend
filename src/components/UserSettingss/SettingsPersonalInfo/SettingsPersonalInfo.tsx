@@ -1,10 +1,13 @@
 import React, { FC, useEffect, useState } from "react";
-import { Box, Grid, TextField } from "@mui/material";
+import { AlertColor, Box, Grid, TextField } from "@mui/material";
 import { useStyles } from "./styles";
-import { useAppDispatch, useAppSelector, useAuth } from "utils/hooks";
+import { useAppDispatch, useAuth } from "utils/hooks";
 // import { getPublicUser, updateUserInfo } from "../../store/thunks/auth";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 import { updateUserInfo } from "redux/auth/thunks";
+
+import { getErrorMessage } from "utils/helpers/getErrorMessage";
+import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 
 export const SettingsPersonalInfo: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
@@ -12,6 +15,11 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [severity, setSeverity] = useState<AlertColor>("success");
 
     const { user } = useAuth();
 
@@ -23,53 +31,76 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
         }
     }, [user]);
 
-    const handleSubmit = (e: React.SyntheticEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const data = {
-            firstName: name,
-            userName: username,
-            email: email,
-        };
-        dispatch(updateUserInfo(data));
+        try {
+            const data = {
+                firstName: name,
+                userName: username,
+                email: email,
+            };
+            await dispatch(updateUserInfo(data)).unwrap();
+            setError(false);
+            setSeverity("success");
+            setOpenSnackbar(true);
+        } catch (e) {
+            setErrorMessage(getErrorMessage(e));
+            setError(true);
+            setSeverity("error");
+            setOpenSnackbar(true);
+        }
     };
 
     return (
-        <Grid
-            component="form"
-            noValidate
-            autoComplete="off"
-            className={classes.root}
-            onSubmit={handleSubmit}
-        >
-            <Box className={classes.formWrapper}>
-                <TextField
-                    className={classes.inputField}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    type="text"
-                    label="Имя"
-                    variant="outlined"
-                />
-                <TextField
-                    className={classes.inputField}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    type="text"
-                    label="Username"
-                    variant="outlined"
-                />
-                <TextField
-                    className={classes.inputField}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="text"
-                    label="Email"
-                    variant="outlined"
-                />
-                <Box className={classes.buttonBlock}>
-                    <AppLoadingButton type="submit">Save</AppLoadingButton>
+        <>
+            <Grid
+                component="form"
+                noValidate
+                autoComplete="off"
+                className={classes.root}
+                onSubmit={handleSubmit}
+            >
+                <Box className={classes.formWrapper}>
+                    <TextField
+                        className={classes.inputField}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        type="text"
+                        label="Имя"
+                        variant="outlined"
+                        fullWidth
+                    />
+                    <TextField
+                        className={classes.inputField}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        type="text"
+                        label="Username"
+                        variant="outlined"
+                        fullWidth
+                    />
+                    <TextField
+                        className={classes.inputField}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                    />
+                    <Box className={classes.buttonBlock}>
+                        <AppLoadingButton type="submit">Save</AppLoadingButton>
+                    </Box>
                 </Box>
-            </Box>
-        </Grid>
+            </Grid>
+            <AppSnackbar
+                open={openSnackbar}
+                setOpen={setOpenSnackbar}
+                error={error}
+                severity={severity}
+                successMessage={"Data changed"}
+                errorMessage={errorMessage}
+            />
+        </>
     );
 };

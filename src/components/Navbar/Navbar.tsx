@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
@@ -15,8 +15,6 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
     const { setIsOpen, isOpen, isNonMobile } = props;
     const { user } = useAuth();
 
-    console.log(user);
-
     return (
         <AppBar className={classes.root} position="static">
             <Toolbar className={classes.toolbar}>
@@ -32,7 +30,7 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                                 onClick={() => setIsOpen(!isOpen)}
                             />
                             <Typography variant="h3">
-                                Welcome {user ? `${user.firstName}` : ""}
+                                Welcome {user ? `${user.userName}` : ""}
                             </Typography>
                         </FlexBetween>
                     </Grid>

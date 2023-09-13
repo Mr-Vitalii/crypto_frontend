@@ -1,15 +1,16 @@
-import React, { FC } from "react";
-import { Box, Grid } from "@mui/material";
+import { FC } from "react";
+import { Box, Grid, Typography } from "@mui/material";
 import { useStyles } from "./styles";
 import TrendUp from "assets/images/chart/trend-up.svg";
 import TrendDown from "assets/images/chart/trend-down.svg";
 import { IFavoriteBlockProps, ISingleCoin } from "common/types/coins";
 import { AreaChart } from "components/charts/AreaChart/AreaChart";
 
-export const FavoriteBlock: FC<IFavoriteBlockProps> = ({ element }): JSX.Element => {
-   
+export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
+    element,
+}): JSX.Element => {
     const classes = useStyles();
-    
+
     let currentPrice = 0;
     let changePrice = 0;
     element.singleCoin.forEach((element: ISingleCoin) => {
@@ -21,9 +22,13 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({ element }): JSX.Element
         <Grid item xs={12} sm={6} lg={6} key={element.name}>
             <Grid container className={classes.topCardItem}>
                 <Grid item xs={12} sm={6} lg={6}>
-                    <h3 className={classes.assetName}>{element.name}</h3>
-                    <div className={classes.itemDetails}>
-                        <h3 className={classes.cardPrice}>${currentPrice}</h3>
+                    <Typography variant="h2" className={classes.assetName}>
+                        {element.name}
+                    </Typography>
+                    <Box className={classes.itemDetails}>
+                        <Typography variant="h2" className={classes.cardPrice}>
+                            ${currentPrice}
+                        </Typography>
                         <Box
                             className={
                                 changePrice > 0
@@ -36,9 +41,11 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({ element }): JSX.Element
                             ) : (
                                 <img src={TrendDown} alt="TrendDown" />
                             )}
-                            <span>{Number(changePrice).toFixed(2)}%</span>
+                            <Typography variant="body2">
+                                {Number(changePrice).toFixed(2)}%
+                            </Typography>
                         </Box>
-                    </div>
+                    </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={6}>
                     <AreaChart data={element.price_chart_data} />

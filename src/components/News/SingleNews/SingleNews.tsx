@@ -1,15 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, Grid, Link, Typography } from "@mui/material";
 import { useStyles } from "./styles";
+import { ISingleNewsProps } from "common/types/news";
 
-export const SingleNews = (props: any) => {
-    const { element } = props;
+export const SingleNews: FC<ISingleNewsProps> = ({ element }): JSX.Element => {
     const classes = useStyles();
 
     return (
         <Grid container className={classes.newsBlock}>
             <Grid item xs={12} md={3}>
-                <img src={element.imageurl} alt={element.category} />
+                <img src={element.imageurl} alt={element.categories} />
             </Grid>
             <Grid item xs={12} md={8}>
                 <Box className={classes.newsTitle}>

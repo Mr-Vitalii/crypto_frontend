@@ -1,9 +1,9 @@
 import { Box, Grid, Tab, Tabs, useTheme } from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
-import { selectUser } from "redux/auth/selectors";
+import React, { FC, useState } from "react";
+
 import { tokens } from "theme";
-import { tabProps } from "utils/helpers";
-import { useAppDispatch, useAppSelector, useAuth } from "utils/hooks";
+import { tabProps } from "utils/helpers/tabProps";
+
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
 import { SettingsPersonalInfo } from "./SettingsPersonalInfo/SettingsPersonalInfo";
@@ -13,17 +13,9 @@ import { TabPanel } from "./TabPanel/TabPanel";
 
 export const UserSettings: FC = (): JSX.Element => {
     const [value, setValue] = useState(0);
-    const dispatch = useAppDispatch();
-    const { user } = useAuth();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const classes = useStyles();
-
-    console.log(user);
-
-    useEffect(() => {
-        // dispatch(getPublicUser());
-    }, [dispatch]);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -48,16 +40,16 @@ export const UserSettings: FC = (): JSX.Element => {
                     <Tab label="Change password" {...tabProps(1)} />
                     <Tab label="Delete account" {...tabProps(2)} />
                 </Tabs>
+                <TabPanel value={value} index={0}>
+                    <SettingsPersonalInfo />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <ChangePassword />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <DeleteUser />
+                </TabPanel>
             </Box>
-            <TabPanel value={value} index={0}>
-                <SettingsPersonalInfo />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <ChangePassword />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <DeleteUser />
-            </TabPanel>
         </Grid>
     );
 };

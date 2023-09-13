@@ -6,13 +6,13 @@ export const useStyles = makeStyles((theme: Theme) => {
     const colors = tokens(theme.palette.mode);
     return {
         root: {
-            padding: "10px, 20px",
+            padding: "32px",
         },
         watchlistHeading: {
             textAlign: "center",
         },
         heading: {
-            margin: "25px 0 !important",
+            marginBottom: "25px !important",
         },
         coinsTableBlock: {
             backgroundColor: `${

@@ -1,43 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
-import {
-    createWatchListRecord,
-    getFavoriteCoins,
-    getTopPriceData,
-} from "./thunks";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ICoinsData, ICoinsState, ISingleCoin } from "common/types/coins";
+import { getFavoriteCoins, getTopPriceData } from "./thunks";
 
-const handleRejected = (state: any, action: any) => {
-    state.error = action.payload;
-};
-
-const initialState: any = {
+const initialState: ICoinsState = {
     coins: [],
     favoriteCoins: [],
-    error: null,
+    favoriteCoinsIsLoading: false,
+    coinsIsLoading: false,
 };
 
 export const coinsSlice = createSlice({
-    name: "assets",
+    name: "coins",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder
-            .addCase(getFavoriteCoins.fulfilled, (state, action) => {
+        builder.addCase(getFavoriteCoins.pending, (state) => {
+            state.favoriteCoinsIsLoading = true;
+        });
+        builder.addCase(
+            getFavoriteCoins.fulfilled,
+            (state, action: PayloadAction<ICoinsData>) => {
                 state.favoriteCoins.push(action.payload);
-            })
-            .addCase(getFavoriteCoins.rejected, handleRejected);
+                state.favoriteCoinsIsLoading = false;
+            },
+        );
+        builder.addCase(getFavoriteCoins.rejected, (state) => {
+            state.favoriteCoinsIsLoading = false;
+        });
 
-        builder
-            .addCase(getTopPriceData.fulfilled, (state, action) => {
+        builder.addCase(getTopPriceData.pending, (state) => {
+            state.coinsIsLoading = true;
+        });
+        builder.addCase(
+            getTopPriceData.fulfilled,
+            (state, action: PayloadAction<ISingleCoin[]>) => {
                 state.coins = action.payload;
-            })
-            .addCase(getTopPriceData.rejected, handleRejected);
-
-        builder
-            .addCase(createWatchListRecord.fulfilled, (state, action) => {
-                state.coins = action.payload;
-            })
-            .addCase(createWatchListRecord.rejected, handleRejected);
+                state.coinsIsLoading = false;
+            },
+        );
+        builder.addCase(getTopPriceData.rejected, (state) => {
+            state.coinsIsLoading = false;
+        });
     },
 });
 
-export default coinsSlice.reducer;
+export const coinsReducer = coinsSlice.reducer;

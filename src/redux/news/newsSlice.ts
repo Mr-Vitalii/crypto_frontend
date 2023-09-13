@@ -1,8 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { INewsState, ISingleNews } from "common/types/news";
 import { getNews } from "./thunks";
 
-const initialState: any = {
+const initialState: INewsState = {
     news: [],
+    isLoading: false,
 };
 
 export const newsSlice = createSlice({
@@ -10,10 +12,20 @@ export const newsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getNews.fulfilled, (state, action) => {
-            state.news = action.payload;
+        builder.addCase(getNews.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(
+            getNews.fulfilled,
+            (state, action: PayloadAction<ISingleNews[]>) => {
+                state.news = action.payload;
+                state.isLoading = false;
+            },
+        );
+        builder.addCase(getNews.rejected, (state, action) => {
+            state.isLoading = false;
         });
     },
 });
 
-export default newsSlice.reducer;
+export const newsReducer = newsSlice.reducer;
