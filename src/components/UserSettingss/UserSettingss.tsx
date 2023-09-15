@@ -1,7 +1,7 @@
 import { Box, Grid, Tab, Tabs, useTheme } from "@mui/material";
 import React, { FC, useState } from "react";
 
-import { tokens } from "theme";
+import { colors } from "theme";
 import { tabProps } from "utils/helpers/tabProps";
 
 import { ChangePassword } from "./ChangePassword/ChangePassword";
@@ -13,8 +13,6 @@ import { TabPanel } from "./TabPanel/TabPanel";
 
 export const UserSettings: FC = (): JSX.Element => {
     const [value, setValue] = useState(0);
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
     const classes = useStyles();
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -32,7 +30,7 @@ export const UserSettings: FC = (): JSX.Element => {
                     textColor="secondary"
                     TabIndicatorProps={{
                         style: {
-                            backgroundColor: colors.blue,
+                            backgroundColor: colors.blueAccent[500],
                         },
                     }}
                 >

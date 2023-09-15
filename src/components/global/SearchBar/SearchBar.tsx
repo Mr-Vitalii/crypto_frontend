@@ -1,11 +1,12 @@
 import { FC, useState } from "react";
-import { Stack, Autocomplete, TextField } from "@mui/material";
+import { Stack, Autocomplete, TextField, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "utils/hooks";
 import { selectAllCoins } from "redux/coins/selectors";
 import { ISingleCoin } from "common/types/coins";
+import SearchIcon from "@mui/icons-material/Search";
+import { colors } from "theme";
 
-//
 export const SearchBar: FC = (): JSX.Element => {
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -22,10 +23,15 @@ export const SearchBar: FC = (): JSX.Element => {
                 renderInput={(element) => (
                     <TextField
                         {...element}
-                        label="Search"
+                        placeholder="Search"
                         InputProps={{
                             ...element.InputProps,
                             type: "search",
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
                         }}
                     />
                 )}

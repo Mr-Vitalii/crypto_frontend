@@ -3,11 +3,11 @@ import { FC } from "react";
 import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
 import { useStyles } from "./styles";
-import { FlexBetween } from "../FlexBetween/FlexBetween";
+import { FlexBetween } from "../../FlexBetween/FlexBetween";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import { SearchBar } from "../SearchBar/SearchBar";
 
-import { useAuth } from "../../utils/hooks";
+import { useAuth } from "../../../utils/hooks";
 import { INavBarProps } from "common/types/navbar";
 
 export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {

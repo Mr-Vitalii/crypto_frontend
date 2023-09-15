@@ -1,9 +1,8 @@
 import { makeStyles } from "@mui/styles";
-import { tokens } from "theme";
+import { colors } from "theme";
 import { Theme } from "@mui/material";
 
 export const useStyles = makeStyles((theme: Theme) => {
-    const colors = tokens(theme.palette.mode);
     return {
         root: {
             padding: 32,
@@ -11,8 +10,8 @@ export const useStyles = makeStyles((theme: Theme) => {
                 textDecoration: "none",
                 color: `${
                     theme.palette.mode === "light"
-                        ? colors.black.DEFAULT
-                        : colors.white.DEFAULT
+                        ? colors.blackAccent[500]
+                        : colors.whiteAccent[500]
                 }`,
             },
         },

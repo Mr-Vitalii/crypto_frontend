@@ -10,7 +10,7 @@ import {
     useTheme,
 } from "@mui/material";
 import { useStyles } from "./styles";
-import { tokens } from "theme";
+import { colors } from "theme";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "utils/hooks";
 import { deleteUser } from "redux/auth/thunks";
@@ -20,8 +20,6 @@ import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 
 export const DeleteUser: FC = (): JSX.Element => {
     const [checked, setChecked] = useState(false);
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
     const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -71,9 +69,9 @@ export const DeleteUser: FC = (): JSX.Element => {
                                     checked={checked}
                                     onChange={() => setChecked(!checked)}
                                     sx={{
-                                        color: colors.blue,
+                                        color: colors.blueAccent[500],
                                         "&.Mui-checked": {
-                                            color: colors.blue,
+                                            color: colors.blueAccent[500],
                                         },
                                     }}
                                 />
