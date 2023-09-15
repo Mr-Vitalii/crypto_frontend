@@ -1,19 +1,18 @@
 import { makeStyles } from "@mui/styles";
-import { tokens } from "theme";
+import { colors } from "theme";
 import { Theme } from "@mui/material";
 
 export const useStyles = makeStyles((theme: Theme) => {
-    const colors = tokens(theme.palette.mode);
     return {
         topCardItem: {
             backgroundColor: `${
                 theme.palette.mode === "light"
-                    ? colors.primary.DEFAULT
-                    : colors.primary[600]
+                    ? colors.primaryWhiteTheme[500]
+                    : colors.secondary[800]
             }`,
             padding: "20px 16px",
             minHeight: 185,
-            border: `1px solid ${colors.borderColor}`,
+            border: `1px solid ${theme.palette.borderColor.main}`,
             borderRadius: 12,
         },
         assetName: {
@@ -41,12 +40,12 @@ export const useStyles = makeStyles((theme: Theme) => {
             borderRadius: 4,
         },
         trendUp: {
-            backgroundColor: "#A9FFA7",
-            color: "#037400",
+            backgroundColor: `${colors.greenAccent[200]}`,
+            color: `${colors.greenAccent[500]}`,
         },
         trendDown: {
-            backgroundColor: "#FFA7A7",
-            color: "#740000",
+            backgroundColor: `${colors.redAccent[200]}`,
+            color: `${colors.redAccent[500]}`,
         },
     };
 });

@@ -1,21 +1,20 @@
 import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material";
-import { tokens } from "theme";
+import { colors } from "theme";
 
 export const useStyles = makeStyles((theme: Theme) => {
-    const colors = tokens(theme.palette.mode);
     return {
         newsBlock: {
             justifyContent: "space-between",
             backgroundColor: `${
                 theme.palette.mode === "light"
-                    ? colors.primary.DEFAULT
-                    : colors.primary[600]
+                    ? colors.primaryWhiteTheme[500]
+                    : colors.secondary[800]
             }`,
             padding: "20px 16px",
             marginBottom: 32,
             minHeight: 270,
-            border: `1px solid ${colors.borderColor}`,
+            border: `1px solid ${theme.palette.borderColor.main}`,
             borderRadius: 12,
             "& .MuiPaper-root": {
                 backgroundColor: "transparent !important",

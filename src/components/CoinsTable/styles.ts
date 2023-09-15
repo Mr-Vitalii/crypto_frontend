@@ -1,10 +1,11 @@
 import { makeStyles } from "@mui/styles";
+import { colors } from "theme";
 
 export const useStyles = makeStyles({
     priceUp: {
-        color: "#A9FFA7 !important",
+        color: `${colors.greenAccent[200]} !important`,
     },
     priceDown: {
-        color: "#FFA7A7 !important",
+        color: `${colors.redAccent[200]} !important`,
     },
 });

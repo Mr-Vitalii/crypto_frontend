@@ -1,21 +1,20 @@
 import { makeStyles } from "@mui/styles";
-import { tokens } from "theme";
+import { colors } from "theme";
 import { Theme } from "@mui/material";
 
 export const useStyles = makeStyles((theme: Theme) => {
-    const colors = tokens(theme.palette.mode);
     return {
         root: {
             "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                    borderColor: colors.blue,
+                    borderColor: colors.blueAccent[500],
                 },
             },
             "& label.Mui-focused": {
                 color: `${
                     theme.palette.mode === "dark"
-                        ? colors.white.DEFAULT
-                        : colors.black.DEFAULT
+                        ? colors.whiteAccent[500]
+                        : colors.blackAccent[500]
                 }`,
             },
         },

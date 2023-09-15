@@ -15,11 +15,11 @@ import {
 import { ChevronLeftOutlined, LogoutOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlexBetween } from "components/FlexBetween/FlexBetween";
-import { navMenu } from "../../common/moks/navigate";
+import { navMenu } from "../../../common/moks/navigate";
 import { NavMenu } from "./NavMenu";
-import Logo from "../../assets/images/sidebar/logo.svg";
-import { ThemeSwitcher } from "components/ThemeSwitcher/ThemeSwitcher";
-import { SearchBar } from "components/SearchBar/SearchBar";
+import Logo from "assets/images/sidebar/logo.svg";
+import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+import { SearchBar } from "../SearchBar/SearchBar";
 import { ISidebarProps } from "common/types/sidebar";
 
 export const Sidebar: FC<ISidebarProps> = (

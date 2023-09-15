@@ -1,9 +1,9 @@
 import { FC, Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Navbar } from "components/Navbar/Navbar";
+import { Navbar } from "components/global/Navbar/Navbar";
 import { Box, useMediaQuery } from "@mui/material";
 import { useStyles } from "./styles";
-import { Sidebar } from "components/Sidebar/Sidebar";
+import { Sidebar } from "components/global/Sidebar/Sidebar";
 import { useAuth } from "utils/hooks";
 
 export const Layout: FC = (): JSX.Element => {

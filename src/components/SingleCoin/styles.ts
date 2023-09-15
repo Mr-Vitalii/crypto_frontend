@@ -1,9 +1,8 @@
 import { makeStyles } from "@mui/styles";
-import { tokens } from "../../theme";
+import { colors } from "../../theme";
 import { Theme } from "@mui/material";
 
 export const useStyles = makeStyles((theme: Theme) => {
-    const colors = tokens(theme.palette.mode);
     return {
         root: {
             padding: 5,
@@ -26,15 +25,15 @@ export const useStyles = makeStyles((theme: Theme) => {
             alignItems: "center",
             backgroundColor: `${
                 theme.palette.mode === "light"
-                    ? colors.primary.DEFAULT
-                    : colors.primary[600]
+                    ? colors.primaryWhiteTheme[500]
+                    : colors.secondary[800]
             }`,
             padding: "20px 16px",
             width: "100%",
             maxWidth: 500,
             minHeight: 185,
             marginBottom: "25px !important",
-            border: `1px solid ${colors.borderColor}`,
+            border: `1px solid ${theme.palette.borderColor.main}`,
             borderRadius: 12,
         },
         coinIcon: {
@@ -56,10 +55,10 @@ export const useStyles = makeStyles((theme: Theme) => {
             fontSize: 20,
         },
         trendUp: {
-            color: "#A9FFA7",
+            color: `${colors.greenAccent[200]}`,
         },
         trendDown: {
-            color: "#FFA7A7",
+            color: `${colors.redAccent[200]}`,
         },
         cardButtonBlock: {
             marginTop: 25,
