@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { useStyles } from "./styles";
+import { FC, useEffect, useState } from "react";
+import { BrandContainer, BrandTitle, NavBlock } from "./styled-components";
 import {
     Box,
     Drawer,
@@ -27,7 +27,6 @@ export const Sidebar: FC<ISidebarProps> = (
 ): JSX.Element => {
     const [active, setActive] = useState("");
     const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
-    const classes = useStyles();
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const theme = useTheme();
@@ -54,18 +53,13 @@ export const Sidebar: FC<ISidebarProps> = (
                         },
                     }}
                 >
-                    <Box className={classes.navBlock}>
+                    <NavBlock>
                         <Box>
                             <FlexBetween>
-                                <Box className={classes.brand}>
+                                <BrandContainer sx={{ py: 4, px: 2 }}>
                                     <img src={Logo} alt="Logo" />
-                                    <Typography
-                                        variant="h1"
-                                        className={classes.brandTitle}
-                                    >
-                                        Demo
-                                    </Typography>
-                                </Box>
+                                    <BrandTitle variant="h1">Demo</BrandTitle>
+                                </BrandContainer>
                                 {!isNonMobile && (
                                     <IconButton
                                         onClick={() => setIsOpen(!isOpen)}
@@ -82,26 +76,25 @@ export const Sidebar: FC<ISidebarProps> = (
                                 </ListItem>
                             )}
                         </List>
-                        <List className={classes.navList}>
+                        <List sx={{ mb: 8 }}>
                             <NavMenu
                                 navMenu={navMenu}
                                 active={active}
-                                classes={classes}
                                 navigate={navigate}
                             />
                         </List>
-                    </Box>
+                    </NavBlock>
                     <Box width="100%">
                         <List>
                             {!isNonMobile && (
                                 <ListItem>
-                                    <Box padding="5px">
+                                    <Box>
                                         <ThemeSwitcher />
                                     </Box>
                                 </ListItem>
                             )}
                             <ListItem>
-                                <ListItemButton className={classes.navItem}>
+                                <ListItemButton>
                                     <ListItemIcon>
                                         <LogoutOutlined />
                                     </ListItemIcon>

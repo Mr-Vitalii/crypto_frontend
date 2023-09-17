@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { LoginSchema, RegisterSchema } from "../../utils/yup";
+import { LoginSchema, RegisterSchema } from "utils/yup";
 
-import { AlertColor, Box, Container } from "@mui/material";
+import { AlertColor } from "@mui/material";
 
 import { LoginForm } from "components/Auth/LoginForm/LoginForm";
 import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
@@ -14,7 +14,7 @@ import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
 import { CommonFormData } from "common/types/auth/index";
 import { AppErrors } from "common/errors";
 import { loginUser, registerUser } from "redux/auth/thunks";
-import { useStyles } from "./styles";
+import { Form, StyledBox, StyledContainer } from "./styled-components";
 import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 
@@ -22,7 +22,6 @@ export const Auth: FC = (): JSX.Element => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const classes = useStyles();
     const loading = useAppSelector((state) => state.auth.isLoading);
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -88,12 +87,9 @@ export const Auth: FC = (): JSX.Element => {
     };
 
     return (
-        <Container className={classes.root}>
-            <form
-                className={classes.form}
-                onSubmit={handleSubmit(handleSubmitForm)}
-            >
-                <Box className={classes.formContainer}>
+        <StyledContainer>
+            <Form onSubmit={handleSubmit(handleSubmitForm)}>
+                <StyledBox>
                     {location.pathname === "/login" ? (
                         <LoginForm
                             register={register}
@@ -109,8 +105,8 @@ export const Auth: FC = (): JSX.Element => {
                             loading={loading}
                         />
                     ) : null}
-                </Box>
-            </form>
+                </StyledBox>
+            </Form>
             <AppSnackbar
                 open={openSnackbar}
                 setOpen={setOpenSnackbar}
@@ -118,6 +114,6 @@ export const Auth: FC = (): JSX.Element => {
                 severity={severity}
                 errorMessage={errorMessage}
             />
-        </Container>
+        </StyledContainer>
     );
 };

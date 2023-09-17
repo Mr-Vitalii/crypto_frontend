@@ -1,17 +1,24 @@
 import { FC, useState } from "react";
-import { useStyles } from "./styles";
+import { StyledGrid } from "./styled-components";
 
 import { ISingleCoin } from "common/types/coins";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { useNavigate, useParams } from "react-router-dom";
-import { AlertColor, Avatar, Button, Grid, Typography } from "@mui/material";
+import {
+    AlertColor,
+    Avatar,
+    Button,
+    Container,
+    Grid,
+    Typography,
+    useTheme,
+} from "@mui/material";
 
 import { selectAllCoins } from "redux/coins/selectors";
-
-import { FlexBetween } from "components/FlexBetween/FlexBetween";
 import { addWatchListElement } from "redux/watchlist/thunks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+import { colors } from "theme";
 
 export const SingleCoin: FC = (): JSX.Element => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -23,7 +30,7 @@ export const SingleCoin: FC = (): JSX.Element => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
-    const classes = useStyles();
+    const theme = useTheme();
 
     let coin = allCoins.find((element) => element.name === (id as string));
 
@@ -56,96 +63,85 @@ export const SingleCoin: FC = (): JSX.Element => {
         <>
             {coin && (
                 <>
-                    <Grid container className={classes.root}>
-                        <Grid item xs={12} className={classes.coinName}>
-                            <Typography variant="h1">{coin.name}</Typography>
-                        </Grid>
-                        <Grid item sm={6} xs={12} className={classes.card}>
-                            <Grid container className={classes.cardItem}>
-                                <FlexBetween>
+                    <Container
+                        sx={{
+                            [theme.breakpoints.up("lg")]: {
+                                p: 4,
+                            },
+                        }}
+                    >
+                        <Typography variant="h1" align="center" sx={{ mb: 3 }}>
+                            {coin.name}
+                        </Typography>
+                        <Grid container spacing={2} sx={{ mb: 4 }}>
+                            <Grid item sm={6} xs={12}>
+                                <StyledGrid>
                                     <Avatar
                                         src={coin.image}
-                                        className={classes.coinIcon}
+                                        sx={{ mr: "5px" }}
                                     />
-                                    <Typography
-                                        variant="h2"
-                                        className={classes.coinSymbol}
-                                    >
+                                    <Typography variant="h1">
                                         {coin.symbol.toUpperCase()}
                                     </Typography>
-                                </FlexBetween>
+                                </StyledGrid>
                             </Grid>
-                        </Grid>
-                        <Grid item sm={6} xs={12} className={classes.card}>
-                            <Grid container className={classes.cardItem}>
-                                <FlexBetween>
-                                    <Typography
-                                        variant="h2"
-                                        className={classes.cardTitle}
-                                    >
+                            <Grid item sm={6} xs={12}>
+                                <StyledGrid>
+                                    <Typography variant="h2">
                                         Price:&nbsp;
                                     </Typography>
-                                    <Typography
-                                        variant="h2"
-                                        className={classes.coinPrice}
-                                    >
+                                    <Typography variant="h2">
                                         $ {coin.current_price}
                                     </Typography>
-                                </FlexBetween>
+                                </StyledGrid>
+                            </Grid>
+                            <Grid item sm={6} xs={12}>
+                                <StyledGrid column>
+                                    <Typography variant="h2" align="center">
+                                        Price change in 24 hours:&nbsp;
+                                    </Typography>
+                                    <Typography
+                                        variant="h2"
+                                        sx={{
+                                            color:
+                                                coin.price_change_percentage_24h >=
+                                                0
+                                                    ? colors.greenAccent[200]
+                                                    : colors.redAccent[200],
+                                        }}
+                                    >
+                                        $ {coin.price_change_24h.toFixed(4)}
+                                    </Typography>
+                                </StyledGrid>
+                            </Grid>
+                            <Grid item sm={6} xs={12}>
+                                <StyledGrid column>
+                                    <Typography variant="h2" align="center">
+                                        Price change in 24 hours :&nbsp;
+                                    </Typography>
+                                    <Typography
+                                        variant="h2"
+                                        sx={{
+                                            color:
+                                                coin.price_change_percentage_24h >=
+                                                0
+                                                    ? colors.greenAccent[200]
+                                                    : colors.redAccent[200],
+                                        }}
+                                    >
+                                        %{" "}
+                                        {coin.price_change_percentage_24h.toFixed(
+                                            2,
+                                        )}
+                                    </Typography>
+                                </StyledGrid>
                             </Grid>
                         </Grid>
-                        <Grid item sm={6} xs={12} className={classes.card}>
-                            <Grid container className={classes.cardItem}>
-                                <Typography
-                                    variant="h2"
-                                    className={classes.cardTitle}
-                                >
-                                    Price change in 24 hours:&nbsp;
-                                </Typography>
-                                <Typography
-                                    variant="h2"
-                                    className={
-                                        coin.price_change_percentage_24h >= 0
-                                            ? `${classes.coinPriceDetail} ${classes.trendUp}`
-                                            : `${classes.coinPriceDetail} ${classes.trendDown}`
-                                    }
-                                >
-                                    $ {coin.price_change_24h.toFixed(4)}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid item sm={6} xs={12} className={classes.card}>
-                            <Grid container className={classes.cardItem}>
-                                <Typography
-                                    variant="h2"
-                                    className={classes.cardTitle}
-                                >
-                                    Price change in 24 hours :&nbsp;
-                                </Typography>
-                                <Typography
-                                    variant="h2"
-                                    className={
-                                        coin.price_change_percentage_24h >= 0
-                                            ? `${classes.coinPriceDetail} ${classes.trendUp}`
-                                            : `${classes.coinPriceDetail} ${classes.trendDown}`
-                                    }
-                                >
-                                    %{" "}
-                                    {coin.price_change_percentage_24h.toFixed(
-                                        2,
-                                    )}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            container
-                            justifyContent="center"
-                            className={classes.cardButtonBlock}
-                        >
+                        <Grid container justifyContent="center">
                             <Button
                                 color="success"
                                 variant="outlined"
-                                className={classes.cardButton}
+                                sx={{ mr: 3 }}
                                 onClick={() => navigate(-1)}
                             >
                                 Back
@@ -153,13 +149,12 @@ export const SingleCoin: FC = (): JSX.Element => {
                             <Button
                                 color="success"
                                 variant="outlined"
-                                className={classes.cardButton}
                                 onClick={handleAddCoin}
                             >
                                 Add to favorites
                             </Button>
                         </Grid>
-                    </Grid>
+                    </Container>
                     <AppSnackbar
                         open={openSnackbar}
                         setOpen={setOpenSnackbar}

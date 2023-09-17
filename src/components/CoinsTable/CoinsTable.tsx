@@ -1,26 +1,24 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import {
     Paper,
     Table,
     TableBody,
     TableCell,
-    TableContainer,
     TableHead,
     TableRow,
 } from "@mui/material";
-import { useStyles } from "./styles";
+import { StyledTableContainer } from "./styled-components";
 import { ISingleCoin, ITablePriceData } from "common/types/coins";
+import { colors } from "theme";
 
 export const CoinsTable: FC<ITablePriceData> = (
     props: ITablePriceData,
 ): JSX.Element => {
     const { coins } = props;
 
-    const classes = useStyles();
-
     return (
         <>
-            <TableContainer component={Paper}>
+            <StyledTableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -48,11 +46,12 @@ export const CoinsTable: FC<ITablePriceData> = (
                                 </TableCell>
                                 <TableCell
                                     align="right"
-                                    className={
-                                        element.price_change_percentage_24h > 0
-                                            ? `${classes.priceUp}`
-                                            : `${classes.priceDown}`
-                                    }
+                                    sx={{
+                                        color:
+                                            element.price_change_24h > 0
+                                                ? `${colors.greenAccent[200]}`
+                                                : `${colors.redAccent[200]}`,
+                                    }}
                                 >
                                     {element.price_change_percentage_24h.toFixed(
                                         2,
@@ -60,11 +59,12 @@ export const CoinsTable: FC<ITablePriceData> = (
                                 </TableCell>
                                 <TableCell
                                     align="right"
-                                    className={
-                                        element.price_change_24h > 0
-                                            ? `${classes.priceUp}`
-                                            : `${classes.priceDown}`
-                                    }
+                                    sx={{
+                                        color:
+                                            element.price_change_24h > 0
+                                                ? `${colors.greenAccent[200]}`
+                                                : `${colors.redAccent[200]}`,
+                                    }}
                                 >
                                     {element.price_change_24h.toFixed(2)}
                                 </TableCell>
@@ -72,7 +72,7 @@ export const CoinsTable: FC<ITablePriceData> = (
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </StyledTableContainer>
         </>
     );
 };

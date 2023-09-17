@@ -1,22 +1,23 @@
 import { FC } from "react";
-import { useStyles } from "./styles";
-import { Box, Typography } from "@mui/material";
+import { StyledBox } from "./styled-components";
+import { Box, Container, Typography, useTheme } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
 import { IErrorComponentProps } from "common/types/error";
 
 export const ErrorComponent: FC<IErrorComponentProps> = ({
     errorMessage,
 }): JSX.Element => {
-    const classes = useStyles();
+    const theme = useTheme();
     return (
-        <Box className={classes.container}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
+        <Container
+            sx={{
+                mb: 2,
+                [theme.breakpoints.up("lg")]: {
+                    px: 4,
+                },
+            }}
+        >
+            <StyledBox>
                 <Box
                     sx={{
                         display: "flex",
@@ -32,7 +33,7 @@ export const ErrorComponent: FC<IErrorComponentProps> = ({
                 <Typography variant="body2" sx={{ color: "red" }}>
                     {errorMessage}
                 </Typography>
-            </Box>
-        </Box>
+            </StyledBox>
+        </Container>
     );
 };

@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { useMode } from "./theme";
@@ -8,6 +8,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { PrivateRoute } from "utils/routes/PrivateRoute";
 import { Layout } from "./components/Layout/Layout";
 import { RestrictedRoute } from "utils/routes/RestrictedRoute";
+import { useAppDispatch, useAuth } from "utils/hooks";
+import { refreshUser } from "redux/auth/thunks";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
@@ -18,7 +20,15 @@ const UserSettingsPage = lazy(() => import("./pages/UserSettingsPage"));
 
 export const App = () => {
     const [theme, colorMode] = useMode();
-    return (
+    const dispatch = useAppDispatch();
+    const { isRefreshing } = useAuth();
+
+    useEffect(() => {
+        dispatch(refreshUser());
+    }, [dispatch]);
+    return isRefreshing ? (
+        <b>Refreshing user...</b>
+    ) : (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline enableColorScheme />
@@ -30,7 +40,7 @@ export const App = () => {
                                 element={
                                     <RestrictedRoute
                                         component={<AuthPage />}
-                                        redirectTo="/"
+                                        redirectTo="/news"
                                     />
                                 }
                             />
@@ -39,7 +49,7 @@ export const App = () => {
                                 element={
                                     <RestrictedRoute
                                         component={<AuthPage />}
-                                        redirectTo="/"
+                                        redirectTo="/news"
                                     />
                                 }
                             />

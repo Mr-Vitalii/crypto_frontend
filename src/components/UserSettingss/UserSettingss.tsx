@@ -1,4 +1,4 @@
-import { Box, Grid, Tab, Tabs, useTheme } from "@mui/material";
+import { Box, Container, Tab, Tabs, useTheme } from "@mui/material";
 import React, { FC, useState } from "react";
 
 import { colors } from "theme";
@@ -8,20 +8,23 @@ import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
 import { SettingsPersonalInfo } from "./SettingsPersonalInfo/SettingsPersonalInfo";
 
-import { useStyles } from "./styles";
 import { TabPanel } from "./TabPanel/TabPanel";
 
 export const UserSettings: FC = (): JSX.Element => {
     const [value, setValue] = useState(0);
-    const classes = useStyles();
+    const theme = useTheme();
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
     return (
-        <Grid className={classes.root}>
-            <Box className={classes.tabsWrapper}>
+        <Container sx={{ display: "flex", justifyContent: "center", p: 4 }}>
+            <Box
+                sx={{
+                    borderBottom: `1px solid ${theme.palette.borderColor.main}`,
+                }}
+            >
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -48,6 +51,6 @@ export const UserSettings: FC = (): JSX.Element => {
                     <DeleteUser />
                 </TabPanel>
             </Box>
-        </Grid>
+        </Container>
     );
 };

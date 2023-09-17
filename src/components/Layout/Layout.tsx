@@ -2,7 +2,7 @@ import { FC, Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Navbar } from "components/global/Navbar/Navbar";
 import { Box, useMediaQuery } from "@mui/material";
-import { useStyles } from "./styles";
+import { StyledBox } from "./styled-components";
 import { Sidebar } from "components/global/Sidebar/Sidebar";
 import { useAuth } from "utils/hooks";
 
@@ -10,7 +10,6 @@ export const Layout: FC = (): JSX.Element => {
     const isNonMobile = useMediaQuery("(min-width:760px)");
 
     const [isOpen, setIsOpen] = useState(isNonMobile ? true : false);
-    const classes = useStyles();
     const { isLoggedIn } = useAuth();
 
     return (
@@ -28,7 +27,7 @@ export const Layout: FC = (): JSX.Element => {
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
-                    <Box className={classes.mainSection}>
+                    <StyledBox>
                         <Navbar
                             isOpen={isOpen}
                             setIsOpen={setIsOpen}
@@ -37,7 +36,7 @@ export const Layout: FC = (): JSX.Element => {
                         <Suspense fallback={null}>
                             <Outlet />
                         </Suspense>
-                    </Box>
+                    </StyledBox>
                 </Box>
             ) : (
                 <Suspense fallback={null}>

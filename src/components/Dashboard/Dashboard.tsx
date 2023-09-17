@@ -5,10 +5,10 @@ import {
     selectFavoriteCoins,
     selectFavoriteCoinsIsLoading,
 } from "redux/coins/selectors";
-import { Box, Grid } from "@mui/material";
+import { Container, Grid, useTheme } from "@mui/material";
 import { getFavoriteCoins, getTopPriceData } from "redux/coins/thunks";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
-import { useStyles } from "./styles";
+import { StyledGridContainer } from "./styled-components";
 import { FavoriteBlock } from "./FavoriteBlock/FavoriteBlock";
 import { ICoinsData, ISingleCoin } from "common/types/coins";
 import { LineChart } from "components/charts/LineChart/LineChart";
@@ -21,7 +21,7 @@ import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
 export const Dashboard: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const fetchDataRef = useRef(false);
-    const classes = useStyles();
+    const theme = useTheme();
 
     const favoriteCoins: ICoinsData[] = useAppSelector(selectFavoriteCoins);
     const favoriteCoinsIsLoading: boolean = useAppSelector(
@@ -87,30 +87,33 @@ export const Dashboard: FC = (): JSX.Element => {
         .sort((a, b) => b.current_price - a.current_price);
 
     return (
-        <Box className={classes.root}>
+        <Container
+            sx={{
+                [theme.breakpoints.up("lg")]: {
+                    p: 4,
+                },
+            }}
+        >
             {favoriteCoinsIsLoading ? (
                 <LoadingComponent />
             ) : favoriteCoinsError ? (
                 <ErrorComponent errorMessage={favoriteCoinsError} />
             ) : (
                 <>
-                    <Grid container spacing={2} className={classes.areaChart}>
+                    <Grid container spacing={2} sx={{ mb: 4 }}>
                         {filteredFavoriteCoinsArray.map(
                             (element: ICoinsData) => (
-                                <FavoriteBlock
-                                    key={element.name}
-                                    element={element}
-                                />
+                                <FavoriteBlock element={element} />
                             ),
                         )}
                     </Grid>
-                    <Grid container className={classes.lineChartBlock}>
+                    <StyledGridContainer container>
                         <Grid item xs={12} sm={12} lg={12}>
                             {filteredFavoriteCoinsArray.length && (
                                 <LineChart data={filteredFavoriteCoinsArray} />
                             )}
                         </Grid>
-                    </Grid>
+                    </StyledGridContainer>
                 </>
             )}
             {topPriceTableIsLoading ? (
@@ -118,14 +121,14 @@ export const Dashboard: FC = (): JSX.Element => {
             ) : priceTableError ? (
                 <ErrorComponent errorMessage={priceTableError} />
             ) : (
-                <Grid container className={classes.topPriceRoot}>
+                <StyledGridContainer container>
                     <Grid item xs={12} sm={12} lg={12}>
                         {filteredCoinsArray.length && (
                             <TopPrice coins={filteredCoinsArray.slice(0, 6)} />
                         )}
                     </Grid>
-                </Grid>
+                </StyledGridContainer>
             )}
-        </Box>
+        </Container>
     );
 };

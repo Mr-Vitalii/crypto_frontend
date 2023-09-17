@@ -3,12 +3,12 @@ import { selectNews, selectNewsIsLoading } from "redux/news/selectors";
 import { getNews } from "redux/news/thunks";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { SingleNews } from "./SingleNews/SingleNews";
-import { Grid, Typography } from "@mui/material";
-import { useStyles } from "./styles";
+import { Box, Typography, useTheme } from "@mui/material";
 import { ISingleNews } from "common/types/news";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
 import { useErrorBoundary } from "react-error-boundary";
+import { StyledContainer } from "./styled-components";
 
 export const News: FC = (): JSX.Element => {
     const [newsItems, setNewsItems] = useState([]);
@@ -19,8 +19,7 @@ export const News: FC = (): JSX.Element => {
     const newsIsLoading = useAppSelector(selectNewsIsLoading);
     const totalNewsCount = news.length;
     const { showBoundary } = useErrorBoundary();
-
-    const classes = useStyles();
+    const theme = useTheme();
 
     const fetchNews = useCallback(async () => {
         try {
@@ -68,19 +67,25 @@ export const News: FC = (): JSX.Element => {
     }, [handleScroll]);
 
     return (
-        <Grid className={classes.root}>
-            <Grid className={classes.blockTitle}>
+        <StyledContainer
+            sx={{
+                [theme.breakpoints.up("lg")]: {
+                    p: 4,
+                },
+            }}
+        >
+            <Box sx={{ mb: 4, textAlign: "center" }}>
                 <Typography variant="h2">News</Typography>
-            </Grid>
+            </Box>
             {newsIsLoading ? (
                 <LoadingComponent />
             ) : (
-                <Grid>
+                <Box>
                     {newsItems.map((element: ISingleNews) => (
                         <SingleNews key={element.id} element={element} />
                     ))}
-                </Grid>
+                </Box>
             )}
-        </Grid>
+        </StyledContainer>
     );
 };

@@ -11,10 +11,12 @@ declare module "@mui/material/styles/createPalette" {
     interface Palette {
         neutral: Palette["primary"];
         borderColor: Palette["primary"];
+        secondaryBackground: Palette["primary"];
     }
     interface PaletteOptions {
         neutral: PaletteOptions["primary"];
         borderColor: PaletteOptions["primary"];
+        secondaryBackground: PaletteOptions["primary"];
     }
 }
 
@@ -38,6 +40,9 @@ export const darkModePalette = (colors: IColors): PaletteOptions => {
             default: colors.secondary[900],
             paper: colors.primaryDarkTheme[500],
         },
+        secondaryBackground: {
+            main: colors.secondary[800],
+        },
     };
 };
 
@@ -60,6 +65,9 @@ export const lightModePalette = (colors: IColors): PaletteOptions => {
         background: {
             default: colors.secondary[100],
             paper: colors.primaryWhiteTheme[500],
+        },
+        secondaryBackground: {
+            main: colors.primaryWhiteTheme[500],
         },
     };
 };

@@ -10,18 +10,18 @@ import {
 } from "redux/watchlist/selectors";
 import { getWatchlistElements } from "redux/watchlist/thunks";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
-import { Grid, Typography } from "@mui/material";
-import { useStyles } from "./styles";
+import { Box, Container, Typography, useTheme } from "@mui/material";
+import { StyledBox } from "./styled-components";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
 import { useErrorBoundary } from "react-error-boundary";
 
 export const WatchList: FC = (): JSX.Element => {
-    const classes = useStyles();
     const { showBoundary } = useErrorBoundary();
     const dispatch = useAppDispatch();
     const watchlist = useAppSelector(selectWatchlist);
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
+    const theme = useTheme();
 
     const topPriceDataIsLoading: boolean = useAppSelector(selectCoinsIsLoading);
     const watchlistElementsIsLoading: boolean = useAppSelector(
@@ -56,19 +56,25 @@ export const WatchList: FC = (): JSX.Element => {
     });
 
     return (
-        <Grid className={classes.root}>
-            <Grid className={classes.watchlistHeading}>
-                <Typography variant="h2" className={classes.heading}>
+        <Container
+            sx={{
+                [theme.breakpoints.up("lg")]: {
+                    p: 4,
+                },
+            }}
+        >
+            <Box sx={{ textAlign: "center" }}>
+                <Typography variant="h2" sx={{ mb: 3 }}>
                     Favorites
                 </Typography>
-            </Grid>
-            <Grid className={classes.coinsTableBlock}>
+            </Box>
+            <StyledBox sx={{ px: 2, py: 3, mb: 4 }}>
                 {topPriceDataIsLoading || watchlistElementsIsLoading ? (
                     <LoadingComponent />
                 ) : (
                     <CoinsTable coins={filteredArray} />
                 )}
-            </Grid>
-        </Grid>
+            </StyledBox>
+        </Container>
     );
 };

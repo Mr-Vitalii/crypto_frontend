@@ -1,14 +1,13 @@
-import { useStyles } from "./styles";
+import { StyledTypography } from "./styled-components";
 
 import { IPropsLogin } from "common/types/auth/index";
 
-import { TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 import { FC } from "react";
 
 export const LoginForm: FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
     const { register, errors, navigate, loading } = props;
-    const classes = useStyles();
 
     return (
         <>
@@ -52,15 +51,15 @@ export const LoginForm: FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
             >
                 LogIn
             </AppLoadingButton>
-            <Typography variant="body1">
-                No account yet?
-                <span
-                    className={classes.incitingText}
+            <Box sx={{ display: "flex" }}>
+                <Typography variant="body1">No account yet?</Typography>
+                <StyledTypography
+                    variant="body1"
                     onClick={() => navigate("/register")}
                 >
                     Sign up
-                </span>
-            </Typography>
+                </StyledTypography>
+            </Box>
         </>
     );
 };

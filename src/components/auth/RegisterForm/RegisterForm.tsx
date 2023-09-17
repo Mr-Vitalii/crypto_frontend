@@ -1,6 +1,6 @@
-import { useStyles } from "./styles";
+import { StyledTypography } from "./styled-components";
 
-import { TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { IPropsRegister } from "common/types/auth";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 
@@ -8,7 +8,6 @@ export const RegisterForm: React.FC<IPropsRegister> = (
     props: IPropsRegister,
 ): JSX.Element => {
     const { register, errors, navigate, loading } = props;
-    const classes = useStyles();
 
     return (
         <>
@@ -87,15 +86,23 @@ export const RegisterForm: React.FC<IPropsRegister> = (
             >
                 Registration
             </AppLoadingButton>
-            <Typography variant="body1">
-                Do you already have an account?
-                <span
-                    className={classes.incitingText}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
+                <Typography variant="body1">
+                    Do you already have an account?
+                </Typography>
+                <StyledTypography
+                    variant="body1"
                     onClick={() => navigate("/login")}
                 >
                     Authorization
-                </span>
-            </Typography>
+                </StyledTypography>
+            </Box>
         </>
     );
 };

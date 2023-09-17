@@ -7,9 +7,8 @@ import {
     FormGroup,
     Grid,
     Typography,
-    useTheme,
 } from "@mui/material";
-import { useStyles } from "./styles";
+
 import { colors } from "theme";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "utils/hooks";
@@ -20,7 +19,6 @@ import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 
 export const DeleteUser: FC = (): JSX.Element => {
     const [checked, setChecked] = useState(false);
-    const classes = useStyles();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -47,18 +45,18 @@ export const DeleteUser: FC = (): JSX.Element => {
 
     return (
         <>
-            <Grid container className={classes.root}>
-                <Grid item className={classes.tabHeading}>
+            <Grid container spacing={4} direction="column" alignItems="center">
+                <Grid item>
                     <Typography variant="h2">Account deleting</Typography>
                 </Grid>
-                <Grid item className={classes.alertMessage}>
-                    <Typography variant="body1">
+                <Grid item>
+                    <Typography variant="body1" sx={{ textAlign: "center" }}>
                         Dear user, by deleting your account, you delete all
                         personal information. After deletion, all the
                         information you saved will be inaccessible.
                     </Typography>
                 </Grid>
-                <Grid item className={classes.checkBoxBlock}>
+                <Grid item>
                     <FormGroup>
                         <FormControlLabel
                             sx={{
@@ -80,7 +78,7 @@ export const DeleteUser: FC = (): JSX.Element => {
                         />
                     </FormGroup>
                 </Grid>
-                <Grid item className={classes.buttonBlock}>
+                <Grid item>
                     <Button
                         onClick={handleDelete}
                         color="error"
