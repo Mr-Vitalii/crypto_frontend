@@ -1,26 +1,23 @@
 import { FC } from "react";
-import { useStyles } from "./styles";
-import { Box, Button, Typography } from "@mui/material";
+import { StyledBox } from "./styled-components";
+import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
 import { FallbackProps, useErrorBoundary } from "react-error-boundary";
 
 export const ErrorBoundaryComponent: FC<FallbackProps> = ({
     error,
 }): JSX.Element => {
-    console.log(error);
-
     const { resetBoundary } = useErrorBoundary();
-    const classes = useStyles();
-
+    const theme = useTheme();
     return (
-        <Box className={classes.container}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                }}
-            >
+        <Container
+            sx={{
+                [theme.breakpoints.up("lg")]: {
+                    px: 4,
+                },
+            }}
+        >
+            <StyledBox>
                 <Box
                     sx={{
                         display: "flex",
@@ -44,7 +41,7 @@ export const ErrorBoundaryComponent: FC<FallbackProps> = ({
                 >
                     Try again
                 </Button>
-            </Box>
-        </Box>
+            </StyledBox>
+        </Container>
     );
 };

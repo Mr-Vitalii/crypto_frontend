@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
-import { useStyles } from "./styles";
-import { AlertColor, Box, Grid, TextField } from "@mui/material";
+import { FC, useState } from "react";
+import { RootGrid } from "./styled-components";
+import { AlertColor, Grid, TextField } from "@mui/material";
 import { useAppDispatch } from "utils/hooks";
 
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
@@ -12,7 +12,6 @@ import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 export const ChangePassword: FC = (): JSX.Element => {
     const [newPassword, setNewPassword] = useState("");
     const [oldPassword, setOldPassword] = useState("");
-    const classes = useStyles();
     const dispatch = useAppDispatch();
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -43,16 +42,19 @@ export const ChangePassword: FC = (): JSX.Element => {
 
     return (
         <>
-            <Grid
+            <RootGrid
                 component="form"
                 noValidate
                 autoComplete="off"
-                className={classes.root}
                 onSubmit={handleChangePassword}
+                container
+                spacing={4}
+                direction="column"
+                alignItems="center"
+                sx={{ py: 4 }}
             >
-                <Box className={classes.formWrapper}>
+                <Grid item sx={{ width: "100%" }}>
                     <TextField
-                        className={classes.inputField}
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)}
                         type="text"
@@ -60,8 +62,9 @@ export const ChangePassword: FC = (): JSX.Element => {
                         variant="outlined"
                         fullWidth
                     />
+                </Grid>
+                <Grid item sx={{ width: "100%" }}>
                     <TextField
-                        className={classes.inputField}
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         type="text"
@@ -69,13 +72,13 @@ export const ChangePassword: FC = (): JSX.Element => {
                         variant="outlined"
                         fullWidth
                     />
-                    <Box className={classes.buttonSubmitBlock}>
-                        <AppLoadingButton type="submit">
-                            Change password
-                        </AppLoadingButton>
-                    </Box>
-                </Box>
-            </Grid>
+                </Grid>
+                <Grid item>
+                    <AppLoadingButton type="submit">
+                        Change password
+                    </AppLoadingButton>
+                </Grid>
+            </RootGrid>
             <AppSnackbar
                 open={openSnackbar}
                 setOpen={setOpenSnackbar}

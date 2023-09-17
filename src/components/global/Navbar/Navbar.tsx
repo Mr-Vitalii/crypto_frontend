@@ -1,32 +1,42 @@
 import { FC } from "react";
 
-import { AppBar, Grid, Toolbar, Typography } from "@mui/material";
+import { AppBar, Grid, Toolbar, Typography, useTheme } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
-import { useStyles } from "./styles";
-import { FlexBetween } from "../../FlexBetween/FlexBetween";
+import { FlexBetween } from "components/FlexBetween/FlexBetween";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import { SearchBar } from "../SearchBar/SearchBar";
 
-import { useAuth } from "../../../utils/hooks";
+import { useAuth } from "utils/hooks";
 import { INavBarProps } from "common/types/navbar";
 
 export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
-    const classes = useStyles();
     const { setIsOpen, isOpen, isNonMobile } = props;
     const { user } = useAuth();
+    const theme = useTheme();
 
     return (
-        <AppBar className={classes.root} position="static">
-            <Toolbar className={classes.toolbar}>
+        <AppBar
+            position="static"
+            sx={{ borderBottom: `1px solid ${theme.palette.borderColor.main}` }}
+        >
+            <Toolbar
+                sx={{
+                    py: 3,
+                    justifyContent: "space-between",
+                    [theme.breakpoints.down("sm")]: {
+                        px: 2,
+                    },
+                }}
+            >
                 <Grid
                     container
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid item sm={3} lg={3}>
+                    <Grid item sm={4} lg={4}>
                         <FlexBetween>
                             <MenuOutlined
-                                className={classes.menuIcon}
+                                sx={{ mr: 2, cursor: "pointer" }}
                                 onClick={() => setIsOpen(!isOpen)}
                             />
                             <Typography variant="h3">
@@ -39,8 +49,8 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                             display="flex"
                             justifyContent="flex-end"
                             item
-                            sm={9}
-                            lg={9}
+                            sm={8}
+                            lg={8}
                         >
                             <ThemeSwitcher />
                             <SearchBar />

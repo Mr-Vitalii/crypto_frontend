@@ -1,8 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { AlertColor, Box, Grid, TextField } from "@mui/material";
-import { useStyles } from "./styles";
+import { AlertColor, Grid, TextField } from "@mui/material";
+import { RootGrid } from "./styled-components";
 import { useAppDispatch, useAuth } from "utils/hooks";
-// import { getPublicUser, updateUserInfo } from "../../store/thunks/auth";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 import { updateUserInfo } from "redux/auth/thunks";
 
@@ -11,7 +10,6 @@ import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 
 export const SettingsPersonalInfo: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
-    const classes = useStyles();
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -53,16 +51,19 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
 
     return (
         <>
-            <Grid
+            <RootGrid
                 component="form"
                 noValidate
                 autoComplete="off"
-                className={classes.root}
                 onSubmit={handleSubmit}
+                container
+                spacing={4}
+                direction="column"
+                alignItems="center"
+                sx={{ py: 4 }}
             >
-                <Box className={classes.formWrapper}>
+                <Grid item sx={{ width: "100%" }}>
                     <TextField
-                        className={classes.inputField}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         type="text"
@@ -70,8 +71,9 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                         variant="outlined"
                         fullWidth
                     />
+                </Grid>
+                <Grid item sx={{ width: "100%" }}>
                     <TextField
-                        className={classes.inputField}
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         type="text"
@@ -79,8 +81,9 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                         variant="outlined"
                         fullWidth
                     />
+                </Grid>
+                <Grid item sx={{ width: "100%" }}>
                     <TextField
-                        className={classes.inputField}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         type="text"
@@ -88,11 +91,11 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                         variant="outlined"
                         fullWidth
                     />
-                    <Box className={classes.buttonBlock}>
-                        <AppLoadingButton type="submit">Save</AppLoadingButton>
-                    </Box>
-                </Box>
-            </Grid>
+                </Grid>
+                <Grid item>
+                    <AppLoadingButton type="submit">Save</AppLoadingButton>
+                </Grid>
+            </RootGrid>
             <AppSnackbar
                 open={openSnackbar}
                 setOpen={setOpenSnackbar}

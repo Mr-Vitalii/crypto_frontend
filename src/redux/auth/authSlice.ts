@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthData, IAuthState, UserAttributes } from "common/types/auth";
-import { loginUser, registerUser, updateUserInfo } from "./thunks";
+import { IAuthData, IAuthState, IUserAttributes } from "common/types/auth";
+import { loginUser, refreshUser, registerUser, updateUserInfo } from "./thunks";
 
 // import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
@@ -10,7 +10,6 @@ import { getPersistConfig } from "redux-deep-persist";
 const initialState: IAuthState = {
     token: "",
     user: {
-        id: null,
         firstName: "",
         userName: "",
         email: "",
@@ -18,6 +17,7 @@ const initialState: IAuthState = {
     },
     isLoggedIn: false,
     isLoading: false,
+    isRefreshing: false,
 };
 
 export const authSlice = createSlice({
@@ -31,7 +31,7 @@ export const authSlice = createSlice({
         });
         builder.addCase(
             loginUser.fulfilled,
-            (state, action: PayloadAction<AuthData>) => {
+            (state, action: PayloadAction<IAuthData>) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.isLoggedIn = true;
@@ -48,7 +48,7 @@ export const authSlice = createSlice({
         });
         builder.addCase(
             registerUser.fulfilled,
-            (state, action: PayloadAction<AuthData>) => {
+            (state, action: PayloadAction<IAuthData>) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.isLoggedIn = true;
@@ -64,15 +64,27 @@ export const authSlice = createSlice({
         });
         builder.addCase(
             updateUserInfo.fulfilled,
-            (state, action: PayloadAction<UserAttributes>) => {
-                state.user.firstName = action.payload.firstName;
-                state.user.userName = action.payload.userName;
-                state.user.email = action.payload.email;
+            (state, action: PayloadAction<IUserAttributes>) => {
+                state.user = action.payload;
                 state.isLoading = false;
             },
         );
         builder.addCase(updateUserInfo.rejected, (state) => {
             state.isLoading = false;
+        });
+        builder.addCase(refreshUser.pending, (state) => {
+            state.isRefreshing = true;
+        });
+        builder.addCase(
+            refreshUser.fulfilled,
+            (state, action: PayloadAction<IUserAttributes>) => {
+                state.user = action.payload;
+                state.isLoggedIn = true;
+                state.isRefreshing = false;
+            },
+        );
+        builder.addCase(refreshUser.rejected, (state) => {
+            state.isRefreshing = false;
         });
     },
 });
@@ -82,7 +94,7 @@ const rootReducer = authSlice.reducer;
 const PersistConfig = getPersistConfig({
     key: "auth",
     storage: storageSession,
-    whitelist: ["user.userName", "user.email"],
+    whitelist: ["user.userName", "user.email", "token"],
     rootReducer,
 });
 

@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-    AuthData,
+    IAuthData,
     ILoginData,
     IPasswordData,
     IRegisterData,
-    UserAttributes,
+    IUserAttributes,
 } from "common/types/auth";
 import {
     clearAuthHeader,
@@ -14,7 +14,7 @@ import {
 } from "utils/axios";
 
 export const loginUser = createAsyncThunk<
-    AuthData,
+    IAuthData,
     ILoginData,
     { rejectValue: string }
 >("auth/login", async (loginData, { rejectWithValue }) => {
@@ -32,7 +32,7 @@ export const loginUser = createAsyncThunk<
 });
 
 export const registerUser = createAsyncThunk<
-    AuthData,
+    IAuthData,
     IRegisterData,
     { rejectValue: string }
 >("auth/register", async (registerData, { rejectWithValue }) => {
@@ -50,8 +50,8 @@ export const registerUser = createAsyncThunk<
 });
 
 export const updateUserInfo = createAsyncThunk<
-    UserAttributes,
-    UserAttributes,
+    IUserAttributes,
+    IUserAttributes,
     { rejectValue: string }
 >("user/update", async (userData, { rejectWithValue }) => {
     try {
@@ -101,5 +101,27 @@ export const deleteUser = createAsyncThunk<
         } else {
             return rejectWithValue(error.message);
         }
+    }
+});
+
+export const refreshUser = createAsyncThunk<
+    IUserAttributes,
+    undefined,
+    { rejectValue: string }
+>("auth/refresh", async (_, thunkAPI) => {
+    const state: any = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    console.log(persistedToken);
+
+    if (persistedToken === null) {
+        return thunkAPI.rejectWithValue("Unable to fetch user");
+    }
+
+    try {
+        setAuthHeader(persistedToken);
+        const res = await instanceAuth.get("/auth/current");
+        return res.data;
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error.message);
     }
 });

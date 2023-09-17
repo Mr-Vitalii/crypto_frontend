@@ -40,30 +40,24 @@ export interface IRegisterData {
 
 //* REDUX TYPE
 
-interface User {
-    id: string | null;
+export interface IUserAttributes {
     firstName: string;
     userName: string;
     email: string;
-    avatarURL: string;
+    avatarURL?: string;
 }
 
 export interface IAuthState {
     token: string;
-    user: User;
+    user: IUserAttributes;
     isLoggedIn: boolean;
     isLoading: boolean;
+    isRefreshing: boolean;
 }
 
-export interface AuthData {
+export interface IAuthData {
     token: string;
-    user: User;
-}
-
-export interface UserAttributes {
-    firstName: string;
-    userName: string;
-    email: string;
+    user: IUserAttributes;
 }
 
 export interface IPasswordData {

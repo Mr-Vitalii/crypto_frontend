@@ -5,7 +5,6 @@ import { useAppSelector } from "utils/hooks";
 import { selectAllCoins } from "redux/coins/selectors";
 import { ISingleCoin } from "common/types/coins";
 import SearchIcon from "@mui/icons-material/Search";
-import { colors } from "theme";
 
 export const SearchBar: FC = (): JSX.Element => {
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
