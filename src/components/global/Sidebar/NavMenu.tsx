@@ -1,12 +1,11 @@
 import React from "react";
 import {
     ListItem,
-    ListItemButton,
     ListItemIcon,
     ListItemText,
     Typography,
 } from "@mui/material";
-import { colors } from "theme";
+import { StyledListItemButton } from "./styled-components";
 
 export const NavMenu = (props: any) => {
     const { navMenu, active, navigate } = props;
@@ -15,31 +14,8 @@ export const NavMenu = (props: any) => {
         <React.Fragment>
             {navMenu.map((element: any) => (
                 <ListItem key={element.id}>
-                    <ListItemButton
-                        sx={{
-                            backgroundColor:
-                                active === element.path
-                                    ? colors.blueAccent[500]
-                                    : "transparent",
-                            color:
-                                active === element.path
-                                    ? colors.whiteAccent[500]
-                                    : colors.secondary[500],
-                            "& .MuiSvgIcon-root": {
-                                color:
-                                    active === element.path
-                                        ? colors.whiteAccent[500]
-                                        : colors.secondary[500],
-                            },
-                            "&:hover, &:focus": {
-                                backgroundColor: colors.blueAccent[500],
-                                color: colors.whiteAccent[500],
-                                borderRadius: "4px",
-                                "& .MuiSvgIcon-root": {
-                                    color: colors.whiteAccent[500],
-                                },
-                            },
-                        }}
+                    <StyledListItemButton
+                        active={active === element.path}
                         onClick={() => navigate(`${element.path}`)}
                     >
                         <ListItemIcon>{element.icon}</ListItemIcon>
@@ -48,7 +24,7 @@ export const NavMenu = (props: any) => {
                                 {element.name}
                             </Typography>
                         </ListItemText>
-                    </ListItemButton>
+                    </StyledListItemButton>
                 </ListItem>
             ))}
         </React.Fragment>

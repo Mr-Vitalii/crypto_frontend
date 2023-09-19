@@ -8,7 +8,6 @@ import { ISingleNews } from "common/types/news";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
 import { useErrorBoundary } from "react-error-boundary";
-import { StyledContainer } from "./styled-components";
 
 export const News: FC = (): JSX.Element => {
     const [newsItems, setNewsItems] = useState([]);
@@ -67,10 +66,15 @@ export const News: FC = (): JSX.Element => {
     }, [handleScroll]);
 
     return (
-        <StyledContainer
+        <Box
             sx={{
-                [theme.breakpoints.up("lg")]: {
-                    p: 4,
+                a: {
+                    textDecoration: "none",
+                    color: `${
+                        theme.palette.mode === "light"
+                            ? theme.palette.common.black
+                            : theme.palette.common.white
+                    }`,
                 },
             }}
         >
@@ -86,6 +90,6 @@ export const News: FC = (): JSX.Element => {
                     ))}
                 </Box>
             )}
-        </StyledContainer>
+        </Box>
     );
 };

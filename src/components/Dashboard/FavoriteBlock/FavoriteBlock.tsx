@@ -1,6 +1,11 @@
 import { FC } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import { FavoriteCardItem, PriceTrend } from "./styled-components";
+import {
+    AreaChartContainer,
+    CoinDetails,
+    FavoriteCardItem,
+    PriceTrend,
+} from "./styled-components";
 import TrendUp from "assets/images/chart/trend-up.svg";
 import TrendDown from "assets/images/chart/trend-down.svg";
 import { IFavoriteBlockProps, ISingleCoin } from "common/types/coins";
@@ -17,19 +22,9 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
     });
 
     return (
-        <Grid item xs={12} sm={6} lg={6} key={element.name}>
+        <Grid item xs={12} sm={12} lg={6}>
             <FavoriteCardItem container>
-                <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    lg={6}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                    }}
-                >
+                <CoinDetails item xs={12} sm={12} lg={6}>
                     <Typography
                         variant="h2"
                         sx={{ textTransform: "capitalize" }}
@@ -38,7 +33,7 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
                     </Typography>
                     <Box>
                         <Typography variant="h2">${currentPrice}</Typography>
-                        <PriceTrend trendUp={changePrice > 0}>
+                        <PriceTrend trendup={true}>
                             {changePrice > 0 ? (
                                 <img src={TrendUp} alt="TrendUp" />
                             ) : (
@@ -49,10 +44,10 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
                             </Typography>
                         </PriceTrend>
                     </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} lg={6}>
+                </CoinDetails>
+                <AreaChartContainer item xs={12} sm={12} lg={6}>
                     <AreaChart data={element.price_chart_data} />
-                </Grid>
+                </AreaChartContainer>
             </FavoriteCardItem>
         </Grid>
     );

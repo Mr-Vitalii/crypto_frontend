@@ -18,7 +18,6 @@ export interface IColors {
     primaryDarkTheme: IColorsShades;
     primaryWhiteTheme: IColorsShades;
     secondary: IColorsShades;
-    whiteAccent: IColorsShades;
     blueAccent: IColorsShades;
     redAccent: IColorsShades;
     greenAccent: IColorsShades;

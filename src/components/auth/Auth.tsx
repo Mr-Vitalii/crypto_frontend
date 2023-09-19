@@ -17,12 +17,13 @@ import { loginUser, registerUser } from "redux/auth/thunks";
 import { Form, StyledBox, StyledContainer } from "./styled-components";
 import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
+import { selectAuthIsLoading } from "redux/auth/selectors";
 
 export const Auth: FC = (): JSX.Element => {
     const location = useLocation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const loading = useAppSelector((state) => state.auth.isLoading);
+    const loading = useAppSelector(selectAuthIsLoading);
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [error, setError] = useState(false);

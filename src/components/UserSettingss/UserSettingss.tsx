@@ -19,38 +19,36 @@ export const UserSettings: FC = (): JSX.Element => {
     };
 
     return (
-        <Container sx={{ display: "flex", justifyContent: "center", p: 4 }}>
-            <Box
-                sx={{
-                    borderBottom: `1px solid ${theme.palette.borderColor.main}`,
+        <Box
+            sx={{
+                borderBottom: `1px solid ${theme.palette.borderColor.main}`,
+            }}
+        >
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="Settings tabs"
+                centered
+                textColor="secondary"
+                TabIndicatorProps={{
+                    style: {
+                        backgroundColor: colors.blueAccent[500],
+                    },
                 }}
             >
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="Settings tabs"
-                    centered
-                    textColor="secondary"
-                    TabIndicatorProps={{
-                        style: {
-                            backgroundColor: colors.blueAccent[500],
-                        },
-                    }}
-                >
-                    <Tab label="Personal Information" {...tabProps(0)} />
-                    <Tab label="Change password" {...tabProps(1)} />
-                    <Tab label="Delete account" {...tabProps(2)} />
-                </Tabs>
-                <TabPanel value={value} index={0}>
-                    <SettingsPersonalInfo />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <ChangePassword />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    <DeleteUser />
-                </TabPanel>
-            </Box>
-        </Container>
+                <Tab label="Personal Information" {...tabProps(0)} />
+                <Tab label="Change password" {...tabProps(1)} />
+                <Tab label="Delete account" {...tabProps(2)} />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+                <SettingsPersonalInfo />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <ChangePassword />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <DeleteUser />
+            </TabPanel>
+        </Box>
     );
 };

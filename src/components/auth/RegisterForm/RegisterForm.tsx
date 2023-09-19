@@ -23,6 +23,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
                 Enter data for registration
             </Typography>
             <TextField
+                autoComplete="off"
                 error={!!errors.name}
                 fullWidth={true}
                 margin="normal"
@@ -33,6 +34,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
                 {...register("name")}
             />
             <TextField
+                autoComplete="off"
                 error={!!errors.username}
                 fullWidth={true}
                 margin="normal"
@@ -43,6 +45,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
                 {...register("username")}
             />
             <TextField
+                autoComplete="off"
                 error={!!errors.email}
                 fullWidth={true}
                 margin="normal"
@@ -53,6 +56,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
                 {...register("email")}
             />
             <TextField
+                autoComplete="off"
                 error={!!errors.password}
                 type="password"
                 fullWidth={true}
@@ -64,6 +68,7 @@ export const RegisterForm: React.FC<IPropsRegister> = (
                 {...register("password")}
             />
             <TextField
+                autoComplete="off"
                 error={!!errors.confirmPassword}
                 type="password"
                 fullWidth={true}

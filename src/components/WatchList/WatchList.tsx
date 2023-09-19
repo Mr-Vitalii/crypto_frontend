@@ -56,13 +56,7 @@ export const WatchList: FC = (): JSX.Element => {
     });
 
     return (
-        <Container
-            sx={{
-                [theme.breakpoints.up("lg")]: {
-                    p: 4,
-                },
-            }}
-        >
+        <>
             <Box sx={{ textAlign: "center" }}>
                 <Typography variant="h2" sx={{ mb: 3 }}>
                     Favorites
@@ -75,6 +69,6 @@ export const WatchList: FC = (): JSX.Element => {
                     <CoinsTable coins={filteredArray} />
                 )}
             </StyledBox>
-        </Container>
+        </>
     );
 };

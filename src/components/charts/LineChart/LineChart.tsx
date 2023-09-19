@@ -26,6 +26,7 @@ ChartJS.register(
 export const LineChart: FC<ICoinsArray> = ({ data }) => {
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 grid: {
@@ -57,5 +58,5 @@ export const LineChart: FC<ICoinsArray> = ({ data }) => {
             },
         ],
     };
-    return <Line options={options} data={values} width="100%" height="20%" />;
+    return <Line options={options} data={values} width={225} height={100} />;
 };

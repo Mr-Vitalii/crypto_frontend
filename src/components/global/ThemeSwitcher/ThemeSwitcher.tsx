@@ -10,7 +10,7 @@ export const ThemeSwitcher: FC = (): JSX.Element => {
     const colorMode: IToggleColorMode = useColorModeContext();
 
     return (
-        <Box sx={{ pr: 4, pt: 1 }}>
+        <Box sx={{ pr: 4, pt: 1, [theme.breakpoints.down("md")]: { pr: 0 } }}>
             <IconButton onClick={colorMode.toggleColorMode}>
                 {theme.palette.mode === "dark" ? <LightMode /> : <DarkMode />}
             </IconButton>
