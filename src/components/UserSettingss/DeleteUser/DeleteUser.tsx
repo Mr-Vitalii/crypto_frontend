@@ -47,7 +47,9 @@ export const DeleteUser: FC = (): JSX.Element => {
         <>
             <Grid container spacing={4} direction="column" alignItems="center">
                 <Grid item>
-                    <Typography variant="h2">Account deleting</Typography>
+                    <Typography align="center" variant="h2">
+                        Account deleting
+                    </Typography>
                 </Grid>
                 <Grid item>
                     <Typography variant="body1" sx={{ textAlign: "center" }}>

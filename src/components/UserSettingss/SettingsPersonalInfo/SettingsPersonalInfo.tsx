@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { AlertColor, Grid, TextField } from "@mui/material";
+import { AlertColor, Grid, TextField, Container, Box } from "@mui/material";
 import { RootGrid } from "./styled-components";
 import { useAppDispatch, useAuth } from "utils/hooks";
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
@@ -50,7 +50,7 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
     };
 
     return (
-        <>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
             <RootGrid
                 component="form"
                 noValidate
@@ -60,7 +60,7 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                 spacing={4}
                 direction="column"
                 alignItems="center"
-                sx={{ py: 4 }}
+                sx={{ py: 4, maxWidth: "550px" }}
             >
                 <Grid item sx={{ width: "100%" }}>
                     <TextField
@@ -104,6 +104,6 @@ export const SettingsPersonalInfo: FC = (): JSX.Element => {
                 successMessage={"Data changed"}
                 errorMessage={errorMessage}
             />
-        </>
+        </Box>
     );
 };

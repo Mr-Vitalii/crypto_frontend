@@ -1,13 +1,13 @@
 import { FC } from "react";
 
-import { AppBar, Grid, Toolbar, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Toolbar, Typography, useTheme } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
-import { FlexBetween } from "components/FlexBetween/FlexBetween";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 import { useAuth } from "utils/hooks";
 import { INavBarProps } from "common/types/navbar";
+import { AppBar } from "./styled-components";
 
 export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
     const { setIsOpen, isOpen, isNonMobile } = props;
@@ -16,8 +16,11 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
 
     return (
         <AppBar
-            position="static"
-            sx={{ borderBottom: `1px solid ${theme.palette.borderColor.main}` }}
+            open={isOpen}
+            position="fixed"
+            sx={{
+                borderBottom: `1px solid ${theme.palette.borderColor.main}`,
+            }}
         >
             <Toolbar
                 sx={{
@@ -34,7 +37,7 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                     alignItems="center"
                 >
                     <Grid item sm={4} lg={4}>
-                        <FlexBetween>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
                             <MenuOutlined
                                 sx={{ mr: 2, cursor: "pointer" }}
                                 onClick={() => setIsOpen(!isOpen)}
@@ -42,14 +45,14 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                             <Typography variant="h3">
                                 Welcome {user ? `${user.userName}` : ""}
                             </Typography>
-                        </FlexBetween>
+                        </Box>
                     </Grid>
                     {isNonMobile && (
                         <Grid
                             display="flex"
                             justifyContent="flex-end"
                             item
-                            sm={8}
+                            sm={7}
                             lg={8}
                         >
                             <ThemeSwitcher />

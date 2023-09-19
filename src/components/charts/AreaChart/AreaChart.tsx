@@ -29,6 +29,7 @@ ChartJS.register(
 export const AreaChart: FC<IAreaChartProps> = ({ data }) => {
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 display: false,
@@ -71,5 +72,5 @@ export const AreaChart: FC<IAreaChartProps> = ({ data }) => {
             },
         ],
     };
-    return <Line options={options} data={values} width={300} height={100} />;
+    return <Line options={options} data={values} width={225} height={100} />;
 };

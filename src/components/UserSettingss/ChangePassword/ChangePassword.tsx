@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { RootGrid } from "./styled-components";
-import { AlertColor, Grid, TextField } from "@mui/material";
+import { AlertColor, Box, Grid, TextField } from "@mui/material";
 import { useAppDispatch } from "utils/hooks";
 
 import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
@@ -41,7 +41,7 @@ export const ChangePassword: FC = (): JSX.Element => {
     };
 
     return (
-        <>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
             <RootGrid
                 component="form"
                 noValidate
@@ -51,7 +51,8 @@ export const ChangePassword: FC = (): JSX.Element => {
                 spacing={4}
                 direction="column"
                 alignItems="center"
-                sx={{ py: 4 }}
+                justifyContent="center"
+                sx={{ py: 4, maxWidth: "550px" }}
             >
                 <Grid item sx={{ width: "100%" }}>
                     <TextField
@@ -87,6 +88,6 @@ export const ChangePassword: FC = (): JSX.Element => {
                 successMessage={"Password changed"}
                 errorMessage={errorMessage}
             />
-        </>
+        </Box>
     );
 };

@@ -87,13 +87,7 @@ export const Dashboard: FC = (): JSX.Element => {
         .sort((a, b) => b.current_price - a.current_price);
 
     return (
-        <Container
-            sx={{
-                [theme.breakpoints.up("lg")]: {
-                    p: 4,
-                },
-            }}
-        >
+        <>
             {favoriteCoinsIsLoading ? (
                 <LoadingComponent />
             ) : favoriteCoinsError ? (
@@ -103,7 +97,10 @@ export const Dashboard: FC = (): JSX.Element => {
                     <Grid container spacing={2} sx={{ mb: 4 }}>
                         {filteredFavoriteCoinsArray.map(
                             (element: ICoinsData) => (
-                                <FavoriteBlock element={element} />
+                                <FavoriteBlock
+                                    key={element.name}
+                                    element={element}
+                                />
                             ),
                         )}
                     </Grid>
@@ -129,6 +126,6 @@ export const Dashboard: FC = (): JSX.Element => {
                     </Grid>
                 </StyledGridContainer>
             )}
-        </Container>
+        </>
     );
 };
