@@ -13,13 +13,13 @@ import {
     setAuthHeader,
 } from "utils/axios";
 
-export const loginUser = createAsyncThunk<
+export const registerUser = createAsyncThunk<
     IAuthData,
-    ILoginData,
+    IRegisterData,
     { rejectValue: string }
->("auth/login", async (loginData, { rejectWithValue }) => {
+>("auth/register", async (registerData, { rejectWithValue }) => {
     try {
-        const res = await instance.post("auth/login", loginData);
+        const res = await instance.post("auth/register", registerData);
         setAuthHeader(res.data.token);
         return res.data;
     } catch (error: any) {
@@ -31,13 +31,13 @@ export const loginUser = createAsyncThunk<
     }
 });
 
-export const registerUser = createAsyncThunk<
+export const loginUser = createAsyncThunk<
     IAuthData,
-    IRegisterData,
+    ILoginData,
     { rejectValue: string }
->("auth/register", async (registerData, { rejectWithValue }) => {
+>("auth/login", async (loginData, { rejectWithValue }) => {
     try {
-        const res = await instance.post("auth/register", registerData);
+        const res = await instance.post("auth/login", loginData);
         setAuthHeader(res.data.token);
         return res.data;
     } catch (error: any) {
@@ -111,7 +111,6 @@ export const refreshUser = createAsyncThunk<
 >("auth/refresh", async (_, thunkAPI) => {
     const state: any = thunkAPI.getState();
     const persistedToken = state.auth.token;
-    console.log(persistedToken);
 
     if (persistedToken === null) {
         return thunkAPI.rejectWithValue("Unable to fetch user");
@@ -123,5 +122,23 @@ export const refreshUser = createAsyncThunk<
         return res.data;
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
+    }
+});
+
+export const logOut = createAsyncThunk<
+    string,
+    undefined,
+    { rejectValue: string }
+>("auth/logout", async (_, { rejectWithValue }) => {
+    try {
+        const response = await instanceAuth.post("auth/logout");
+        clearAuthHeader();
+        return response.data;
+    } catch (error: any) {
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+        } else {
+            return rejectWithValue(error.message);
+        }
     }
 });

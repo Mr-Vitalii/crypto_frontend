@@ -1,6 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuthData, IAuthState, IUserAttributes } from "common/types/auth";
-import { loginUser, refreshUser, registerUser, updateUserInfo } from "./thunks";
+import {
+    deleteUser,
+    loginUser,
+    logOut,
+    refreshUser,
+    registerUser,
+    updateUserInfo,
+    updateUserPassword,
+} from "./thunks";
 
 // import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
@@ -25,23 +33,6 @@ export const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(loginUser.pending, (state) => {
-            state.isLoggedIn = false;
-            state.isLoading = true;
-        });
-        builder.addCase(
-            loginUser.fulfilled,
-            (state, action: PayloadAction<IAuthData>) => {
-                state.user = action.payload.user;
-                state.token = action.payload.token;
-                state.isLoggedIn = true;
-                state.isLoading = false;
-            },
-        );
-        builder.addCase(loginUser.rejected, (state) => {
-            state.isLoggedIn = false;
-            state.isLoading = false;
-        });
         builder.addCase(registerUser.pending, (state) => {
             state.isLoggedIn = false;
             state.isLoading = true;
@@ -59,6 +50,25 @@ export const authSlice = createSlice({
             state.isLoggedIn = false;
             state.isLoading = false;
         });
+
+        builder.addCase(loginUser.pending, (state) => {
+            state.isLoggedIn = false;
+            state.isLoading = true;
+        });
+        builder.addCase(
+            loginUser.fulfilled,
+            (state, action: PayloadAction<IAuthData>) => {
+                state.user = action.payload.user;
+                state.token = action.payload.token;
+                state.isLoggedIn = true;
+                state.isLoading = false;
+            },
+        );
+        builder.addCase(loginUser.rejected, (state) => {
+            state.isLoggedIn = false;
+            state.isLoading = false;
+        });
+
         builder.addCase(updateUserInfo.pending, (state) => {
             state.isLoading = true;
         });
@@ -72,6 +82,27 @@ export const authSlice = createSlice({
         builder.addCase(updateUserInfo.rejected, (state) => {
             state.isLoading = false;
         });
+
+        builder.addCase(updateUserPassword.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(updateUserPassword.fulfilled, (state) => {
+            state.isLoading = false;
+        });
+        builder.addCase(updateUserPassword.rejected, (state) => {
+            state.isLoading = false;
+        });
+
+        builder.addCase(deleteUser.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(deleteUser.fulfilled, (state) => {
+            state.isLoading = false;
+        });
+        builder.addCase(deleteUser.rejected, (state) => {
+            state.isLoading = false;
+        });
+
         builder.addCase(refreshUser.pending, (state) => {
             state.isRefreshing = true;
         });
@@ -85,6 +116,24 @@ export const authSlice = createSlice({
         );
         builder.addCase(refreshUser.rejected, (state) => {
             state.isRefreshing = false;
+        });
+
+        builder.addCase(logOut.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(logOut.fulfilled, (state) => {
+            state.user = {
+                firstName: "",
+                userName: "",
+                email: "",
+                avatarURL: "",
+            };
+            state.token = "";
+            state.isLoggedIn = false;
+            state.isLoading = false;
+        });
+        builder.addCase(logOut.rejected, (state) => {
+            state.isLoading = false;
         });
     },
 });

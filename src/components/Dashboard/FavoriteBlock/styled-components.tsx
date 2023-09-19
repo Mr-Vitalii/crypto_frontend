@@ -32,7 +32,9 @@ export const AreaChartContainer = styled(Box)(
     }),
 );
 
-export const PriceTrend = styled(Box)(({ trendup }: { trendup: boolean }) => ({
+export const PriceTrend = styled(Box, {
+    shouldForwardProp: (prop: any) => prop !== "trendup",
+})(({ trendup }: { trendup: boolean }) => ({
     width: "80px",
     display: "flex",
     alignItems: "center",
