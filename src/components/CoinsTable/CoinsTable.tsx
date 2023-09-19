@@ -7,9 +7,8 @@ import {
     TableHead,
     TableRow,
 } from "@mui/material";
-import { StyledTableContainer } from "./styled-components";
+import { StyledTableCell, StyledTableContainer } from "./styled-components";
 import { ISingleCoin, ITablePriceData } from "common/types/coins";
-import { colors } from "theme";
 
 export const CoinsTable: FC<ITablePriceData> = (
     props: ITablePriceData,
@@ -44,30 +43,20 @@ export const CoinsTable: FC<ITablePriceData> = (
                                 <TableCell align="right">
                                     {element.current_price}
                                 </TableCell>
-                                <TableCell
+                                <StyledTableCell
+                                    trendup={element.price_change_24h > 0}
                                     align="right"
-                                    sx={{
-                                        color:
-                                            element.price_change_24h > 0
-                                                ? `${colors.greenAccent[200]}`
-                                                : `${colors.redAccent[200]}`,
-                                    }}
                                 >
                                     {element.price_change_percentage_24h.toFixed(
                                         2,
                                     )}
-                                </TableCell>
-                                <TableCell
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    trendup={element.price_change_24h > 0}
                                     align="right"
-                                    sx={{
-                                        color:
-                                            element.price_change_24h > 0
-                                                ? `${colors.greenAccent[200]}`
-                                                : `${colors.redAccent[200]}`,
-                                    }}
                                 >
                                     {element.price_change_24h.toFixed(2)}
-                                </TableCell>
+                                </StyledTableCell>
                             </TableRow>
                         ))}
                     </TableBody>

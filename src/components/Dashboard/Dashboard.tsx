@@ -5,7 +5,7 @@ import {
     selectFavoriteCoins,
     selectFavoriteCoinsIsLoading,
 } from "redux/coins/selectors";
-import { Container, Grid, useTheme } from "@mui/material";
+import { Grid } from "@mui/material";
 import { getFavoriteCoins, getTopPriceData } from "redux/coins/thunks";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { StyledGridContainer } from "./styled-components";
@@ -21,7 +21,6 @@ import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
 export const Dashboard: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const fetchDataRef = useRef(false);
-    const theme = useTheme();
 
     const favoriteCoins: ICoinsData[] = useAppSelector(selectFavoriteCoins);
     const favoriteCoinsIsLoading: boolean = useAppSelector(

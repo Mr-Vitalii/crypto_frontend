@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { StyledGrid } from "./styled-components";
+import { StyledGrid, StyledTypography } from "./styled-components";
 
 import { ISingleCoin } from "common/types/coins";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
@@ -10,7 +10,6 @@ import { selectAllCoins } from "redux/coins/selectors";
 import { addWatchListElement } from "redux/watchlist/thunks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
-import { colors } from "theme";
 
 export const SingleCoin: FC = (): JSX.Element => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -77,44 +76,36 @@ export const SingleCoin: FC = (): JSX.Element => {
                             </StyledGrid>
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                            <StyledGrid column>
+                            <StyledGrid iscolumn={true}>
                                 <Typography variant="h3" align="center">
                                     Price change in 24 hours:&nbsp;
                                 </Typography>
-                                <Typography
+                                <StyledTypography
                                     variant="h2"
-                                    sx={{
-                                        color:
-                                            coin.price_change_percentage_24h >=
-                                            0
-                                                ? colors.greenAccent[200]
-                                                : colors.redAccent[200],
-                                    }}
+                                    trendup={
+                                        coin.price_change_percentage_24h >= 0
+                                    }
                                 >
                                     $ {coin.price_change_24h.toFixed(4)}
-                                </Typography>
+                                </StyledTypography>
                             </StyledGrid>
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                            <StyledGrid column>
+                            <StyledGrid iscolumn={true}>
                                 <Typography variant="h3" align="center">
                                     Price change in 24 hours :&nbsp;
                                 </Typography>
-                                <Typography
+                                <StyledTypography
                                     variant="h2"
-                                    sx={{
-                                        color:
-                                            coin.price_change_percentage_24h >=
-                                            0
-                                                ? colors.greenAccent[200]
-                                                : colors.redAccent[200],
-                                    }}
+                                    trendup={
+                                        coin.price_change_percentage_24h >= 0
+                                    }
                                 >
                                     %{" "}
                                     {coin.price_change_percentage_24h.toFixed(
                                         2,
                                     )}
-                                </Typography>
+                                </StyledTypography>
                             </StyledGrid>
                         </Grid>
                     </Grid>

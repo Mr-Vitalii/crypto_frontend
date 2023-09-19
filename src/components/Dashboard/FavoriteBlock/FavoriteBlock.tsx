@@ -33,7 +33,7 @@ export const FavoriteBlock: FC<IFavoriteBlockProps> = ({
                     </Typography>
                     <Box>
                         <Typography variant="h2">${currentPrice}</Typography>
-                        <PriceTrend trendup={true}>
+                        <PriceTrend trendup={changePrice > 0}>
                             {changePrice > 0 ? (
                                 <img src={TrendUp} alt="TrendUp" />
                             ) : (
