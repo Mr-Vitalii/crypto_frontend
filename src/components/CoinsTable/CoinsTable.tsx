@@ -7,8 +7,8 @@ import {
     TableHead,
     TableRow,
 } from "@mui/material";
-import { StyledTableCell, StyledTableContainer } from "./styled-components";
 import { ISingleCoin, ITablePriceData } from "common/types/coins";
+import { StyledTableCell, StyledTableContainer } from "./styled-components";
 
 export const CoinsTable: FC<ITablePriceData> = (
     props: ITablePriceData,

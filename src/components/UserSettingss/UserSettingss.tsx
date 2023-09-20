@@ -1,4 +1,4 @@
-import { Box, Container, Tab, Tabs, useTheme } from "@mui/material";
+import { Box, Tab, Tabs, useTheme } from "@mui/material";
 import React, { FC, useState } from "react";
 
 import { colors } from "theme";
@@ -7,7 +7,6 @@ import { tabProps } from "utils/helpers/tabProps";
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
 import { SettingsPersonalInfo } from "./SettingsPersonalInfo/SettingsPersonalInfo";
-
 import { TabPanel } from "./TabPanel/TabPanel";
 
 export const UserSettings: FC = (): JSX.Element => {

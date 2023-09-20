@@ -1,22 +1,23 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { StyledGridContainer } from "./styled-components";
 import {
     selectAllCoins,
     selectCoinsIsLoading,
     selectFavoriteCoins,
     selectFavoriteCoinsIsLoading,
 } from "redux/coins/selectors";
-import { Grid } from "@mui/material";
 import { getFavoriteCoins, getTopPriceData } from "redux/coins/thunks";
+
+import { Grid } from "@mui/material";
+import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
-import { StyledGridContainer } from "./styled-components";
-import { FavoriteBlock } from "./FavoriteBlock/FavoriteBlock";
 import { ICoinsData, ISingleCoin } from "common/types/coins";
+
+import { FavoriteBlock } from "./FavoriteBlock/FavoriteBlock";
 import { LineChart } from "components/charts/LineChart/LineChart";
 import { TopPrice } from "components/TopPrice/TopPrice";
-
-import { ErrorComponent } from "components/ErrorComponent/ErrorComponent";
-import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
+import { ErrorComponent } from "components/global/ErrorComponent/ErrorComponent";
+import { LoadingComponent } from "components/global/LoadingComponent/LoadingComponent";
 
 export const Dashboard: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();

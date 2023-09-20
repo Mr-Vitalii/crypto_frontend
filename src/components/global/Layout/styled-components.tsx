@@ -4,25 +4,32 @@ import { Theme } from "@mui/material";
 const drawerWidth = 250;
 
 export const Main = styled("main", {
-    shouldForwardProp: (prop: any) => prop !== "open" && prop !== "mobile",
+    shouldForwardProp: (prop: any) =>
+        prop !== "open" && prop !== "notMobile" && prop !== "isTablet",
 })(
     ({
         theme,
         open,
-        mobile,
+        notMobile,
+        isTablet,
     }: {
         theme: Theme;
         open: boolean;
-        mobile: string;
+        notMobile: boolean;
+        isTablet: boolean;
     }) => {
         return {
             flexGrow: 1,
-            padding: mobile ? theme.spacing(3) : theme.spacing(7, 1),
+            padding: notMobile
+                ? isTablet
+                    ? theme.spacing(8, 1)
+                    : theme.spacing(3, 1)
+                : theme.spacing(3),
             transition: theme.transitions.create("margin", {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen,
             }),
-            marginLeft: `-${mobile ? drawerWidth : 0}px`,
+            marginLeft: `-${notMobile ? drawerWidth : 0}px`,
             ...(open && {
                 transition: theme.transitions.create("margin", {
                     easing: theme.transitions.easing.easeOut,

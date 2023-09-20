@@ -1,13 +1,16 @@
 import { FC, useCallback, useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
+import { Box, Typography, useTheme } from "@mui/material";
+
 import { selectNews, selectNewsIsLoading } from "redux/news/selectors";
 import { getNews } from "redux/news/thunks";
+
 import { useAppDispatch, useAppSelector } from "utils/hooks";
-import { SingleNews } from "./SingleNews/SingleNews";
-import { Box, Typography, useTheme } from "@mui/material";
-import { ISingleNews } from "common/types/news";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
-import { useErrorBoundary } from "react-error-boundary";
+import { ISingleNews } from "common/types/news";
+
+import { SingleNews } from "./SingleNews/SingleNews";
+import { LoadingComponent } from "components/global/LoadingComponent/LoadingComponent";
 
 export const News: FC = (): JSX.Element => {
     const [newsItems, setNewsItems] = useState([]);

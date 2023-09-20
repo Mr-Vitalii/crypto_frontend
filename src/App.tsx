@@ -1,15 +1,18 @@
 import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import { refreshUser } from "redux/auth/thunks";
+
 import { useMode } from "./theme";
 import { ColorModeContext } from "theme/context";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import { PrivateRoute } from "utils/routes/PrivateRoute";
-import { Layout } from "./components/Layout/Layout";
 import { RestrictedRoute } from "utils/routes/RestrictedRoute";
 import { useAppDispatch, useAuth } from "utils/hooks";
-import { refreshUser } from "redux/auth/thunks";
+
+import { Layout } from "./components/global/Layout/Layout";
+import { LoadingComponent } from "components/global/LoadingComponent/LoadingComponent";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
@@ -27,7 +30,7 @@ export const App = () => {
         dispatch(refreshUser());
     }, [dispatch]);
     return isRefreshing ? (
-        <b>Refreshing user...</b>
+        <LoadingComponent />
     ) : (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>

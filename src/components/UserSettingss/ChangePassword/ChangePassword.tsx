@@ -1,13 +1,14 @@
 import { FC, useState } from "react";
 import { RootGrid } from "./styled-components";
-import { AlertColor, Box, Grid, TextField } from "@mui/material";
-import { useAppDispatch } from "utils/hooks";
 
-import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 import { updateUserPassword } from "redux/auth/thunks";
 
+import { AlertColor, Box, Grid, TextField } from "@mui/material";
+import { useAppDispatch } from "utils/hooks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+
+import { AppLoadingButton } from "components/global/AppLoadingButton/AppLoadingButton";
+import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const ChangePassword: FC = (): JSX.Element => {
     const [newPassword, setNewPassword] = useState("");

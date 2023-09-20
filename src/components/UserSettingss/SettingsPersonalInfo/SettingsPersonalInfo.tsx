@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from "react";
-import { AlertColor, Grid, TextField, Container, Box } from "@mui/material";
-import { RootGrid } from "./styled-components";
-import { useAppDispatch, useAuth } from "utils/hooks";
-import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
 import { updateUserInfo } from "redux/auth/thunks";
 
+import { AlertColor, Grid, TextField, Box } from "@mui/material";
+import { RootGrid } from "./styled-components";
+import { useAppDispatch, useAuth } from "utils/hooks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+
+import { AppLoadingButton } from "components/global/AppLoadingButton/AppLoadingButton";
+import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const SettingsPersonalInfo: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();

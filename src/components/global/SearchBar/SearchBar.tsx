@@ -1,10 +1,12 @@
 import { FC, useState } from "react";
-import { Stack, Autocomplete, TextField, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+import { Stack, Autocomplete, TextField, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+
 import { useAppSelector } from "utils/hooks";
 import { selectAllCoins } from "redux/coins/selectors";
 import { ISingleCoin } from "common/types/coins";
-import SearchIcon from "@mui/icons-material/Search";
 
 export const SearchBar: FC = (): JSX.Element => {
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
