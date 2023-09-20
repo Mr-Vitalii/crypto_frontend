@@ -7,7 +7,7 @@ export const NavBlock = styled(Box)(({ theme }: { theme: Theme }) => ({
     borderBottom: `1px solid ${theme.palette.borderColor.main}`,
 }));
 
-export const BrandContainer = styled(Typography)({
+export const BrandContainer = styled(Box)({
     display: "flex",
     alignItems: "center",
     gap: "10px",

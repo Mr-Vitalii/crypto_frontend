@@ -1,19 +1,16 @@
 import { FC, Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Navbar } from "components/global/Navbar/Navbar";
-import {
-    Box,
-    useMediaQuery,
-    Container,
-    Typography,
-    useTheme,
-} from "@mui/material";
 import { DrawerHeader, Main } from "./styled-components";
-import { Sidebar } from "components/global/Sidebar/Sidebar";
+
+import { Box, useMediaQuery, Container, useTheme } from "@mui/material";
 import { useAuth } from "utils/hooks";
+
+import { Navbar } from "components/global/Navbar/Navbar";
+import { Sidebar } from "components/global/Sidebar/Sidebar";
 
 export const Layout: FC = (): JSX.Element => {
     const isNonMobile = useMediaQuery("(min-width:760px)");
+    const isTablet = useMediaQuery("(min-width: 760px) and (max-width: 900px)");
 
     const [isOpen, setIsOpen] = useState(isNonMobile ? true : false);
     const { isLoggedIn } = useAuth();
@@ -35,7 +32,11 @@ export const Layout: FC = (): JSX.Element => {
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
-                    <Main open={isOpen} mobile={isNonMobile}>
+                    <Main
+                        open={isOpen}
+                        notMobile={isNonMobile}
+                        isTablet={isTablet}
+                    >
                         <DrawerHeader />
                         <Container
                             sx={{

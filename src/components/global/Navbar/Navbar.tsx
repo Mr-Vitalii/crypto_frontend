@@ -1,13 +1,14 @@
 import { FC } from "react";
+import { AppBar } from "./styled-components";
 
 import { Box, Grid, Toolbar, Typography, useTheme } from "@mui/material";
 import { MenuOutlined } from "@mui/icons-material";
-import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
-import { SearchBar } from "../SearchBar/SearchBar";
 
 import { useAuth } from "utils/hooks";
 import { INavBarProps } from "common/types/navbar";
-import { AppBar } from "./styled-components";
+
+import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+import { SearchBar } from "../SearchBar/SearchBar";
 
 export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
     const { setIsOpen, isOpen, isNonMobile } = props;

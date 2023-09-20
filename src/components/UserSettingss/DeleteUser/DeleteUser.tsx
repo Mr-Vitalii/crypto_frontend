@@ -1,4 +1,8 @@
 import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { deleteUser } from "redux/auth/thunks";
+
 import {
     AlertColor,
     Button,
@@ -10,12 +14,9 @@ import {
 } from "@mui/material";
 
 import { colors } from "theme";
-import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "utils/hooks";
-import { deleteUser } from "redux/auth/thunks";
-
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const DeleteUser: FC = (): JSX.Element => {
     const [checked, setChecked] = useState(false);

@@ -1,10 +1,10 @@
+import { FC } from "react";
 import { StyledTypography } from "./styled-components";
-
 import { Box, TextField, Typography } from "@mui/material";
 import { IPropsRegister } from "common/types/auth";
-import { AppLoadingButton } from "components/AppLoadingButton/AppLoadingButton";
+import { AppLoadingButton } from "components/global/AppLoadingButton/AppLoadingButton";
 
-export const RegisterForm: React.FC<IPropsRegister> = (
+export const RegisterForm: FC<IPropsRegister> = (
     props: IPropsRegister,
 ): JSX.Element => {
     const { register, errors, navigate, loading } = props;

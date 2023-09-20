@@ -1,15 +1,15 @@
 import { FC, useState } from "react";
-import { StyledGrid, StyledTypography } from "./styled-components";
-
-import { ISingleCoin } from "common/types/coins";
-import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { useNavigate, useParams } from "react-router-dom";
-import { AlertColor, Avatar, Button, Grid, Typography } from "@mui/material";
+import { StyledGrid, StyledTypography } from "./styled-components";
 
 import { selectAllCoins } from "redux/coins/selectors";
 import { addWatchListElement } from "redux/watchlist/thunks";
+
+import { AlertColor, Avatar, Button, Grid, Typography } from "@mui/material";
+import { ISingleCoin } from "common/types/coins";
+import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const SingleCoin: FC = (): JSX.Element => {
     const [openSnackbar, setOpenSnackbar] = useState(false);

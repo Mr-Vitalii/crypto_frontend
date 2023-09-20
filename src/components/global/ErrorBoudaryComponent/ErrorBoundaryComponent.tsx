@@ -1,8 +1,8 @@
 import { FC } from "react";
+import { FallbackProps, useErrorBoundary } from "react-error-boundary";
 import { StyledBox } from "./styled-components";
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
-import { FallbackProps, useErrorBoundary } from "react-error-boundary";
 
 export const ErrorBoundaryComponent: FC<FallbackProps> = ({
     error,

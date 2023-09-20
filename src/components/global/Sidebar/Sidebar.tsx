@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
     BrandContainer,
     BrandTitle,
@@ -18,17 +19,19 @@ import {
     useTheme,
 } from "@mui/material";
 import { ChevronLeftOutlined, LogoutOutlined } from "@mui/icons-material";
-import { useLocation, useNavigate } from "react-router-dom";
+
+import { logOut } from "redux/auth/thunks";
+
+import { useAppDispatch } from "utils/hooks";
+import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { navMenu } from "../../../common/moks/navigate";
-import { NavMenu } from "./NavMenu";
+import { ISidebarProps } from "common/types/sidebar";
 import Logo from "assets/images/sidebar/logo.svg";
+
+import { NavMenu } from "./NavMenu";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import { SearchBar } from "../SearchBar/SearchBar";
-import { ISidebarProps } from "common/types/sidebar";
-import { useAppDispatch } from "utils/hooks";
-import { logOut } from "redux/auth/thunks";
-import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
+import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const Sidebar: FC<ISidebarProps> = (
     props: ISidebarProps,

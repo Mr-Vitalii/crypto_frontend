@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { Box, Grid, Typography } from "@mui/material";
 import {
     AreaChartContainer,
     CoinDetails,
     FavoriteCardItem,
     PriceTrend,
 } from "./styled-components";
+import { Box, Grid, Typography } from "@mui/material";
 import TrendUp from "assets/images/chart/trend-up.svg";
 import TrendDown from "assets/images/chart/trend-down.svg";
 import { IFavoriteBlockProps, ISingleCoin } from "common/types/coins";

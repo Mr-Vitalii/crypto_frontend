@@ -1,27 +1,29 @@
 import { FC, useCallback, useEffect } from "react";
-import { IWatchlistCoin } from "common/types/watchlist";
-import { ISingleCoin } from "common/types/coins";
-import { CoinsTable } from "components/CoinsTable/CoinsTable";
-import { selectAllCoins, selectCoinsIsLoading } from "redux/coins/selectors";
+import { useErrorBoundary } from "react-error-boundary";
 import { getTopPriceData } from "redux/coins/thunks";
 import {
     selectWatchlist,
     selectWatchlistIsLoading,
 } from "redux/watchlist/selectors";
+import { selectAllCoins, selectCoinsIsLoading } from "redux/coins/selectors";
 import { getWatchlistElements } from "redux/watchlist/thunks";
-import { useAppDispatch, useAppSelector } from "utils/hooks";
-import { Box, Container, Typography, useTheme } from "@mui/material";
+
+import { Box, Typography } from "@mui/material";
 import { StyledBox } from "./styled-components";
+
+import { IWatchlistCoin } from "common/types/watchlist";
+import { ISingleCoin } from "common/types/coins";
+import { CoinsTable } from "components/CoinsTable/CoinsTable";
+import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { LoadingComponent } from "components/LoadingComponent/LoadingComponent";
-import { useErrorBoundary } from "react-error-boundary";
+
+import { LoadingComponent } from "components/global/LoadingComponent/LoadingComponent";
 
 export const WatchList: FC = (): JSX.Element => {
     const { showBoundary } = useErrorBoundary();
     const dispatch = useAppDispatch();
     const watchlist = useAppSelector(selectWatchlist);
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
-    const theme = useTheme();
 
     const topPriceDataIsLoading: boolean = useAppSelector(selectCoinsIsLoading);
     const watchlistElementsIsLoading: boolean = useAppSelector(

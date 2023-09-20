@@ -5,19 +5,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema, RegisterSchema } from "utils/yup";
+import { getErrorMessage } from "utils/helpers/getErrorMessage";
+
+import { Form, StyledBox, StyledContainer } from "./styled-components";
 
 import { AlertColor } from "@mui/material";
 
-import { LoginForm } from "components/Auth/LoginForm/LoginForm";
-import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
+import { loginUser, registerUser } from "redux/auth/thunks";
+import { selectAuthIsLoading } from "redux/auth/selectors";
 
 import { CommonFormData } from "common/types/auth/index";
 import { AppErrors } from "common/errors";
-import { loginUser, registerUser } from "redux/auth/thunks";
-import { Form, StyledBox, StyledContainer } from "./styled-components";
-import { AppSnackbar } from "components/AppSnackbar/AppSnackbar";
-import { getErrorMessage } from "utils/helpers/getErrorMessage";
-import { selectAuthIsLoading } from "redux/auth/selectors";
+
+import { LoginForm } from "components/Auth/LoginForm/LoginForm";
+import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
+import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const Auth: FC = (): JSX.Element => {
     const location = useLocation();

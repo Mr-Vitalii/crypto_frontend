@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IWatchlistCoin, IWatchlistState } from "common/types/watchlist";
-import { getWatchlistElements } from "./thunks";
+import { addWatchListElement, getWatchlistElements } from "./thunks";
 
 const initialState: IWatchlistState = {
     watchlistCoins: [],
@@ -23,6 +23,16 @@ export const watchlistSlice = createSlice({
             },
         );
         builder.addCase(getWatchlistElements.rejected, (state) => {
+            state.isLoading = false;
+        });
+
+        builder.addCase(addWatchListElement.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(addWatchListElement.fulfilled, (state) => {
+            state.isLoading = false;
+        });
+        builder.addCase(addWatchListElement.rejected, (state) => {
             state.isLoading = false;
         });
     },

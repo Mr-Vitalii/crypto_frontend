@@ -1,11 +1,11 @@
 import React from "react";
+import { StyledListItemButton } from "./styled-components";
 import {
     ListItem,
     ListItemIcon,
     ListItemText,
     Typography,
 } from "@mui/material";
-import { StyledListItemButton } from "./styled-components";
 
 export const NavMenu = (props: any) => {
     const { navMenu, active, navigate } = props;

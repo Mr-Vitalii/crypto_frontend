@@ -20,17 +20,15 @@ export const CoinDetails = styled(Grid)({
     justifyContent: "space-between",
 });
 
-export const AreaChartContainer = styled(Box)(
-    ({ theme }: { theme: Theme }) => ({
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        [theme.breakpoints.down("md")]: {
-            width: "100%",
-            marginTop: "10px",
-        },
-    }),
-);
+export const AreaChartContainer = styled(Grid)(({ theme }: { theme: Theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    [theme.breakpoints.down("md")]: {
+        width: "100%",
+        marginTop: "10px",
+    },
+}));
 
 export const PriceTrend = styled(Box, {
     shouldForwardProp: (prop: any) => prop !== "trendup",
