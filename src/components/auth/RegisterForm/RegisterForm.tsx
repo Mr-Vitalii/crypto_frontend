@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { StyledTypography } from "./styled-components";
 import { Box, TextField, Typography } from "@mui/material";
-import { IPropsRegister } from "common/types/auth";
+import { IPropsRegister } from "common/types/user";
 import { AppLoadingButton } from "components/global/AppLoadingButton/AppLoadingButton";
 
 export const RegisterForm: FC<IPropsRegister> = (

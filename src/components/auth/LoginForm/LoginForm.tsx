@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { StyledTypography } from "./styled-components";
-import { IPropsLogin } from "common/types/auth/index";
+import { IPropsLogin } from "common/types/user/index";
 import { Box, TextField, Typography } from "@mui/material";
 import { AppLoadingButton } from "components/global/AppLoadingButton/AppLoadingButton";
 

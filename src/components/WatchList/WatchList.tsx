@@ -68,7 +68,7 @@ export const WatchList: FC = (): JSX.Element => {
                 {topPriceDataIsLoading || watchlistElementsIsLoading ? (
                     <LoadingComponent />
                 ) : (
-                    <CoinsTable coins={filteredArray} />
+                    <CoinsTable isWatchlist={true} coins={filteredArray} />
                 )}
             </StyledBox>
         </>

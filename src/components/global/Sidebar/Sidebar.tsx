@@ -8,6 +8,7 @@ import {
 } from "./styled-components";
 import {
     AlertColor,
+    Avatar,
     Box,
     Drawer,
     IconButton,
@@ -20,13 +21,12 @@ import {
 } from "@mui/material";
 import { ChevronLeftOutlined, LogoutOutlined } from "@mui/icons-material";
 
-import { logOut } from "redux/auth/thunks";
+import { logOut } from "redux/user/thunks";
 
-import { useAppDispatch } from "utils/hooks";
+import { useAppDispatch, useAuth } from "utils/hooks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
 import { navMenu } from "../../../common/moks/navigate";
 import { ISidebarProps } from "common/types/sidebar";
-import Logo from "assets/images/sidebar/logo.svg";
 
 import { NavMenu } from "./NavMenu";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
@@ -41,12 +41,14 @@ export const Sidebar: FC<ISidebarProps> = (
     const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    const theme = useTheme();
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [severity, setSeverity] = useState<AlertColor>("success");
+
+    const { user } = useAuth();
+    const theme = useTheme();
 
     useEffect(() => {
         setActive(pathname);
@@ -91,7 +93,14 @@ export const Sidebar: FC<ISidebarProps> = (
                 }}
             >
                 <NavBlock>
-                    <Box sx={{ display: "flex", alignItems: "space-between" }}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "space-between",
+                            maxWidth: !isNonMobile ? "400px" : "auto",
+                            margin: !isNonMobile ? "auto" : "initial",
+                        }}
+                    >
                         <BrandContainer
                             sx={{
                                 py: 4,
@@ -99,8 +108,12 @@ export const Sidebar: FC<ISidebarProps> = (
                                 width: !isNonMobile ? "100%" : drawerWidth,
                             }}
                         >
-                            <img src={Logo} alt="Logo" />
-                            <BrandTitle variant="h1">Demo</BrandTitle>
+                            <Avatar
+                                alt="user avatar"
+                                src={user.avatarURL}
+                                sx={{ width: 65, height: 65 }}
+                            />
+                            <BrandTitle variant="h1">Crypto</BrandTitle>
                         </BrandContainer>
                         {!isNonMobile && (
                             <IconButton
@@ -114,13 +127,20 @@ export const Sidebar: FC<ISidebarProps> = (
 
                     <List>
                         {!isNonMobile && (
-                            <ListItem>
-                                <SearchBar />
+                            <ListItem sx={{ justifyContent: "center" }}>
+                                <SearchBar
+                                    setIsOpen={setIsOpen}
+                                    isOpen={isOpen}
+                                    isNonMobile={isNonMobile}
+                                />
                             </ListItem>
                         )}
                     </List>
-                    <List sx={{ mb: 8 }}>
+                    <List sx={{ mb: 8, margin: "auto" }}>
                         <NavMenu
+                            isNonMobile={isNonMobile}
+                            setIsOpen={setIsOpen}
+                            isOpen={isOpen}
                             navMenu={navMenu}
                             active={active}
                             navigate={navigate}
@@ -130,13 +150,23 @@ export const Sidebar: FC<ISidebarProps> = (
                 <Box width="100%">
                     <List>
                         {!isNonMobile && (
-                            <ListItem>
+                            <ListItem
+                                sx={{
+                                    maxWidth: !isNonMobile ? "400px" : "auto",
+                                    margin: !isNonMobile ? "auto" : "initial",
+                                }}
+                            >
                                 <Box>
                                     <ThemeSwitcher />
                                 </Box>
                             </ListItem>
                         )}
-                        <ListItem>
+                        <ListItem
+                            sx={{
+                                maxWidth: !isNonMobile ? "400px" : "auto",
+                                margin: !isNonMobile ? "auto" : "initial",
+                            }}
+                        >
                             <StyledListItemButton>
                                 <ListItemIcon>
                                     <LogoutOutlined />

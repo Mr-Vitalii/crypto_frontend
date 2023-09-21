@@ -11,10 +11,10 @@ import { Form, StyledBox, StyledContainer } from "./styled-components";
 
 import { AlertColor } from "@mui/material";
 
-import { loginUser, registerUser } from "redux/auth/thunks";
-import { selectAuthIsLoading } from "redux/auth/selectors";
+import { loginUser, registerUser } from "redux/user/thunks";
+import { selectAuthIsLoading } from "redux/user/selectors";
 
-import { CommonFormData } from "common/types/auth/index";
+import { CommonFormData } from "common/types/user/index";
 import { AppErrors } from "common/errors";
 
 import { LoginForm } from "components/Auth/LoginForm/LoginForm";

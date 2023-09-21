@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Theme, TableCell } from "@mui/material";
+import { Theme, TableRow, TableCell } from "@mui/material";
 import { TableContainer } from "@mui/material";
 import { colors } from "theme";
 
@@ -10,6 +10,13 @@ export const StyledTableContainer = styled(TableContainer)(
         backgroundImage: "none",
     }),
 );
+
+export const EmptyContainer = styled(TableRow)({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "20px",
+});
 
 export const StyledTableCell = styled(TableCell, {
     shouldForwardProp: (prop: any) => prop !== "trendup",

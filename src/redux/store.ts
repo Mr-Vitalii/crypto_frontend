@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { authReducer } from "./auth/authSlice";
+import { userReducer } from "./user/userSlice";
 import { coinsReducer } from "./coins/coinsSlice";
 import { newsReducer } from "./news/newsSlice";
 import { watchlistReducer } from "./watchlist/watchlistSlice";
@@ -20,7 +20,7 @@ export type RootState = ReturnType<typeof store.getState>;
 
 export const store = configureStore({
     reducer: {
-        auth: authReducer,
+        user: userReducer,
         coins: coinsReducer,
         watchlist: watchlistReducer,
         news: newsReducer,

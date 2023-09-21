@@ -1,5 +1,6 @@
 import { FC, Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { DrawerHeader, Main } from "./styled-components";
 
 import { Box, useMediaQuery, Container, useTheme } from "@mui/material";
@@ -48,6 +49,10 @@ export const Layout: FC = (): JSX.Element => {
                             <Suspense fallback={null}>
                                 <Outlet />
                             </Suspense>
+                            <Toaster
+                                position="top-center"
+                                reverseOrder={false}
+                            />
                         </Container>
                     </Main>
                 </Box>

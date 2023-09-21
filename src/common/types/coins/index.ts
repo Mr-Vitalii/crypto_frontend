@@ -53,6 +53,7 @@ export interface IFavoriteBlockProps {
 
 export interface ITablePriceData {
     coins: ISingleCoin[];
+    isWatchlist?: boolean;
 }
 
 //* REDUX
