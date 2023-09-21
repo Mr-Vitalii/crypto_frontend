@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { RootGrid } from "./styled-components";
 
-import { updateUserPassword } from "redux/auth/thunks";
+import { updateUserPassword } from "redux/user/thunks";
 
 import { AlertColor, Box, Grid, TextField } from "@mui/material";
 import { useAppDispatch } from "utils/hooks";

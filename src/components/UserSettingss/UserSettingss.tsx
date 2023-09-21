@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 
 import { colors } from "theme";
 import { tabProps } from "utils/helpers/tabProps";
+import { ChangeAvatar } from "./ChangeAvatar/ChangeAvatar";
 
 import { ChangePassword } from "./ChangePassword/ChangePassword";
 import { DeleteUser } from "./DeleteUser/DeleteUser";
@@ -37,7 +38,8 @@ export const UserSettings: FC = (): JSX.Element => {
             >
                 <Tab label="Personal Information" {...tabProps(0)} />
                 <Tab label="Change password" {...tabProps(1)} />
-                <Tab label="Delete account" {...tabProps(2)} />
+                <Tab label="Change avatar" {...tabProps(2)} />
+                <Tab label="Delete account" {...tabProps(3)} />
             </Tabs>
             <TabPanel value={value} index={0}>
                 <SettingsPersonalInfo />
@@ -46,6 +48,9 @@ export const UserSettings: FC = (): JSX.Element => {
                 <ChangePassword />
             </TabPanel>
             <TabPanel value={value} index={2}>
+                <ChangeAvatar />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
                 <DeleteUser />
             </TabPanel>
         </Box>

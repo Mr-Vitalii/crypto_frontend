@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { deleteUser } from "redux/auth/thunks";
+import { deleteUser } from "redux/user/thunks";
 
 import {
     AlertColor,

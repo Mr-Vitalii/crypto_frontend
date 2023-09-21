@@ -1,7 +1,7 @@
 import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { refreshUser } from "redux/auth/thunks";
+import { refreshUser } from "redux/user/thunks";
 
 import { useMode } from "./theme";
 import { ColorModeContext } from "theme/context";
@@ -43,7 +43,7 @@ export const App = () => {
                                 element={
                                     <RestrictedRoute
                                         component={<AuthPage />}
-                                        redirectTo="/news"
+                                        redirectTo="/"
                                     />
                                 }
                             />
@@ -52,7 +52,7 @@ export const App = () => {
                                 element={
                                     <RestrictedRoute
                                         component={<AuthPage />}
-                                        redirectTo="/news"
+                                        redirectTo="/"
                                     />
                                 }
                             />

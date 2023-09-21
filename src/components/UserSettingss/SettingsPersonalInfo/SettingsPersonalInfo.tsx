@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { updateUserInfo } from "redux/auth/thunks";
+import { updateUserInfo } from "redux/user/thunks";
 
 import { AlertColor, Grid, TextField, Box } from "@mui/material";
 import { RootGrid } from "./styled-components";

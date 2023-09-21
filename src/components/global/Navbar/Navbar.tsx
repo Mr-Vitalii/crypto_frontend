@@ -1,8 +1,15 @@
 import { FC } from "react";
 import { AppBar } from "./styled-components";
 
-import { Box, Grid, Toolbar, Typography, useTheme } from "@mui/material";
-import { MenuOutlined } from "@mui/icons-material";
+import {
+    Box,
+    Grid,
+    IconButton,
+    Toolbar,
+    Typography,
+    useTheme,
+} from "@mui/material";
+import { ChevronLeftOutlined, MenuOutlined } from "@mui/icons-material";
 
 import { useAuth } from "utils/hooks";
 import { INavBarProps } from "common/types/navbar";
@@ -37,12 +44,18 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid item sm={4} lg={4}>
+                    <Grid item sm={isOpen ? 4 : 6} lg={4}>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <MenuOutlined
-                                sx={{ mr: 2, cursor: "pointer" }}
-                                onClick={() => setIsOpen(!isOpen)}
-                            />
+                            {isOpen ? (
+                                <IconButton onClick={() => setIsOpen(!isOpen)}>
+                                    <ChevronLeftOutlined fontSize="large" />
+                                </IconButton>
+                            ) : (
+                                <MenuOutlined
+                                    sx={{ mr: 2, cursor: "pointer" }}
+                                    onClick={() => setIsOpen(!isOpen)}
+                                />
+                            )}
                             <Typography variant="h3">
                                 Welcome {user ? `${user.userName}` : ""}
                             </Typography>
@@ -53,11 +66,16 @@ export const Navbar: FC<INavBarProps> = (props: INavBarProps): JSX.Element => {
                             display="flex"
                             justifyContent="flex-end"
                             item
-                            sm={7}
+                            sm={isOpen ? 7 : 6}
+                            md={isOpen ? 8 : 6}
                             lg={8}
                         >
                             <ThemeSwitcher />
-                            <SearchBar />
+                            <SearchBar
+                                setIsOpen={setIsOpen}
+                                isOpen={isOpen}
+                                isNonMobile={isNonMobile}
+                            />
                         </Grid>
                     )}
                 </Grid>

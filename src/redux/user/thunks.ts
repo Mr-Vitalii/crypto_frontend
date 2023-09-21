@@ -5,7 +5,7 @@ import {
     IPasswordData,
     IRegisterData,
     IUserAttributes,
-} from "common/types/auth";
+} from "common/types/user";
 import {
     clearAuthHeader,
     instance,
@@ -86,6 +86,29 @@ export const updateUserPassword = createAsyncThunk<
     }
 });
 
+export const updateAvatar = createAsyncThunk<
+    { avatarURL: string },
+    FormData,
+    { rejectValue: string }
+>("auth/avatars", async (avatarImage, thunkAPI) => {
+    const state: any = thunkAPI.getState();
+    const persistedToken = state.user.token;
+
+    if (persistedToken === null) {
+        return thunkAPI.rejectWithValue("Unable to change avatar");
+    }
+
+    try {
+        setAuthHeader(persistedToken);
+        const res = await instanceAuth.patch("/auth/avatars", avatarImage);
+        console.log(res.data);
+
+        return res.data;
+    } catch (error: any) {
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
+
 export const deleteUser = createAsyncThunk<
     string,
     undefined,
@@ -110,7 +133,7 @@ export const refreshUser = createAsyncThunk<
     { rejectValue: string }
 >("auth/refresh", async (_, thunkAPI) => {
     const state: any = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+    const persistedToken = state.user.token;
 
     if (persistedToken === null) {
         return thunkAPI.rejectWithValue("Unable to fetch user");

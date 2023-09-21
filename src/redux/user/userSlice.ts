@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IAuthData, IAuthState, IUserAttributes } from "common/types/auth";
+import { IAuthData, IUserState, IUserAttributes } from "common/types/user";
 import {
     deleteUser,
     loginUser,
     logOut,
     refreshUser,
     registerUser,
+    updateAvatar,
     updateUserInfo,
     updateUserPassword,
 } from "./thunks";
 
-// import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
 import { persistReducer } from "redux-persist";
 import { getPersistConfig } from "redux-deep-persist";
 
-const initialState: IAuthState = {
+const initialState: IUserState = {
     token: "",
     user: {
         firstName: "",
@@ -28,8 +28,8 @@ const initialState: IAuthState = {
     isRefreshing: false,
 };
 
-export const authSlice = createSlice({
-    name: "auth",
+export const userSlice = createSlice({
+    name: "user",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -93,10 +93,32 @@ export const authSlice = createSlice({
             state.isLoading = false;
         });
 
+        builder.addCase(updateAvatar.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(
+            updateAvatar.fulfilled,
+            (state, action: PayloadAction<{ avatarURL: string }>) => {
+                state.user.avatarURL = action.payload.avatarURL;
+                state.isLoading = false;
+            },
+        );
+        builder.addCase(updateAvatar.rejected, (state) => {
+            state.isLoading = false;
+        });
+
         builder.addCase(deleteUser.pending, (state) => {
             state.isLoading = true;
         });
         builder.addCase(deleteUser.fulfilled, (state) => {
+            state.user = {
+                firstName: "",
+                userName: "",
+                email: "",
+                avatarURL: "",
+            };
+            state.token = "";
+            state.isLoggedIn = false;
             state.isLoading = false;
         });
         builder.addCase(deleteUser.rejected, (state) => {
@@ -138,13 +160,13 @@ export const authSlice = createSlice({
     },
 });
 
-const rootReducer = authSlice.reducer;
+const rootReducer = userSlice.reducer;
 
 const PersistConfig = getPersistConfig({
-    key: "auth",
+    key: "user",
     storage: storageSession,
     whitelist: ["user.userName", "user.email", "token"],
     rootReducer,
 });
 
-export const authReducer = persistReducer(PersistConfig, rootReducer);
+export const userReducer = persistReducer(PersistConfig, rootReducer);

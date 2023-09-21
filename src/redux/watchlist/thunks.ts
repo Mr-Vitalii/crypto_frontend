@@ -35,3 +35,22 @@ export const addWatchListElement = createAsyncThunk<
         }
     }
 });
+
+export const deleteWatchListElement = createAsyncThunk<
+    { id: string; message: string },
+    string,
+    { rejectValue: string }
+>("watchlist/delete", async (coinId, { rejectWithValue }) => {
+    console.log(coinId);
+
+    try {
+        const response = await instanceAuth.delete(`/watchlist/${coinId}`);
+        return response.data;
+    } catch (error: any) {
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+        } else {
+            return rejectWithValue(error.message);
+        }
+    }
+});

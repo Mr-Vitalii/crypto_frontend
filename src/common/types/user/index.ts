@@ -47,7 +47,7 @@ export interface IUserAttributes {
     avatarURL?: string;
 }
 
-export interface IAuthState {
+export interface IUserState {
     token: string;
     user: IUserAttributes;
     isLoggedIn: boolean;

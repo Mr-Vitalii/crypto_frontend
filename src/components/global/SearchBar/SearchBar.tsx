@@ -7,8 +7,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useAppSelector } from "utils/hooks";
 import { selectAllCoins } from "redux/coins/selectors";
 import { ISingleCoin } from "common/types/coins";
+import { INavBarProps } from "common/types/navbar";
 
-export const SearchBar: FC = (): JSX.Element => {
+export const SearchBar: FC<INavBarProps> = (
+    props: INavBarProps,
+): JSX.Element => {
+    const { setIsOpen, isOpen, isNonMobile } = props;
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
     const navigate = useNavigate();
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
@@ -19,6 +23,7 @@ export const SearchBar: FC = (): JSX.Element => {
                 value={selectedItem}
                 onChange={(e: any, value: string | null) => {
                     navigate(`single/${value}`);
+                    !isNonMobile && setIsOpen(!isOpen);
                     setSelectedItem(null);
                 }}
                 renderInput={(element) => (

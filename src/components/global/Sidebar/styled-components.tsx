@@ -11,7 +11,6 @@ export const BrandContainer = styled(Box)({
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    cursor: "pointer",
 });
 
 export const BrandTitle = styled(Typography)(({ theme }: { theme: Theme }) => ({

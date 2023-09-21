@@ -3,7 +3,7 @@ import {
     selectIsLoggedIn,
     selectIsRefreshing,
     selectUser,
-} from "redux/auth/selectors";
+} from "redux/user/selectors";
 import { AppDispatch, RootState } from "redux/store";
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
