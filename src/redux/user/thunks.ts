@@ -53,9 +53,9 @@ export const updateUserInfo = createAsyncThunk<
     IUserAttributes,
     IUserAttributes,
     { rejectValue: string }
->("user/update", async (userData, { rejectWithValue }) => {
+>("user/update_user", async (userData, { rejectWithValue }) => {
     try {
-        const user = await instanceAuth.patch("auth/user", userData);
+        const user = await instanceAuth.patch("user/update_user", userData);
         return user.data;
     } catch (error: any) {
         if (error.response && error.response.data.message) {
@@ -70,10 +70,10 @@ export const updateUserPassword = createAsyncThunk<
     string,
     IPasswordData,
     { rejectValue: string }
->("users/change-password", async (passwordData, { rejectWithValue }) => {
+>("user/update_password", async (passwordData, { rejectWithValue }) => {
     try {
         const password = await instanceAuth.patch(
-            "auth/update_password",
+            "user/update_password",
             passwordData,
         );
         return password.data;
@@ -90,7 +90,7 @@ export const updateAvatar = createAsyncThunk<
     { avatarURL: string },
     FormData,
     { rejectValue: string }
->("auth/avatars", async (avatarImage, thunkAPI) => {
+>("user/update_avatars", async (avatarImage, thunkAPI) => {
     const state: any = thunkAPI.getState();
     const persistedToken = state.user.token;
 
@@ -100,7 +100,10 @@ export const updateAvatar = createAsyncThunk<
 
     try {
         setAuthHeader(persistedToken);
-        const res = await instanceAuth.patch("/auth/avatars", avatarImage);
+        const res = await instanceAuth.patch(
+            "user/update_avatars",
+            avatarImage,
+        );
         console.log(res.data);
 
         return res.data;
@@ -113,9 +116,9 @@ export const deleteUser = createAsyncThunk<
     string,
     undefined,
     { rejectValue: string }
->("users/delete-user", async (_, { rejectWithValue }) => {
+>("user/delete-user", async (_, { rejectWithValue }) => {
     try {
-        const response = await instanceAuth.delete("auth/user");
+        const response = await instanceAuth.delete("user/delete_user");
         clearAuthHeader();
         return response.data;
     } catch (error: any) {
@@ -131,7 +134,7 @@ export const refreshUser = createAsyncThunk<
     IUserAttributes,
     undefined,
     { rejectValue: string }
->("auth/refresh", async (_, thunkAPI) => {
+>("user/refresh", async (_, thunkAPI) => {
     const state: any = thunkAPI.getState();
     const persistedToken = state.user.token;
 
@@ -141,7 +144,7 @@ export const refreshUser = createAsyncThunk<
 
     try {
         setAuthHeader(persistedToken);
-        const res = await instanceAuth.get("/auth/current");
+        const res = await instanceAuth.get("user/current");
         return res.data;
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);

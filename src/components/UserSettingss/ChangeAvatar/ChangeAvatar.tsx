@@ -24,7 +24,6 @@ export const ChangeAvatar: FC = (): JSX.Element => {
 
     const [file, setFile] = useState<null | IFile>(null);
     const [rejected, setRejected] = useState<never[] | FileRejection[]>([]);
-    const [showPreview, setShowPreview] = useState<boolean>(false);
 
     const onDrop = useCallback(
         (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
@@ -35,7 +34,6 @@ export const ChangeAvatar: FC = (): JSX.Element => {
                         preview: URL.createObjectURL(acceptedFile),
                     }),
                 );
-                setShowPreview(true);
             } else {
                 setRejected(rejectedFiles);
             }
@@ -77,7 +75,7 @@ export const ChangeAvatar: FC = (): JSX.Element => {
                 toast.success(`Avatar update`, {
                     duration: 3000,
                 });
-                setShowPreview(false);
+                setFile(null);
             } catch (e: any) {
                 toast.error(getErrorMessage(e), {
                     duration: 3000,
@@ -109,7 +107,7 @@ export const ChangeAvatar: FC = (): JSX.Element => {
                 </DropContainer>
 
                 <FilePreview>
-                    {file && showPreview && (
+                    {file && (
                         <>
                             <img
                                 src={file.preview}
