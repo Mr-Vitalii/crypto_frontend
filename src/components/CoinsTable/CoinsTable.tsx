@@ -25,7 +25,6 @@ export const CoinsTable: FC<ITablePriceData> = (
 ): JSX.Element => {
     const { coins, isWatchlist } = props;
     const dispatch = useAppDispatch();
-    console.log(coins);
 
     const handleDelete = async (id: string) => {
         try {
