@@ -17,8 +17,8 @@ import { selectAuthIsLoading } from "redux/user/selectors";
 import { CommonFormData } from "common/types/user/index";
 import { AppErrors } from "common/errors";
 
-import { LoginForm } from "components/Auth/LoginForm/LoginForm";
-import { RegisterForm } from "components/Auth/RegisterForm/RegisterForm";
+import { LoginForm } from "components/auth/LoginForm/LoginForm";
+import { RegisterForm } from "components/auth/RegisterForm/RegisterForm";
 import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const Auth: FC = (): JSX.Element => {
