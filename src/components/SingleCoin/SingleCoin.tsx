@@ -5,7 +5,14 @@ import { StyledGrid, StyledTypography } from "./styled-components";
 import { selectAllCoins } from "redux/coins/selectors";
 import { addWatchListElement } from "redux/watchlist/thunks";
 
-import { AlertColor, Avatar, Button, Grid, Typography } from "@mui/material";
+import {
+    AlertColor,
+    Avatar,
+    Button,
+    Grid,
+    Typography,
+    useMediaQuery,
+} from "@mui/material";
 import { ISingleCoin } from "common/types/coins";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { getErrorMessage } from "utils/helpers/getErrorMessage";
@@ -20,6 +27,7 @@ export const SingleCoin: FC = (): JSX.Element => {
     const navigate = useNavigate();
     const { id } = useParams();
     const dispatch = useAppDispatch();
+    const isNonMobile = useMediaQuery("(min-width:760px)");
     const allCoins: ISingleCoin[] = useAppSelector(selectAllCoins);
 
     let coin = allCoins.find((element) => element.name === (id as string));
@@ -66,7 +74,7 @@ export const SingleCoin: FC = (): JSX.Element => {
                             </StyledGrid>
                         </Grid>
                         <Grid item sm={6} xs={12}>
-                            <StyledGrid>
+                            <StyledGrid iscolumn={!isNonMobile ? true : false}>
                                 <Typography variant="h2">
                                     Price:&nbsp;
                                 </Typography>
@@ -113,7 +121,7 @@ export const SingleCoin: FC = (): JSX.Element => {
                         <Button
                             color="success"
                             variant="outlined"
-                            sx={{ mr: 3 }}
+                            sx={{ mr: !isNonMobile ? 1 : 3 }}
                             onClick={() => navigate(-1)}
                         >
                             Back
