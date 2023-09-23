@@ -30,7 +30,7 @@ export const UserSettings: FC = (): JSX.Element => {
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                     <TabList
-                        variant={!isNonMobile ? "fullWidth" : "standard"}
+                        variant={!isNonMobile ? "scrollable" : "standard"}
                         scrollButtons
                         allowScrollButtonsMobile
                         onChange={handleChange}
