@@ -11,6 +11,7 @@ import {
     FormContainer,
     StyledListItem,
     DeleteButton,
+    ErrorsContainer,
 } from "./styled-components";
 
 import { Box, List, ListItem, Typography } from "@mui/material";
@@ -128,7 +129,7 @@ export const ChangeAvatar: FC = (): JSX.Element => {
                         <List>
                             {rejected.map(({ file, errors }) => (
                                 <StyledListItem key={file.name}>
-                                    <Box>
+                                    <ErrorsContainer>
                                         <Typography variant="body1">
                                             Unable to upload file {file.name}
                                         </Typography>
@@ -142,7 +143,7 @@ export const ChangeAvatar: FC = (): JSX.Element => {
                                                 </ListItem>
                                             ))}
                                         </List>
-                                    </Box>
+                                    </ErrorsContainer>
                                     <DeleteButton
                                         type="button"
                                         onClick={removeRejected}

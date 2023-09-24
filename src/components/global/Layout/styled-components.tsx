@@ -24,7 +24,7 @@ export const Main = styled("main", {
                 ? isTablet
                     ? theme.spacing(8, 1)
                     : theme.spacing(3, 1)
-                : theme.spacing(3),
+                : theme.spacing(3, 1),
             transition: theme.transitions.create("margin", {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen,

@@ -18,7 +18,7 @@ export const LoginForm: FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 fontFamily="Poppins"
                 textAlign="center"
             >
-                Enter your username and password
+                Enter your email and password
             </Typography>
             <TextField
                 autoComplete="off"

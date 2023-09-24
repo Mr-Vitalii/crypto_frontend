@@ -27,7 +27,7 @@ export const RegisterForm: FC<IPropsRegister> = (
                 error={!!errors.name}
                 fullWidth={true}
                 margin="normal"
-                label="Имя"
+                label="Name"
                 variant="outlined"
                 placeholder="Enter your name"
                 helperText={errors.name ? `${errors.name.message}` : ""}
@@ -98,7 +98,7 @@ export const RegisterForm: FC<IPropsRegister> = (
                     alignItems: "center",
                 }}
             >
-                <Typography variant="body1">
+                <Typography variant="body1" align="center">
                     Do you already have an account?
                 </Typography>
                 <StyledTypography
