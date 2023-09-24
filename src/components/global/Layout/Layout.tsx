@@ -41,6 +41,10 @@ export const Layout: FC = (): JSX.Element => {
                         <DrawerHeader />
                         <Container
                             sx={{
+                                p: 1,
+                                [theme.breakpoints.up("md")]: {
+                                    p: 3,
+                                },
                                 [theme.breakpoints.up("lg")]: {
                                     p: 4,
                                 },

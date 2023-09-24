@@ -61,6 +61,9 @@ export const DeleteButton = styled("button")(({ theme }: { theme: Theme }) => ({
     "&:hover": {
         backgroundColor: colors.redAccent[300],
     },
+    [theme.breakpoints.down("md")]: {
+        marginTop: "10px",
+    },
 }));
 
 export const StyledListItem = styled(ListItem, {
@@ -72,4 +75,17 @@ export const StyledListItem = styled(ListItem, {
     padding: "10px",
     backgroundColor: theme.palette.secondaryBackground.main,
     color: colors.redAccent[300],
+    [theme.breakpoints.down("md")]: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+}));
+
+export const ErrorsContainer = styled(Box)(({ theme }: { theme: Theme }) => ({
+    [theme.breakpoints.down("md")]: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
 }));
