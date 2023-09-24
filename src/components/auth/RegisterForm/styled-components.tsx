@@ -4,6 +4,7 @@ import { colors } from "theme";
 
 export const StyledTypography = styled(Typography)({
     color: colors.blueAccent[500],
+    textAlign: "center",
     marginLeft: "5px",
     cursor: "pointer",
 });
