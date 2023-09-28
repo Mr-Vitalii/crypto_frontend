@@ -120,8 +120,6 @@ export const updateAvatar = createAsyncThunk<
             "user/update_avatars",
             avatarImage,
         );
-        console.log(res.data);
-
         return res.data;
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);
