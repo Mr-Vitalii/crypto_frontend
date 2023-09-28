@@ -1,6 +1,7 @@
 import { FC } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { colors } from "theme";
 
 export const LoadingComponent: FC = (): JSX.Element => {
     return (
@@ -9,10 +10,13 @@ export const LoadingComponent: FC = (): JSX.Element => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                marginBottom: 15,
+                background: colors.secondary[900],
+                width: "100vw",
+                height: "100vh",
+                padding: "20px",
             }}
         >
-            <CircularProgress color={"secondary"} />
+            <CircularProgress color={"primary"} />
         </Box>
     );
 };

@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useAppDispatch, useAppSelector } from "utils/hooks";
+import { useAppDispatch, useAppSelector, useAuth } from "utils/hooks";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -17,8 +17,8 @@ import { selectAuthIsLoading } from "redux/user/selectors";
 import { CommonFormData } from "common/types/user/index";
 import { AppErrors } from "common/errors";
 
-import { LoginForm } from "components/auth/LoginForm/LoginForm";
-import { RegisterForm } from "components/auth/RegisterForm/RegisterForm";
+import { LoginForm } from "./LoginForm/LoginForm";
+import { RegisterForm } from "./RegisterForm/RegisterForm";
 import { AppSnackbar } from "components/global/AppSnackbar/AppSnackbar";
 
 export const Auth: FC = (): JSX.Element => {
@@ -26,6 +26,7 @@ export const Auth: FC = (): JSX.Element => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const loading = useAppSelector(selectAuthIsLoading);
+    const { user } = useAuth();
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [error, setError] = useState(false);
@@ -38,6 +39,10 @@ export const Auth: FC = (): JSX.Element => {
         formState: { errors },
         reset,
     } = useForm<CommonFormData>({
+        defaultValues: {
+            email:
+                location.pathname === "/login" && user.email ? user.email : "",
+        },
         resolver: yupResolver(
             location.pathname === "/login" ? LoginSchema : RegisterSchema,
         ),
@@ -69,7 +74,7 @@ export const Auth: FC = (): JSX.Element => {
                             setSeverity("success");
                             setOpenSnackbar(true);
                             reset();
-                            navigate("/");
+                            navigate("/confirmation");
                         } catch (e) {
                             return e;
                         }
