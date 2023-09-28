@@ -19,5 +19,9 @@ export const AppLoadingButton = styled(LoadingButton)(
             backgroundColor: colors.blueAccent[400],
             boxShadow: `0px 1px 20px ${colors.blueAccent[400]}`,
         },
+        "&:disabled": {
+            backgroundColor: colors.secondary[500],
+            boxShadow: "none",
+        },
     }),
 );

@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Container, Box } from "@mui/material";
+import { Container, Box, Theme } from "@mui/material";
 import { colors } from "theme";
 
 export const StyledContainer = styled(Container)({
@@ -15,7 +15,7 @@ export const Form = styled("form")({
     flex: 1,
 });
 
-export const StyledBox = styled(Box)({
+export const StyledBox = styled(Box)(({ theme }: { theme: Theme }) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -25,4 +25,7 @@ export const StyledBox = styled(Box)({
     padding: "16px 32px",
     borderRadius: "5px",
     boxShadow: `-3px -2px 20px 1px ${colors.secondary[800]}`,
-});
+    [theme.breakpoints.down("sm")]: {
+        padding: "8px 8px",
+    },
+}));

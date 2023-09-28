@@ -14,13 +14,29 @@ import {
 } from "utils/axios";
 
 export const registerUser = createAsyncThunk<
-    IAuthData,
+    IUserAttributes,
     IRegisterData,
     { rejectValue: string }
 >("auth/register", async (registerData, { rejectWithValue }) => {
     try {
         const res = await instance.post("auth/register", registerData);
-        setAuthHeader(res.data.token);
+        return res.data;
+    } catch (error: any) {
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+        } else {
+            return rejectWithValue(error.message);
+        }
+    }
+});
+
+export const resendVerifyEmail = createAsyncThunk<
+    string,
+    { email: string },
+    { rejectValue: string }
+>("auth/verify", async (email, { rejectWithValue }) => {
+    try {
+        const res = await instance.post("auth/verify", email);
         return res.data;
     } catch (error: any) {
         if (error.response && error.response.data.message) {
@@ -104,8 +120,6 @@ export const updateAvatar = createAsyncThunk<
             "user/update_avatars",
             avatarImage,
         );
-        console.log(res.data);
-
         return res.data;
     } catch (error: any) {
         return thunkAPI.rejectWithValue(error.message);

@@ -16,6 +16,7 @@ import { LoadingComponent } from "components/global/LoadingComponent/LoadingComp
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
+const ConfirmationPage = lazy(() => import("./pages/ConfirmationPage"));
 const SingleCoinPage = lazy(() => import("./pages/SingleCoinPage"));
 const WatchListPage = lazy(() => import("./pages/WatchListPage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
@@ -56,7 +57,15 @@ export const App = () => {
                                     />
                                 }
                             />
-
+                            <Route
+                                path="/confirmation"
+                                element={
+                                    <RestrictedRoute
+                                        component={<ConfirmationPage />}
+                                        redirectTo="/"
+                                    />
+                                }
+                            />
                             <Route element={<PrivateRoute />}>
                                 <Route index element={<DashboardPage />} />
                                 <Route
