@@ -32,7 +32,9 @@ export const AppSnackbar: FC<ISnackbarProps> = ({
             onClose={handleClose}
         >
             <Alert severity={severity} sx={{ width: "100%" }}>
-                {!error ? successMessage : `An error occurred: ${errorMessage}`}
+                {!error
+                    ? `${successMessage ? successMessage : "Success!"}`
+                    : `An error occurred: ${errorMessage}`}
             </Alert>
         </Snackbar>
     );

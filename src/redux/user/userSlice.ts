@@ -6,6 +6,7 @@ import {
     logOut,
     refreshUser,
     registerUser,
+    resendVerifyEmail,
     updateAvatar,
     updateUserInfo,
     updateUserPassword,
@@ -39,14 +40,26 @@ export const userSlice = createSlice({
         });
         builder.addCase(
             registerUser.fulfilled,
-            (state, action: PayloadAction<IAuthData>) => {
-                state.user = action.payload.user;
-                state.token = action.payload.token;
-                state.isLoggedIn = true;
+            (state, action: PayloadAction<IUserAttributes>) => {
+                state.user = action.payload;
+                state.isLoggedIn = false;
                 state.isLoading = false;
             },
         );
         builder.addCase(registerUser.rejected, (state) => {
+            state.isLoggedIn = false;
+            state.isLoading = false;
+        });
+
+        builder.addCase(resendVerifyEmail.pending, (state) => {
+            state.isLoggedIn = false;
+            state.isLoading = true;
+        });
+        builder.addCase(resendVerifyEmail.fulfilled, (state) => {
+            state.isLoggedIn = false;
+            state.isLoading = false;
+        });
+        builder.addCase(resendVerifyEmail.rejected, (state) => {
             state.isLoggedIn = false;
             state.isLoading = false;
         });
